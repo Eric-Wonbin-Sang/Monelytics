@@ -1,6 +1,12 @@
 import itertools
+import os
 import csv
 import codecs
+import json
+
+
+def get_curr_parent_dir(path_addition=None):
+    return os.path.dirname(os.getcwd()) + path_addition if path_addition is not None else ""
 
 
 def csv_to_list_list(csv_path):
@@ -34,3 +40,10 @@ def get_first_in_list(data_list):
         if data is not None and data != "":
             return data
     return None
+
+
+def parse_json(json_path):
+    if not os.path.exists(json_path):
+        raise FileExistsError
+    with open(json_path) as f:
+        return json.load(f)
