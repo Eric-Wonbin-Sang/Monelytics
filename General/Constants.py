@@ -4,7 +4,8 @@ from General import Functions
 
 chrome_driver_path = Functions.get_curr_parent_dir("/API Keys/chromedriver.exe")
 
-bofa_login_credentials_json = Functions.get_curr_parent_dir("/API Keys/Monelytics/bofa - login credentials.json")
+profile_list_json = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/profile_list.json")
+
 bofa_login_cookies_pkl = Functions.get_curr_parent_dir("/API Keys/Monelytics/bofa - login cookies.pkl")
 bofa_accounts_download_dir = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/Bank of America")
 
