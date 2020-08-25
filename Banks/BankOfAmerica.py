@@ -9,26 +9,22 @@ from selenium.webdriver import ActionChains
 from bs4 import BeautifulSoup
 import time
 
-from General import Functions, Constants
+from General import Constants
 
 
 class BankOfAmerica:
 
-    def __init__(self):
+    def __init__(self, profile):
+
+        self.profile = profile
 
         self.bofa_login_url = "https://www.bankofamerica.com/"
-
-        self.login_credentials_json = Constants.bofa_login_credentials_json
         self.login_cookies_pkl = Constants.bofa_login_cookies_pkl
-        self.login_credentials_dict = self.get_login_credentials_dict()
 
         self.driver = self.get_driver()
         self.login()
 
         self.account_list = self.get_account_list()
-
-    def get_login_credentials_dict(self):
-        return Functions.parse_json(self.login_credentials_json)
 
     def get_driver(self):
         options = Options()
@@ -47,8 +43,8 @@ class BankOfAmerica:
         return driver
 
     def login(self):
-        self.driver.find_element_by_name("onlineId1").send_keys(self.login_credentials_dict["username"])
-        self.driver.find_element_by_name("passcode1").send_keys(self.login_credentials_dict["password"])
+        self.driver.find_element_by_name("onlineId1").send_keys(self.profile.username)
+        self.driver.find_element_by_name("passcode1").send_keys(self.profile.password)
         self.driver.find_element_by_id("signIn").send_keys(Keys.RETURN)
         time.sleep(2)
 
