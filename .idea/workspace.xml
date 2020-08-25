@@ -19,17 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Banks/BankOfAmerica.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/General/Constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Monelytics.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Monelytics.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ericw.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/ericw.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="Removed testing script and committing updated project files.">
+      <change afterPath="$PROJECT_DIR$/Classes/Profile.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/General/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/General/Functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chromedriver.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banks/BankOfAmerica.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/BankOfAmerica.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/General/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/General/Constants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testing.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,6 +145,49 @@
       <option name="presentableId" value="Default" />
       <updated>1567637323358</updated>
     </task>
+    <task id="LOCAL-00001" summary="New BankOfAmerica class in Banks dir with an account class that downloads all statement CSVs from a bank of america login using selenium.">
+      <created>1598387747727</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1598387747727</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added Constants file for keeping references to download directories, common chromedriver path, etc. Removed local chromedriver from project.">
+      <created>1598387799138</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1598387799138</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Updated project dictionary for custom words.">
+      <created>1598387815533</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1598387815533</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added parse_json and get_curr_parent_dir to Function.py.">
+      <created>1598387832662</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1598387832662</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Removed old test code for the venmo_account and bofa_account classes.">
+      <created>1598387865272</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1598387865272</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Removed testing script and committing updated project files.">
+      <created>1598387898823</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1598387898823</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -164,6 +202,15 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="New BankOfAmerica class in Banks dir with an account class that downloads all statement CSVs from a bank of america login using selenium." />
+    <MESSAGE value="Added Constants file for keeping references to download directories, common chromedriver path, etc. Removed local chromedriver from project." />
+    <MESSAGE value="Updated project dictionary for custom words." />
+    <MESSAGE value="Added parse_json and get_curr_parent_dir to Function.py." />
+    <MESSAGE value="Removed old test code for the venmo_account and bofa_account classes." />
+    <MESSAGE value="Removed testing script and committing updated project files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed testing script and committing updated project files." />
+  </component>
   <component name="WindowStateProjectService">
     <state x="1020" y="361" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595211004486">
       <screen x="0" y="0" width="2048" height="1112" />
@@ -173,26 +220,26 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="995" y="306" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595211019220" />
-    <state width="1013" height="305" key="GridCell.Tab.0.bottom" timestamp="1598387581506">
+    <state width="2027" height="305" key="GridCell.Tab.0.bottom" timestamp="1598389068336">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="391" height="775" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
-    <state width="1013" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1598387581506" />
-    <state width="1013" height="305" key="GridCell.Tab.0.center" timestamp="1598387581506">
+    <state width="2027" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1598389068336" />
+    <state width="2027" height="305" key="GridCell.Tab.0.center" timestamp="1598389068336">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="391" height="775" key="GridCell.Tab.0.center/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
-    <state width="1013" height="305" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1598387581506" />
-    <state width="1013" height="305" key="GridCell.Tab.0.left" timestamp="1598387581506">
+    <state width="2027" height="305" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1598389068336" />
+    <state width="2027" height="305" key="GridCell.Tab.0.left" timestamp="1598389068336">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="391" height="775" key="GridCell.Tab.0.left/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
-    <state width="1013" height="305" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1598387581506" />
-    <state width="1013" height="305" key="GridCell.Tab.0.right" timestamp="1598387581506">
+    <state width="2027" height="305" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1598389068336" />
+    <state width="2027" height="305" key="GridCell.Tab.0.right" timestamp="1598389068336">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="391" height="775" key="GridCell.Tab.0.right/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
-    <state width="1013" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1598387581506" />
+    <state width="2027" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1598389068336" />
     <state width="1013" height="376" key="GridCell.Tab.1.bottom" timestamp="1598386522723">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -209,6 +256,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="1013" height="376" key="GridCell.Tab.1.right/0.0.2048.1112@0.0.2048.1112" timestamp="1598386522723" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1598387902249">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1598387902249" />
     <state x="442" y="260" width="1150" height="551" key="dock-window-1" timestamp="1595547357288">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>

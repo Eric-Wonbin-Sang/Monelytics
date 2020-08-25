@@ -1,9 +1,11 @@
-from Banks import BankOfAmerica
+from Classes import Profile
 
 
 def main():
 
-    BankOfAmerica.BankOfAmerica()
+    profile_list = Profile.get_profile_list()
+    for profile in profile_list:
+        print(profile)
 
 
 main()
