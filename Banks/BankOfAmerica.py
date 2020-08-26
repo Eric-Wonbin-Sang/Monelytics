@@ -1,46 +1,25 @@
-import pickle
 import glob
 import datetime
 import os
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
 from bs4 import BeautifulSoup
 import time
 
+from Classes import Bank
+
 from General import Constants
 
 
-class BankOfAmerica:
+class BankOfAmerica(Bank.Bank):
 
     def __init__(self, profile):
 
-        self.profile = profile
-
-        self.bofa_login_url = "https://www.bankofamerica.com/"
-        self.login_cookies_pkl = Constants.bofa_login_cookies_pkl
-
-        self.driver = self.get_driver()
-        self.login()
-
-        self.account_list = self.get_account_list()
-
-    def get_driver(self):
-        options = Options()
-        options.add_argument("--app={}".format(self.bofa_login_url))
-        options.add_argument("window-size={},{}".format(1280, 1000))
-        options.add_experimental_option("detach", True)
-
-        # options.add_argument('--disable-gpu')
-        # options.add_argument('--disable-software-rasterizer')
-
-        driver = webdriver.Chrome(executable_path=Constants.chrome_driver_path, options=options)
-
-        for cookie in pickle.load(open(self.login_cookies_pkl, "rb")):
-            driver.add_cookie(cookie)
-
-        return driver
+        super().__init__(
+            profile=profile,
+            login_url="https://www.bankofamerica.com/",
+            login_cookies_pkl=Constants.bofa_login_cookies_pkl
+        )
 
     def login(self):
         self.driver.find_element_by_name("onlineId1").send_keys(self.profile.username)
@@ -59,6 +38,7 @@ class BankOfAmerica:
                 Account(
                     name=list_elem.text,
                     type=account_elem.get("data-accounttype"),
+                    source_info_dir=self.source_info_dir,
                     redirect_link=list_elem["href"],
                     driver=self.driver
                 )
@@ -70,19 +50,21 @@ class Account:
 
     def __init__(self, **kwargs):
 
+        self.driver = kwargs.get("driver")
         self.name = kwargs.get("name")
         self.type = kwargs.get("type")
+        self.source_info_dir = kwargs.get("source_info_dir")
         self.redirect_link = "https://secure.bankofamerica.com" + kwargs.get("redirect_link")
 
-        self.driver = kwargs.get("driver")
-        self.download_dir = self.get_download_dir(Constants.bofa_accounts_download_dir)
+        self.download_dir = self.get_download_dir(parent_dir=self.source_info_dir)
         self.user_download_dir = Constants.user_download_dir
 
-        self.current_statement_name = "Current transactions.csv"
+        self.default_statement_csv_name = "stmt.csv"
+        self.current_statement_csv_name = "Current transactions.csv"
         self.get_transactions()
 
-    def get_download_dir(self, bofa_accounts_download_dir):
-        download_dir = bofa_accounts_download_dir + "/" + self.name
+    def get_download_dir(self, parent_dir):
+        download_dir = parent_dir + "/" + self.name
         if not os.path.exists(download_dir):
             os.mkdir(download_dir)
         return download_dir
@@ -119,7 +101,7 @@ class Account:
         csv_path = None
         base_time = datetime.datetime.now()
         while (datetime.datetime.now() - base_time).seconds < 2:
-            if len(csv_list := glob.glob(self.user_download_dir + "/stmt.csv")) > 0:
+            if len(csv_list := glob.glob(self.user_download_dir + "/" + self.default_statement_csv_name)) > 0:
                 csv_path = csv_list[0]
                 break
             print(".", end="")
@@ -135,8 +117,8 @@ class Account:
         self.click_download_transactions_elem()
         self.change_file_type_to_excel()
 
-        if self.current_statement_name in os.listdir(self.download_dir):
-            os.remove(self.download_dir + "/" + self.current_statement_name)
+        if self.current_statement_csv_name in os.listdir(self.download_dir):
+            os.remove(self.download_dir + "/" + self.current_statement_csv_name)
 
         option_list = self.get_time_period_option_elem_list()
         for i in range(len(option_list)):
