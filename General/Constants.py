@@ -6,8 +6,9 @@ chrome_driver_path = Functions.get_curr_parent_dir("/API Keys/chromedriver.exe")
 
 profile_list_json = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/profile_list.json")
 
-bofa_login_cookies_pkl = Functions.get_curr_parent_dir("/API Keys/Monelytics/bofa - login cookies.pkl")
-bofa_accounts_download_dir = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/Bank of America")
+bank_source_info_dir = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/Bank Source Information")
+bofa_login_cookies_pkl = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/login cookies - bofa.pkl")
+venmo_login_cookies_pkl = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/login cookies - venmo.pkl")
 
 user_download_dir = "C:/Users/ericw/Downloads"
 
