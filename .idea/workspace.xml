@@ -19,12 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="Removed testing script and committing updated project files.">
-      <change afterPath="$PROJECT_DIR$/Classes/Profile.py" afterDir="false" />
+    <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="main changed from creating a Bofa object to getting the profile list which creates the bank objects from the profile type.">
+      <change afterPath="$PROJECT_DIR$/Banks/Venmo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Classes/Bank.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Banks/BankOfAmerica.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/BankOfAmerica.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Classes/Profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classes/Profile.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/General/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/General/Constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/General/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/General/Functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +85,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Venmo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Monelytics" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Banks" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Banks/Venmo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Monelytics" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -128,6 +151,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.Venmo" />
         <item itemvalue="Python.BankOfAmerica" />
         <item itemvalue="Python.test" />
       </list>
@@ -187,7 +211,28 @@
       <option name="project" value="LOCAL" />
       <updated>1598387898823</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="New Profile class created for handling account login info. BankOfAmerica uses the profile class onw.">
+      <created>1598389220543</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1598389220543</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Removed bofa_login_credentials_json from Constants.py.">
+      <created>1598389233999</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1598389233999</updated>
+    </task>
+    <task id="LOCAL-00009" summary="main changed from creating a Bofa object to getting the profile list which creates the bank objects from the profile type.">
+      <created>1598389274846</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1598389274846</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -209,7 +254,10 @@
     <MESSAGE value="Added parse_json and get_curr_parent_dir to Function.py." />
     <MESSAGE value="Removed old test code for the venmo_account and bofa_account classes." />
     <MESSAGE value="Removed testing script and committing updated project files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed testing script and committing updated project files." />
+    <MESSAGE value="New Profile class created for handling account login info. BankOfAmerica uses the profile class onw." />
+    <MESSAGE value="Removed bofa_login_credentials_json from Constants.py." />
+    <MESSAGE value="main changed from creating a Bofa object to getting the profile list which creates the bank objects from the profile type." />
+    <option name="LAST_COMMIT_MESSAGE" value="main changed from creating a Bofa object to getting the profile list which creates the bank objects from the profile type." />
   </component>
   <component name="WindowStateProjectService">
     <state x="1020" y="361" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595211004486">
@@ -220,26 +268,26 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="995" y="306" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595211019220" />
-    <state width="2027" height="305" key="GridCell.Tab.0.bottom" timestamp="1598389068336">
+    <state width="2027" height="317" key="GridCell.Tab.0.bottom" timestamp="1598404661168">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="391" height="775" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
-    <state width="2027" height="305" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1598389068336" />
-    <state width="2027" height="305" key="GridCell.Tab.0.center" timestamp="1598389068336">
+    <state width="2027" height="317" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1598404661168" />
+    <state width="2027" height="317" key="GridCell.Tab.0.center" timestamp="1598404661168">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="391" height="775" key="GridCell.Tab.0.center/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
-    <state width="2027" height="305" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1598389068336" />
-    <state width="2027" height="305" key="GridCell.Tab.0.left" timestamp="1598389068336">
+    <state width="2027" height="317" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1598404661168" />
+    <state width="2027" height="317" key="GridCell.Tab.0.left" timestamp="1598404661168">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="391" height="775" key="GridCell.Tab.0.left/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
-    <state width="2027" height="305" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1598389068336" />
-    <state width="2027" height="305" key="GridCell.Tab.0.right" timestamp="1598389068336">
+    <state width="2027" height="317" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1598404661168" />
+    <state width="2027" height="317" key="GridCell.Tab.0.right" timestamp="1598404661168">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="391" height="775" key="GridCell.Tab.0.right/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
-    <state width="2027" height="305" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1598389068336" />
+    <state width="2027" height="317" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1598404661168" />
     <state width="1013" height="376" key="GridCell.Tab.1.bottom" timestamp="1598386522723">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -256,10 +304,14 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="1013" height="376" key="GridCell.Tab.1.right/0.0.2048.1112@0.0.2048.1112" timestamp="1598386522723" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1598387902249">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1598389277623">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1598387902249" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1598389277623" />
+    <state x="626" y="167" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598404614619">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="626" y="167" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.2048.1112@0.0.2048.1112" timestamp="1598404614619" />
     <state x="442" y="260" width="1150" height="551" key="dock-window-1" timestamp="1595547357288">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -272,6 +324,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="735" y="260" width="578" height="616" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1598330893064" />
+    <state x="867" y="342" key="refactoring.ChangeSignatureDialog" timestamp="1598397134353">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="867" y="342" key="refactoring.ChangeSignatureDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1598397134353" />
     <state x="687" y="243" width="672" height="678" key="search.everywhere.popup" timestamp="1598331766830">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>

@@ -1,4 +1,4 @@
-from Banks import BankOfAmerica
+from Banks import BankOfAmerica, Venmo
 
 from General import Functions, Constants
 
@@ -13,13 +13,13 @@ class Profile:
         self.username = kwargs.get("username")
         self.password = kwargs.get("password")
 
-        # self.bank = self.get_bank()
+        self.bank = self.get_bank()
 
     def get_bank(self):
         if self.type == "Bank Of America":
             return BankOfAmerica.BankOfAmerica(self)
         elif self.type == "Venmo":
-            return None
+            return Venmo.Venmo(self)
 
     def __str__(self):
         return "nick: {}  type: {}  owner: {}, username: {}, password: ****".format(
