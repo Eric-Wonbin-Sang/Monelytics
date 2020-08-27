@@ -47,3 +47,30 @@ def parse_json(json_path):
         raise FileExistsError
     with open(json_path) as f:
         return json.load(f)
+
+
+def str_to_length(base_str, length, do_dots=True, do_left=True):
+    base_str = str(base_str)
+    if do_left:
+        ret_str = base_str.ljust(length)[:length]
+        if do_dots and len(base_str) + 3 > length:
+            return ret_str[:-3] + "..."
+    else:
+        ret_str = base_str.rjust(length)[:length]
+        if do_dots and len(base_str) + 3 > length:
+            return "..." + ret_str[3:]
+    return ret_str
+
+
+def list_list_to_str(data_list_list, str_length=20):
+    return "\n".join([" ".join([str_to_length(x, str_length) for x in data_list]) for data_list in data_list_list])
+
+
+def tab_str(data_str, tab_amount):
+    return ("\t" * tab_amount) + data_str.replace("\n", "\n" + ("\t" * tab_amount))
+
+
+def dataframe_to_str(dataframe, str_length=20, spacer=" | "):
+    ret_str = spacer.join([str_to_length(x, str_length) for x in dataframe.columns]) + "\n"
+    ret_str += "\n".join([spacer.join([str_to_length(x, str_length) for x in list(data_list)]) for data_list in dataframe.values])
+    return ret_str
