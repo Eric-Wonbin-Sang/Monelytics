@@ -5,64 +5,38 @@ import glob
 import os
 import time
 from dateutil import relativedelta
-from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 
-from Classes import Bank
+from Banks.Generic import Account
+from Banks.Venmo import VenmoStatement
 
-from General import Constants
 
+class VenmoAccount(Account.Account):
 
-class Venmo(Bank.Bank):
-
-    def __init__(self, profile):
+    def __init__(self, parent_bank, driver, source_info_dir, do_download):
 
         super().__init__(
-            profile=profile,
-            login_url="https://venmo.com/account/sign-in",
-            login_cookies_pkl=Constants.venmo_login_cookies_pkl
+            parent_bank=parent_bank,
+            driver=driver,
+            name="Personal Account",
+            source_info_dir=source_info_dir,
+            base_url="https://venmo.com",
+            statement_suffix_url="/account/statement",
+            default_statement_csv_name="venmo_statement.csv",
+            current_statement_csv_name="Current transactions.csv",
+            do_download=do_download
         )
 
-        self.driver.quit()
-
-    def login(self):
-        self.driver.find_element_by_name("phoneEmailUsername").send_keys(self.profile.username)
-        self.driver.find_element_by_name("password").send_keys(self.profile.password)
-        self.driver.find_element_by_name("password").send_keys(Keys.RETURN)
-        time.sleep(2)
-
-    def get_account_list(self):
-        return [
-            Account(
-                driver=self.driver,
-                source_info_dir=self.source_info_dir
-            )
-        ]
-
-
-class Account:
-
-    def __init__(self, **kwargs):
-
-        self.driver = kwargs.get("driver")
-        self.source_info_dir = kwargs.get("source_info_dir")
-
-        self.base_url = "https://venmo.com"
-
-        self.profile_id, self.type = self.get_profile_id_and_type()
-        self.base_download_url = self.get_base_download_url()
-
-        self.start_end_date_tuple_list = self.get_start_end_date_tuple_list()
-
-        self.user_download_dir = Constants.user_download_dir
-        self.name = self.profile_id + " - " + self.type
-        self.download_dir = self.get_download_dir(parent_dir=self.source_info_dir)
-        self.default_statement_csv_name = "venmo_statement.csv"
-        self.current_statement_csv_name = "Current transactions.csv"
-        self.download_and_store()
+        if self.do_download:
+            self.profile_id, self.type = self.get_profile_id_and_type()
+            self.base_download_url = self.get_base_download_url()
+            self.start_end_date_tuple_list = self.get_start_end_date_tuple_list()
+            self.download_and_store()
+        else:
+            self.profile_id, self.type, self.start_end_date_tuple_list = None, None, []
 
     def get_profile_id_and_type(self):
-        self.driver.get(self.base_url + "/account/statement")
+        self.driver.get(self.statement_url)
         time.sleep(2)
 
         soup = BeautifulSoup(self.driver.page_source, 'html.parser')
@@ -77,24 +51,18 @@ class Account:
 
         return profile_id, account_type
 
-    def get_download_dir(self, parent_dir):
-        download_dir = parent_dir + "/" + self.name
-        if not os.path.exists(download_dir):
-            os.mkdir(download_dir)
-        return download_dir
-
     def get_base_download_url(self):
         return self.base_url + "/transaction-history/statement?startDate={start_date}&endDate={end_date}" + \
-               "&profileId={}".format(self.profile_id) + \
-               "&accountType={}".format(self.type)
+               "&profileId={}".format(self.profile_id if self.do_download else "DNE") + \
+               "&accountType={}".format(self.type if self.do_download else "DNE")
 
     def get_start_end_date_tuple_list(self):
-        """ returns [(08-01-2020, 08-25-2020), (07-01-2020, 07-31-2020), ...]"""
+        """ returns [(08-01-2020, 08-25-2020), (07-01-2020, 07-31-2020), ...] """
         tuple_list = []
-        curr_time = datetime.datetime.now()
+        curr_time = self.curr_datetime
         for i in range(12):
             base_date_str = curr_time.strftime("%m-{}-%Y")
-            start_date_str = base_date_str.format(1)
+            start_date_str = base_date_str.format("01")
             if i == 0:
                 end_date_str = base_date_str.format(curr_time.strftime("%d"))
             else:
@@ -114,7 +82,6 @@ class Account:
         return None
 
     def download_and_store(self):
-
         if self.current_statement_csv_name in os.listdir(self.download_dir):
             os.remove(self.download_dir + "/" + self.current_statement_csv_name)
 
@@ -134,3 +101,12 @@ class Account:
                 print(new_cvs_path, "created!")
             else:
                 print(new_cvs_path, "exists!")
+
+    def get_statement_list(self):
+        return [
+            VenmoStatement.VenmoStatement(
+                parent_account=self,
+                file_name=file_name,
+                source_directory=self.download_dir
+            ) for file_name in os.listdir(self.download_dir)
+        ]
