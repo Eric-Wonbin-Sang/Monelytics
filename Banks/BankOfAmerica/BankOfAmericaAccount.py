@@ -1,73 +1,33 @@
 import glob
 import datetime
 import os
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver import ActionChains
-from bs4 import BeautifulSoup
 import time
 
-from Classes import Bank
+from Banks.Generic import Account
+from Banks.BankOfAmerica import BankOfAmericaStatement
 
-from General import Constants
 
+class BankOfAmericaAccount(Account.Account):
 
-class BankOfAmerica(Bank.Bank):
+    def __init__(self, parent_bank, driver, name, account_type, source_info_dir, statement_suffix_url, do_download):
 
-    def __init__(self, profile):
+        self.type = account_type
 
         super().__init__(
-            profile=profile,
-            login_url="https://www.bankofamerica.com/",
-            login_cookies_pkl=Constants.bofa_login_cookies_pkl
+            parent_bank=parent_bank,
+            driver=driver,
+            name=name,
+            source_info_dir=source_info_dir,
+            base_url="https://secure.bankofamerica.com",
+            statement_suffix_url=statement_suffix_url,
+            default_statement_csv_name="stmt.csv",
+            current_statement_csv_name="Current transactions.csv",
+            do_download=do_download
         )
 
-    def login(self):
-        self.driver.find_element_by_name("onlineId1").send_keys(self.profile.username)
-        self.driver.find_element_by_name("passcode1").send_keys(self.profile.password)
-        self.driver.find_element_by_id("signIn").send_keys(Keys.RETURN)
-        time.sleep(2)
-
-    def get_account_list(self):
-        soup = BeautifulSoup(self.driver.page_source, 'html.parser')
-        account_elem_list = soup.findAll("div", {"class": "AccountItem AccountItemDeposit"})
-        account_list = []
-        for account_elem in account_elem_list:
-            account_name_elem = account_elem.findAll("span", {"class": "AccountName"})[0]
-            list_elem = account_name_elem.findAll("a")[0]
-            account_list.append(
-                Account(
-                    name=list_elem.text,
-                    type=account_elem.get("data-accounttype"),
-                    source_info_dir=self.source_info_dir,
-                    redirect_link=list_elem["href"],
-                    driver=self.driver
-                )
-            )
-        return account_list
-
-
-class Account:
-
-    def __init__(self, **kwargs):
-
-        self.driver = kwargs.get("driver")
-        self.name = kwargs.get("name")
-        self.type = kwargs.get("type")
-        self.source_info_dir = kwargs.get("source_info_dir")
-        self.redirect_link = "https://secure.bankofamerica.com" + kwargs.get("redirect_link")
-
-        self.download_dir = self.get_download_dir(parent_dir=self.source_info_dir)
-        self.user_download_dir = Constants.user_download_dir
-
-        self.default_statement_csv_name = "stmt.csv"
-        self.current_statement_csv_name = "Current transactions.csv"
-        self.get_transactions()
-
-    def get_download_dir(self, parent_dir):
-        download_dir = parent_dir + "/" + self.name
-        if not os.path.exists(download_dir):
-            os.mkdir(download_dir)
-        return download_dir
+        if self.do_download:
+            self.download_and_store()
 
     def click_download_transactions_elem(self):
         download_menu_button = self.driver.find_element_by_name("download_transactions_top")
@@ -111,9 +71,8 @@ class Account:
     def get_time_period_option_elem_list(self):
         return self.driver.find_element_by_id("select_txnperiod").find_elements_by_tag_name("option")
 
-    def get_transactions(self):
-
-        self.driver.get(self.redirect_link)
+    def download_and_store(self):
+        self.driver.get(self.statement_url)
         self.click_download_transactions_elem()
         self.change_file_type_to_excel()
 
@@ -139,3 +98,12 @@ class Account:
                     option_list = self.get_time_period_option_elem_list()
             else:
                 print(self.download_dir + "/" + csv_name, "exists!")
+
+    def get_statement_list(self):
+        return [
+            BankOfAmericaStatement.BankOfAmericaStatement(
+                parent_account=self,
+                file_name=file_name,
+                source_directory=self.download_dir
+            ) for file_name in os.listdir(self.download_dir)
+        ]
