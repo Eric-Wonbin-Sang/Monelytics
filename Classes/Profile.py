@@ -1,4 +1,5 @@
-from Banks import BankOfAmerica, Venmo
+from Banks.BankOfAmerica import BankOfAmerica
+from Banks.Venmo import Venmo
 
 from General import Functions, Constants
 
@@ -17,9 +18,9 @@ class Profile:
 
     def get_bank(self):
         if self.type == "Bank Of America":
-            return BankOfAmerica.BankOfAmerica(self)
+            return BankOfAmerica.BankOfAmerica(self, Constants.do_download)
         elif self.type == "Venmo":
-            return Venmo.Venmo(self)
+            return Venmo.Venmo(self, Constants.do_download)
 
     def __str__(self):
         return "nick: {}  type: {}  owner: {}, username: {}, password: ****".format(
