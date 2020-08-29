@@ -1,7 +1,10 @@
 import pandas
+import datetime
 
 from Banks.Generic import Statement
 from Banks.Venmo import VenmoTransaction
+
+from General import Functions, Constants
 
 
 class VenmoStatement(Statement.Statement):
@@ -39,7 +42,19 @@ class VenmoStatement(Statement.Statement):
         self.info_dict = self.get_info_dict()
         self.clean_dataframe()
 
+        self.start_time, self.end_time = self.get_start_and_end_times()
+        self.starting_balance = float(self.info_dict["Beginning Balance"][1:])
+        self.ending_balance = float(self.info_dict["Ending Balance"][1:])
+
         self.transaction_list = self.get_transaction_list()
+
+        self.sort_transaction_list()
+        self.update_transaction_account_balances()
+
+    def get_start_and_end_times(self):
+        if self.file_name == Constants.current_statement_file_name_default:
+            return self.get_times_as_current_statement()
+        return [datetime.datetime.strptime(x, "%m-%d-%Y") for x in self.file_name[:-4].split(" to ")]
 
     def get_dataframe(self):
         column_headers = self.data_list_list[0]
@@ -79,3 +94,10 @@ class VenmoStatement(Statement.Statement):
                 {self.dataframe.columns[i]: data for i, data in enumerate(list(value))}
             ) for value in self.dataframe.values
         ]
+
+    def update_transaction_account_balances(self):
+        amount = self.starting_balance
+        for transaction in self.transaction_list:
+            if not (transaction.raw_data_dict["Funding Source"] != "Venmo balance" and transaction.amount < 0):
+                amount += transaction.amount
+            transaction.account_balance = amount
