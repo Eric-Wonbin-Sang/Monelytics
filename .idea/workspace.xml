@@ -19,30 +19,21 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="Added the Venmo class which scrapes transaction info from a venmo account.">
-      <change afterPath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmericaAccount.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmericaStatement.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmericaTransaction.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Banks/Generic/Account.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Banks/Generic/Statement.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Banks/Generic/Transaction.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Banks/Venmo/VenmoAccount.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Banks/Venmo/VenmoStatement.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Banks/Venmo/VenmoTransaction.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CookieGetter.py" afterDir="false" />
+    <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="Created a simple script that saves cookies from a selenium browser after it is closed. Default save directory is the user downloads folder.">
+      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AccountParsers/Account.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AccountParsers/Day.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AccountParsers/Transaction.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banks/BankOfAmerica.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmerica.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banks/Venmo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/Venmo/Venmo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Classes/Bank.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/Generic/Bank.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmerica.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmerica.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmericaAccount.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmericaAccount.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmericaStatement.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmericaStatement.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banks/Generic/Account.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/Generic/Account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banks/Generic/Statement.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/Generic/Statement.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banks/Generic/Transaction.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/Generic/Transaction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banks/Venmo/VenmoAccount.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/Venmo/VenmoAccount.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banks/Venmo/VenmoStatement.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/Venmo/VenmoStatement.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Classes/Profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classes/Profile.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/General/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/General/Constants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/General/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/General/Functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StatementFiles/BofAStatement.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/StatementFiles/Statement.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/StatementFiles/VenmoStatement.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,27 +74,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
-    <configuration name="BankOfAmerica" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Monelytics" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Banks" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\ericw\CodingProjects\Monelytics\Banks\BankOfAmerica\BankOfAmerica.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="CookieGetter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Monelytics" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -188,13 +158,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="testing" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Monelytics" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.testing" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.CookieGetter" />
         <item itemvalue="Python.Venmo" />
-        <item itemvalue="Python.BankOfAmerica" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -301,7 +292,63 @@
       <option name="project" value="LOCAL" />
       <updated>1598404848200</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Removed old classes for statement parsing.">
+      <created>1598510508471</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1598510508471</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Created generic classes for abstract Banks, Accounts, Statements, and Transactions.">
+      <created>1598510558022</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1598510558022</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Moved child objects of generic classes to separate files and created new Statement and Transaction children.">
+      <created>1598510605233</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1598510605233</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Created new child classes for Venmo bank parsing.">
+      <created>1598510632896</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1598510632896</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Added the do_download reference from Constants.py for the bank objects.">
+      <created>1598510717117</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1598510717117</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Added more useful functions to Functions.py.">
+      <created>1598510731095</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1598510731095</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Added the do_download cond for bank objects in Constants.py.">
+      <created>1598510750271</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1598510750271</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Created a simple script that saves cookies from a selenium browser after it is closed. Default save directory is the user downloads folder.">
+      <created>1598510796825</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1598510796825</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -330,9 +377,21 @@
     <MESSAGE value="BankOfAmerica now uses the Bank parent class." />
     <MESSAGE value="Added paths for profile_list.json and venmo_login_cookies_pkl in Constants.py." />
     <MESSAGE value="Added the Venmo class which scrapes transaction info from a venmo account." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the Venmo class which scrapes transaction info from a venmo account." />
+    <MESSAGE value="Removed old classes for statement parsing." />
+    <MESSAGE value="Created generic classes for abstract Banks, Accounts, Statements, and Transactions." />
+    <MESSAGE value="Moved child objects of generic classes to separate files and created new Statement and Transaction children." />
+    <MESSAGE value="Created new child classes for Venmo bank parsing." />
+    <MESSAGE value="Added the do_download reference from Constants.py for the bank objects." />
+    <MESSAGE value="Added more useful functions to Functions.py." />
+    <MESSAGE value="Added the do_download cond for bank objects in Constants.py." />
+    <MESSAGE value="Created a simple script that saves cookies from a selenium browser after it is closed. Default save directory is the user downloads folder." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created a simple script that saves cookies from a selenium browser after it is closed. Default save directory is the user downloads folder." />
   </component>
   <component name="WindowStateProjectService">
+    <state x="593" y="182" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598589018310">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="593" y="182" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1598589018310" />
     <state x="1020" y="361" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1595211004486">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -341,26 +400,26 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="995" y="306" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595211019220" />
-    <state width="2027" height="497" key="GridCell.Tab.0.bottom" timestamp="1598510139184">
+    <state width="1563" height="234" key="GridCell.Tab.0.bottom" timestamp="1598645685100">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="391" height="775" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
-    <state width="2027" height="497" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1598510139184" />
-    <state width="2027" height="497" key="GridCell.Tab.0.center" timestamp="1598510139183">
+    <state width="1563" height="234" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1598645685100" />
+    <state width="1563" height="234" key="GridCell.Tab.0.center" timestamp="1598645685099">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="391" height="775" key="GridCell.Tab.0.center/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
-    <state width="2027" height="497" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1598510139183" />
-    <state width="2027" height="497" key="GridCell.Tab.0.left" timestamp="1598510139183">
+    <state width="1563" height="234" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1598645685099" />
+    <state width="1563" height="234" key="GridCell.Tab.0.left" timestamp="1598645685099">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="391" height="775" key="GridCell.Tab.0.left/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
-    <state width="2027" height="497" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1598510139183" />
-    <state width="2027" height="497" key="GridCell.Tab.0.right" timestamp="1598510139183">
+    <state width="1563" height="234" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1598645685099" />
+    <state width="1563" height="234" key="GridCell.Tab.0.right" timestamp="1598645685100">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="391" height="775" key="GridCell.Tab.0.right/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
-    <state width="2027" height="497" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1598510139183" />
+    <state width="1563" height="234" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1598645685100" />
     <state width="1013" height="376" key="GridCell.Tab.1.bottom" timestamp="1598386522723">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -377,14 +436,18 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="1013" height="376" key="GridCell.Tab.1.right/0.0.2048.1112@0.0.2048.1112" timestamp="1598386522723" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1598389277623">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1598510801640">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1598389277623" />
-    <state x="626" y="167" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598405761027">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1598510801640" />
+    <state x="626" y="167" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598554594810">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="626" y="167" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.2048.1112@0.0.2048.1112" timestamp="1598405761027" />
+    <state x="626" y="167" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.2048.1112@0.0.2048.1112" timestamp="1598554594810" />
+    <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1598552308952">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="842" y="470" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2048.1112@0.0.2048.1112" timestamp="1598552308952" />
     <state x="442" y="260" width="1150" height="551" key="dock-window-1" timestamp="1595547357288">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
@@ -393,17 +456,17 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="727" y="433" width="1150" height="551" key="dock-window-2/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595547357288" />
-    <state x="735" y="260" width="578" height="616" key="find.popup" timestamp="1598510334392">
+    <state x="735" y="260" width="578" height="616" key="find.popup" timestamp="1598561832672">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="735" y="260" width="578" height="616" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1598510334392" />
+    <state x="735" y="260" width="578" height="616" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1598561832672" />
     <state x="867" y="342" key="refactoring.ChangeSignatureDialog" timestamp="1598397134353">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="867" y="342" key="refactoring.ChangeSignatureDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1598397134353" />
-    <state x="687" y="243" width="672" height="678" key="search.everywhere.popup" timestamp="1598509886680">
+    <state x="687" y="243" width="672" height="678" key="search.everywhere.popup" timestamp="1598556151318">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="687" y="243" width="672" height="678" key="search.everywhere.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1598509886680" />
+    <state x="687" y="243" width="672" height="678" key="search.everywhere.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1598556151318" />
   </component>
 </project>
