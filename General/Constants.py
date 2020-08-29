@@ -10,6 +10,8 @@ bank_source_info_dir = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/Ba
 bofa_login_cookies_pkl = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/login cookies - bofa.pkl")
 venmo_login_cookies_pkl = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/login cookies - venmo.pkl")
 
+current_statement_file_name_default = "Current transactions.csv"
+
 do_download = False
 
 user_download_dir = "C:/Users/ericw/Downloads"
