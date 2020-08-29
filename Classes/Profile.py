@@ -21,6 +21,7 @@ class Profile:
             return BankOfAmerica.BankOfAmerica(self, Constants.do_download)
         elif self.type == "Venmo":
             return Venmo.Venmo(self, Constants.do_download)
+        raise UserWarning("Unknown Bank type requested - {}".format(self.type))
 
     def __str__(self):
         return "nick: {}  type: {}  owner: {}, username: {}, password: ****".format(
