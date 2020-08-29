@@ -22,7 +22,7 @@ class Account:
         self.download_dir = self.get_download_dir()
 
         self.default_statement_csv_name = kwargs["default_statement_csv_name"]
-        self.current_statement_csv_name = kwargs["current_statement_csv_name"]
+        self.current_statement_csv_name = Constants.current_statement_file_name_default
 
         self.do_download = kwargs["do_download"]
 
