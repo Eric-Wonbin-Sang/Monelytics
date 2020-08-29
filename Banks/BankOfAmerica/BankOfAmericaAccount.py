@@ -22,7 +22,6 @@ class BankOfAmericaAccount(Account.Account):
             base_url="https://secure.bankofamerica.com",
             statement_suffix_url=statement_suffix_url,
             default_statement_csv_name="stmt.csv",
-            current_statement_csv_name="Current transactions.csv",
             do_download=do_download
         )
 

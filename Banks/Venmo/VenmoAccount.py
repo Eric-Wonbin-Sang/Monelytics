@@ -23,7 +23,6 @@ class VenmoAccount(Account.Account):
             base_url="https://venmo.com",
             statement_suffix_url="/account/statement",
             default_statement_csv_name="venmo_statement.csv",
-            current_statement_csv_name="Current transactions.csv",
             do_download=do_download
         )
 
