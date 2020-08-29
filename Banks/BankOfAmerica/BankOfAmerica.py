@@ -36,6 +36,7 @@ class BankOfAmerica(Bank.Bank):
                 list_elem = account_name_elem.findAll("a")[0]
                 account_list.append(
                     BankOfAmericaAccount.BankOfAmericaAccount(
+                        parent_bank=self,
                         driver=self.driver,
                         name=list_elem.text,
                         source_info_dir=self.source_info_dir,
