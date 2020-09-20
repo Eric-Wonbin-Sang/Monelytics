@@ -1,6 +1,6 @@
 import datetime
 
-from Banks.Generic import Transaction
+from Banks.AbstractSystem import Transaction
 
 
 class VenmoTransaction(Transaction.Transaction):
