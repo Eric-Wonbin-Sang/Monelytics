@@ -1,13 +1,13 @@
 import pandas
 import datetime
 
-from Banks.Generic import Statement
+from Banks.AbstractSystem import AbstractStatement
 from Banks.Venmo import VenmoTransaction
 
-from General import Functions, Constants
+from General import Constants
 
 
-class VenmoStatement(Statement.Statement):
+class VenmoStatement(AbstractStatement.AbstractStatement):
 
     column_pair_list = [
         ("Username", True),
@@ -30,31 +30,45 @@ class VenmoStatement(Statement.Statement):
         ("Disclaimer", True)
     ]
 
-    def __init__(self, parent_account, file_name, source_directory):
+    def __init__(self, parent_account, statement_file_path):
 
         super().__init__(
             parent_account=parent_account,
-            file_name=file_name,
-            source_directory=source_directory
+            statement_file_path=statement_file_path
         )
 
         self.dataframe = self.get_dataframe()
+
         self.info_dict = self.get_info_dict()
         self.clean_dataframe()
 
         self.start_time, self.end_time = self.get_start_and_end_times()
-        self.starting_balance = float(self.info_dict["Beginning Balance"][1:])
-        self.ending_balance = float(self.info_dict["Ending Balance"][1:])
+        self.starting_balance = self.get_starting_balance()
+        self.ending_balance = self.get_ending_balance()
 
         self.transaction_list = self.get_transaction_list()
 
         self.sort_transaction_list()
         self.update_transaction_account_balances()
 
+    def get_times_as_current_statement(self):
+        base_date_str = self.curr_time.strftime("%m-{}-%Y")
+        start_date_str = base_date_str.format("01")
+        end_date_str = base_date_str.format(self.curr_time.strftime("%d"))
+        return \
+            datetime.datetime.strptime(start_date_str, "%m-%d-%Y"), datetime.datetime.strptime(end_date_str, "%m-%d-%Y")
+
     def get_start_and_end_times(self):
-        if self.file_name == Constants.current_statement_file_name_default:
+        if self.statement_file_path.split("/")[-1] == Constants.current_statement_file_name_default:
             return self.get_times_as_current_statement()
-        return [datetime.datetime.strptime(x, "%m-%d-%Y") for x in self.file_name[:-4].split(" to ")]
+        return [datetime.datetime.strptime(x, "%m-%d-%Y")
+                for x in self.statement_file_path.split("/")[-1][:-4].split(" to ")]
+
+    def get_starting_balance(self):
+        return float(self.info_dict["Beginning Balance"][1:].replace(",", ""))
+
+    def get_ending_balance(self):
+        return float(self.info_dict["Ending Balance"][1:].replace(",", ""))
 
     def get_dataframe(self):
         column_headers = self.data_list_list[0]
@@ -70,6 +84,7 @@ class VenmoStatement(Statement.Statement):
         for (column_name, is_single_value) in self.column_pair_list:
             if is_single_value:
                 value = None
+                # if column_name in self.dataframe:
                 for data in self.dataframe[column_name].values:
                     if data != "":
                         value = data
@@ -87,6 +102,16 @@ class VenmoStatement(Statement.Statement):
         self.dataframe.drop(0, axis=0, inplace=True)
         self.dataframe.drop(self.dataframe.tail(1).index, axis=0, inplace=True)
 
+    def update_transaction_account_balances(self):
+        amount = self.starting_balance
+        for transaction in self.transaction_list:
+            if transaction.raw_data_dict["Funding Source"] != "" and \
+                    transaction.raw_data_dict["Funding Source"] != "Venmo balance":
+                transaction.account_balance = amount
+                continue
+            amount += transaction.amount
+            transaction.account_balance = amount
+
     def get_transaction_list(self):
         return [
             VenmoTransaction.VenmoTransaction(
@@ -94,10 +119,3 @@ class VenmoStatement(Statement.Statement):
                 {self.dataframe.columns[i]: data for i, data in enumerate(list(value))}
             ) for value in self.dataframe.values
         ]
-
-    def update_transaction_account_balances(self):
-        amount = self.starting_balance
-        for transaction in self.transaction_list:
-            if not (transaction.raw_data_dict["Funding Source"] != "Venmo balance" and transaction.amount < 0):
-                amount += transaction.amount
-            transaction.account_balance = amount
