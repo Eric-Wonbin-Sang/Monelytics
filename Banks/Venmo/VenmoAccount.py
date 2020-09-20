@@ -3,36 +3,34 @@ import calendar
 import dateutil
 import glob
 import os
-import time
 from dateutil import relativedelta
 from bs4 import BeautifulSoup
+import time
 
-from Banks.Generic import Account
-from Banks.Venmo import VenmoStatement
+from General import Constants
 
 
-class VenmoAccount(Account.Account):
+class VenmoAccount:
 
-    def __init__(self, parent_bank, driver, source_info_dir, do_download):
+    def __init__(self, parent_bank, driver, info_dict, account_folder_dir):
 
-        super().__init__(
-            parent_bank=parent_bank,
-            driver=driver,
-            name="Personal Account",
-            source_info_dir=source_info_dir,
-            base_url="https://venmo.com",
-            statement_suffix_url="/account/statement",
-            default_statement_csv_name="venmo_statement.csv",
-            do_download=do_download
-        )
+        self.curr_datetime = datetime.datetime.now()
 
-        if self.do_download:
-            self.profile_id, self.type = self.get_profile_id_and_type()
-            self.base_download_url = self.get_base_download_url()
-            self.start_end_date_tuple_list = self.get_start_end_date_tuple_list()
-            self.download_and_store()
-        else:
-            self.profile_id, self.type, self.start_end_date_tuple_list = None, None, []
+        self.parent_bank = parent_bank
+        self.driver = driver
+        self.info_dict = info_dict
+        self.account_folder_dir = account_folder_dir
+
+        self.user_download_dir = Constants.user_download_dir
+        self.base_url = "https://venmo.com"
+        self.default_statement_csv_name = "venmo_statement.csv"
+        self.current_statement_csv_name = Constants.current_statement_file_name_default
+        self.statement_url = self.base_url + "/account/statement"
+
+        self.profile_id, self.type = self.get_profile_id_and_type()
+        self.base_download_url = self.get_base_download_url()
+        self.start_end_date_tuple_list = self.get_start_end_date_tuple_list()
+        self.download_and_store()
 
     def get_profile_id_and_type(self):
         self.driver.get(self.statement_url)
@@ -52,15 +50,14 @@ class VenmoAccount(Account.Account):
 
     def get_base_download_url(self):
         return self.base_url + "/transaction-history/statement?startDate={start_date}&endDate={end_date}" + \
-               "&profileId={}".format(self.profile_id if self.do_download else "DNE") + \
-               "&accountType={}".format(self.type if self.do_download else "DNE")
+               "&profileId={}".format(self.profile_id) + "&accountType={}".format(self.type)
 
     def get_start_end_date_tuple_list(self):
         """ returns [(08-01-2020, 08-25-2020), (07-01-2020, 07-31-2020), ...] """
         tuple_list = []
         curr_time = self.curr_datetime
         for i in range(12):
-            base_date_str = curr_time.strftime("%m-{}-%Y")
+            base_date_str = curr_time.strftime("%Y-%m-{}")
             start_date_str = base_date_str.format("01")
             if i == 0:
                 end_date_str = base_date_str.format(curr_time.strftime("%d"))
@@ -81,8 +78,8 @@ class VenmoAccount(Account.Account):
         return None
 
     def download_and_store(self):
-        if self.current_statement_csv_name in os.listdir(self.download_dir):
-            os.remove(self.download_dir + "/" + self.current_statement_csv_name)
+        if self.current_statement_csv_name in os.listdir(self.account_folder_dir):
+            os.remove(self.account_folder_dir + "/" + self.current_statement_csv_name)
 
         for i, (start_date_str, end_date_str) in enumerate(self.start_end_date_tuple_list):
             download_url = self.base_download_url.format(start_date=start_date_str, end_date=end_date_str)
@@ -92,7 +89,7 @@ class VenmoAccount(Account.Account):
                 new_csv_name = self.current_statement_csv_name
             else:
                 new_csv_name = "{} to {}.csv".format(start_date_str, end_date_str)
-            new_cvs_path = self.download_dir + "/" + new_csv_name
+            new_cvs_path = self.account_folder_dir + "/" + new_csv_name
 
             if not os.path.exists(new_cvs_path):
                 self.driver.get(download_url)
@@ -100,12 +97,3 @@ class VenmoAccount(Account.Account):
                 print(new_cvs_path, "created!")
             else:
                 print(new_cvs_path, "exists!")
-
-    def get_statement_list(self):
-        return [
-            VenmoStatement.VenmoStatement(
-                parent_account=self,
-                file_name=file_name,
-                source_directory=self.download_dir
-            ) for file_name in os.listdir(self.download_dir)
-        ]

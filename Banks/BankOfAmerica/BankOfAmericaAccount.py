@@ -4,29 +4,25 @@ import os
 from selenium.webdriver import ActionChains
 import time
 
-from Banks.Generic import Account
-from Banks.BankOfAmerica import BankOfAmericaStatement
+from General import Constants
 
 
-class BankOfAmericaAccount(Account.Account):
+class BankOfAmericaAccount:
 
-    def __init__(self, parent_bank, driver, name, account_type, source_info_dir, statement_suffix_url, do_download):
+    def __init__(self, parent_bank, driver, info_dict, account_folder_dir):
 
-        self.type = account_type
+        self.parent_bank = parent_bank
+        self.driver = driver
+        self.info_dict = info_dict
+        self.account_folder_dir = account_folder_dir
 
-        super().__init__(
-            parent_bank=parent_bank,
-            driver=driver,
-            name=name,
-            source_info_dir=source_info_dir,
-            base_url="https://secure.bankofamerica.com",
-            statement_suffix_url=statement_suffix_url,
-            default_statement_csv_name="stmt.csv",
-            do_download=do_download
-        )
+        self.user_download_dir = Constants.user_download_dir
+        self.base_url = "https://secure.bankofamerica.com"
+        self.default_statement_csv_name = "stmt.csv"
+        self.current_statement_csv_name = Constants.current_statement_file_name_default
+        self.statement_url = self.base_url + self.info_dict["statement_suffix_url"]
 
-        if self.do_download:
-            self.download_and_store()
+        self.download_and_store()
 
     def click_download_transactions_elem(self):
         download_menu_button = self.driver.find_element_by_name("download_transactions_top")
@@ -75,17 +71,17 @@ class BankOfAmericaAccount(Account.Account):
         self.click_download_transactions_elem()
         self.change_file_type_to_excel()
 
-        if self.current_statement_csv_name in os.listdir(self.download_dir):
-            os.remove(self.download_dir + "/" + self.current_statement_csv_name)
+        if self.current_statement_csv_name in os.listdir(self.account_folder_dir):
+            os.remove(self.account_folder_dir + "/" + self.current_statement_csv_name)
 
         option_list = self.get_time_period_option_elem_list()
         for i in range(len(option_list)):
             (option := option_list[i]).click()
             period_name = option.get_attribute("value").strip().replace("/", ".")
             print(period_name + " - ", end="")
-            if not os.path.exists(self.download_dir + "/" + (csv_name := period_name + ".csv")):
+            if not os.path.exists(self.account_folder_dir + "/" + (csv_name := period_name + ".csv")):
                 csv_path = self.try_download_and_get_csv_path()
-                new_path = self.download_dir + "/" + csv_name
+                new_path = self.account_folder_dir + "/" + csv_name
                 if csv_path is not None:
                     os.rename(csv_path, new_path)
                     print(new_path, "created!")
@@ -96,13 +92,4 @@ class BankOfAmericaAccount(Account.Account):
                     self.change_file_type_to_excel()
                     option_list = self.get_time_period_option_elem_list()
             else:
-                print(self.download_dir + "/" + csv_name, "exists!")
-
-    def get_statement_list(self):
-        return [
-            BankOfAmericaStatement.BankOfAmericaStatement(
-                parent_account=self,
-                file_name=file_name,
-                source_directory=self.download_dir
-            ) for file_name in os.listdir(self.download_dir)
-        ]
+                print(self.account_folder_dir + "/" + csv_name, "exists!")
