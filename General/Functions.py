@@ -5,6 +5,12 @@ import codecs
 import json
 
 
+def get_path_list_in_dir(some_dir):
+    return [
+        (some_dir + "/" + path).replace("\\", "/") for path in os.listdir(some_dir)
+    ]
+
+
 def get_curr_parent_dir(path_addition=None):
     return os.path.dirname(os.getcwd()) + path_addition if path_addition is not None else ""
 
@@ -47,6 +53,11 @@ def parse_json(json_path):
         raise FileExistsError
     with open(json_path) as f:
         return json.load(f)
+
+
+def dict_to_json(data_dict, file_path):
+    with open(file_path, 'w') as file:
+        json.dump(data_dict, file)
 
 
 def str_to_length(base_str, length, do_dots=True, do_left=True):
