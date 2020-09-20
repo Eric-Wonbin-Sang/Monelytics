@@ -7,12 +7,8 @@ chrome_driver_path = Functions.get_curr_parent_dir("/API Keys/chromedriver.exe")
 profile_list_json = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/profile_list.json")
 
 bank_source_info_dir = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/Bank Source Information")
-bofa_login_cookies_pkl = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/login cookies - bofa.pkl")
-venmo_login_cookies_pkl = Functions.get_curr_parent_dir("/0 - Secrets/Monelytics/login cookies - venmo.pkl")
 
 current_statement_file_name_default = "Current transactions.csv"
-
-do_download = False
 
 user_download_dir = "C:/Users/ericw/Downloads"
 

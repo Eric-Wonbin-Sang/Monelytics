@@ -41,7 +41,7 @@ def main():
     #         VenmoUpdateBot(path)
 
     bank_list = []
-    for path in Functions.get_path_list_in_dir(Constants.new_bank_source_info_dir):
+    for path in Functions.get_path_list_in_dir(Constants.bank_source_info_dir):
         bank_list.append(AbstractBank.AbstractBank(bank_folder_dir=path))
         print(bank_list[-1])
 

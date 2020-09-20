@@ -32,7 +32,7 @@ def get_driver_cookies_on_close(driver):
 
 def get_bank_file_path_list(bank_type):
     file_path_list = []
-    for path in Functions.get_path_list_in_dir(Constants.new_bank_source_info_dir):
+    for path in Functions.get_path_list_in_dir(Constants.bank_source_info_dir):
         if bank_type == path.split("/")[-1].split(" - ")[0]:
             file_path_list.append(path)
     return file_path_list
@@ -45,7 +45,7 @@ def get_new_bank_dir_path(bank_type):
         if bank_num not in num_list:
             break
         bank_num += 1
-    return Constants.new_bank_source_info_dir + "/" + bank_type + " - {}".format(bank_num)
+    return Constants.bank_source_info_dir + "/" + bank_type + " - {}".format(bank_num)
 
 
 def bank_setup():
