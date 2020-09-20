@@ -1,4 +1,10 @@
-{
-  "Bank Of America": "https://www.bankofamerica.com/",
-  "Venmo": "https://venmo.com/account/sign-in"
-}
+[
+  {
+    "type": "Bank Of America",
+    "login_url": "https://www.bankofamerica.com/"
+  },
+  {
+    "type": "Venmo",
+    "login_url": "https://venmo.com/account/sign-in"
+  }
+]
