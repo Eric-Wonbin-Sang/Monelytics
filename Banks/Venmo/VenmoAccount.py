@@ -30,6 +30,7 @@ class VenmoAccount:
         self.profile_id, self.type = self.get_profile_id_and_type()
         self.base_download_url = self.get_base_download_url()
         self.start_end_date_tuple_list = self.get_start_end_date_tuple_list()
+
         self.download_and_store()
 
     def get_profile_id_and_type(self):
@@ -57,7 +58,7 @@ class VenmoAccount:
         tuple_list = []
         curr_time = self.curr_datetime
         for i in range(12):
-            base_date_str = curr_time.strftime("%Y-%m-{}")
+            base_date_str = curr_time.strftime("%m-{}-%Y")
             start_date_str = base_date_str.format("01")
             if i == 0:
                 end_date_str = base_date_str.format(curr_time.strftime("%d"))
