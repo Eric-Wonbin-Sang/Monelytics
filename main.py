@@ -1,10 +1,11 @@
 import operator
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-from mpl_finance import candlestick_ohlc
-from matplotlib.dates import date2num
 
-from Classes import Profile
+from Banks.AbstractSystem import AbstractBank
+from Banks.BankOfAmerica.BankOfAmericaUpdateBot import BankOfAmericaUpdateBot
+from Banks.Venmo.VenmoUpdateBot import VenmoUpdateBot
+
+from General import Constants, Functions
 
 
 def sort_transaction_list(transaction_list):
@@ -16,47 +17,6 @@ def account_to_transaction_list(account):
     for statement in account.statement_list:
         transaction_list += statement.transaction_list
     return sort_transaction_list(transaction_list)
-
-
-def do_candlestick(transaction_list):
-
-    datetime_transaction_list_dict = {}
-    for transaction in transaction_list:
-        if transaction.datetime not in datetime_transaction_list_dict:
-            datetime_transaction_list_dict[transaction.datetime] = []
-        datetime_transaction_list_dict[transaction.datetime] += [transaction]
-
-    for key, value in datetime_transaction_list_dict.items():
-        datetime_transaction_list_dict[key] = sort_transaction_list(value)
-
-    data_list_list = []
-    for datetime, t_list in datetime_transaction_list_dict.items():
-        data_list_list.append(
-            [
-                date2num(datetime),                 # date
-                t_list[0].account_balance,          # openp
-                max([t.account_balance for t in t_list]),    # highp
-                min([t.account_balance for t in t_list]),    # lowp
-                t_list[-1].account_balance,         # closep
-                len(t_list)                         # volume
-            ]
-        )
-
-    # fig = plt.figure()
-    ax1 = plt.subplot2grid((1, 1), (0, 0))
-
-    candlestick_ohlc(ax1, data_list_list, width=0.4, colorup='#77d879', colordown='#db3f3f')
-
-    for label in ax1.xaxis.get_ticklabels():
-        label.set_rotation(45)
-
-    ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
-    ax1.grid(True)
-
-    plt.xlabel('Date')
-    plt.ylabel('Price')
-    plt.legend()
-    plt.show()
 
 
 def graph_account_transactions(account_list):
@@ -74,16 +34,16 @@ def graph_account_transactions(account_list):
 
 def main():
 
-    profile_list = Profile.get_profile_list()
+    # for path in Functions.get_path_list_in_dir(Constants.new_bank_source_info_dir):
+    #     # if "Bank Of America" == path.split("/")[-1].split(" - ")[0]:
+    #     #     BankOfAmericaUpdateBot(path)
+    #     if "Venmo" == path.split("/")[-1].split(" - ")[0]:
+    #         VenmoUpdateBot(path)
 
-    account_list = [account for profile in profile_list for account in profile.bank.account_list]
-    graph_account_transactions(account_list)
-
-    full_transaction_list = []
-    for account in account_list:
-        full_transaction_list += account_to_transaction_list(account)
-    full_transaction_list = sort_transaction_list(full_transaction_list)
-    # do_candlestick(full_transaction_list)
+    bank_list = []
+    for path in Functions.get_path_list_in_dir(Constants.new_bank_source_info_dir):
+        bank_list.append(AbstractBank.AbstractBank(bank_folder_dir=path))
+        print(bank_list[-1])
 
 
 main()
