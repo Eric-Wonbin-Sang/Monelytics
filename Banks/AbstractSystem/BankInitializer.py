@@ -2,21 +2,10 @@ import os
 import pickle
 import time
 from selenium.common import exceptions
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+
+from Banks.AbstractSystem import bank_helper
 
 from General import Constants, Functions
-
-
-def get_driver(starting_url):
-    options = Options()
-    options.add_argument("window-size={},{}".format(1280, 1000))
-
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-    driver.get(starting_url)
-
-    return driver
 
 
 def get_driver_cookies_on_close(driver):
@@ -43,14 +32,11 @@ def get_new_bank_dir_path(bank_type):
     bank_num = 0
     while True:
         if bank_num not in num_list:
-            break
+            return Constants.bank_source_info_dir + "/" + bank_type + " - {}".format(bank_num)
         bank_num += 1
-    return Constants.bank_source_info_dir + "/" + bank_type + " - {}".format(bank_num)
 
 
-def bank_setup():
-
-    bank_type = "Venmo"
+def bank_setup(bank_type):
 
     data_dict = {
         "nickname": input("bank's nickname: "),
@@ -62,10 +48,10 @@ def bank_setup():
     for path in get_bank_file_path_list(bank_type):
         info_dict = Functions.parse_json(path + "/profile.json")
         if info_dict["username"] == data_dict["username"]:
-            print("That username already exists in the system!")
+            print("That username already exists for bank_type {} in the system!".format(bank_type))
             exit()
 
-    driver = get_driver(starting_url=Functions.parse_json(Constants.project_dir + "/Banks/bank_constants.json")[bank_type])
+    driver = bank_helper.get_driver(startup_url=bank_helper.get_bank_info_dict(bank_type)["login_url"])
 
     driver_cookies = get_driver_cookies_on_close(driver)
 
