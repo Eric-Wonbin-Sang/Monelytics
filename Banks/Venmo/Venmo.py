@@ -1,5 +1,5 @@
 from Banks.AbstractSystem import AbstractBank
-from Banks.Venmo import VenmoStatement, VenmoTransaction
+from Banks.Venmo import VenmoStatement
 
 
 class Venmo(AbstractBank.AbstractBank):
@@ -8,6 +8,5 @@ class Venmo(AbstractBank.AbstractBank):
         super().__init__(
             bank_folder_dir=bank_folder_dir,
             bank_type="Venmo",
-            statement_class=VenmoStatement.VenmoStatement,
-            transaction_class=VenmoTransaction.VenmoTransaction
+            statement_class=VenmoStatement.VenmoStatement
         )

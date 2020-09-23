@@ -1,5 +1,5 @@
 from Banks.AbstractSystem import AbstractBank
-from Banks.BankOfAmerica import BankOfAmericaStatement, BankOfAmericaTransaction
+from Banks.BankOfAmerica import BankOfAmericaStatement
 
 
 class BankOfAmerica(AbstractBank.AbstractBank):
@@ -9,6 +9,5 @@ class BankOfAmerica(AbstractBank.AbstractBank):
         super().__init__(
             bank_folder_dir=bank_folder_dir,
             bank_type="Bank Of America",
-            statement_class=BankOfAmericaStatement.BankOfAmericaStatement,
-            transaction_class=BankOfAmericaTransaction.BankOfAmericaTransaction
+            statement_class=BankOfAmericaStatement.BankOfAmericaStatement
         )
