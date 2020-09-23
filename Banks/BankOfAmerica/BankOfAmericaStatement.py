@@ -1,8 +1,7 @@
 import pandas
 import datetime
 
-from Banks.AbstractSystem import AbstractStatement
-from Banks.BankOfAmerica import BankOfAmericaTransaction
+from Banks.AbstractSystem import AbstractStatement, Transaction
 
 
 class BankOfAmericaStatement(AbstractStatement.AbstractStatement):
@@ -51,12 +50,18 @@ class BankOfAmericaStatement(AbstractStatement.AbstractStatement):
         return pandas.DataFrame(self.data_list_list[8:], columns=self.data_list_list[6])
 
     def get_transaction_list(self):
-        return [
-            BankOfAmericaTransaction.BankOfAmericaTransaction(
-                self,
-                {self.dataframe.columns[i]: data for i, data in enumerate(list(value))}
-            ) for value in self.dataframe.values
-        ]
+        transaction_list = []
+        for value in self.dataframe.values:
+            raw_data_dict = {self.dataframe.columns[i]: data for i, data in enumerate(list(value))}
+            transaction_list.append(
+                Transaction.Transaction(
+                    parent_statement=self,
+                    datetime=datetime.datetime.strptime(raw_data_dict["Date"], "%m/%d/%Y"),
+                    amount=float(raw_data_dict["Amount"]),
+                    description=raw_data_dict["Description"]
+                )
+            )
+        return transaction_list
 
     def update_transaction_account_balances(self):
         amount = self.starting_balance

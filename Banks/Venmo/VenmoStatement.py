@@ -1,8 +1,7 @@
 import pandas
 import datetime
 
-from Banks.AbstractSystem import AbstractStatement
-from Banks.Venmo import VenmoTransaction
+from Banks.AbstractSystem import AbstractStatement, Transaction
 
 from General import Constants
 
@@ -49,7 +48,6 @@ class VenmoStatement(AbstractStatement.AbstractStatement):
         self.transaction_list = self.get_transaction_list()
 
         self.sort_transaction_list()
-        self.update_transaction_account_balances()
 
     def get_times_as_current_statement(self):
         base_date_str = self.curr_time.strftime("%m-{}-%Y")
@@ -84,7 +82,6 @@ class VenmoStatement(AbstractStatement.AbstractStatement):
         for (column_name, is_single_value) in self.column_pair_list:
             if is_single_value:
                 value = None
-                # if column_name in self.dataframe:
                 for data in self.dataframe[column_name].values:
                     if data != "":
                         value = data
@@ -102,20 +99,32 @@ class VenmoStatement(AbstractStatement.AbstractStatement):
         self.dataframe.drop(0, axis=0, inplace=True)
         self.dataframe.drop(self.dataframe.tail(1).index, axis=0, inplace=True)
 
-    def update_transaction_account_balances(self):
-        amount = self.starting_balance
-        for transaction in self.transaction_list:
-            if transaction.raw_data_dict["Funding Source"] != "" and \
-                    transaction.raw_data_dict["Funding Source"] != "Venmo balance":
-                transaction.account_balance = amount
-                continue
-            amount += transaction.amount
-            transaction.account_balance = amount
-
     def get_transaction_list(self):
-        return [
-            VenmoTransaction.VenmoTransaction(
-                self,
-                {self.dataframe.columns[i]: data for i, data in enumerate(list(value))}
-            ) for value in self.dataframe.values
-        ]
+
+        def get_amount():
+            is_positive = raw_data_dict["Amount (total)"][0] == "+"
+            number = float(raw_data_dict["Amount (total)"][3:].replace(",", ""))
+            return number if is_positive else number * -1
+
+        def get_description():
+            if raw_data_dict["From"] == "" and raw_data_dict["To"] == "":
+                return "Moved funds to {}".format(raw_data_dict["Destination"])
+            return "From {} to {}: ".format(raw_data_dict["From"], raw_data_dict["To"]) + raw_data_dict["Note"]
+
+        amount = self.starting_balance
+        transaction_list = []
+        for value in self.dataframe.values:
+            raw_data_dict = {self.dataframe.columns[i]: data for i, data in enumerate(list(value))}
+            transaction_list.append(
+                Transaction.Transaction(
+                    parent_statement=self,
+                    datetime=datetime.datetime.strptime(raw_data_dict["Datetime"], "%Y-%m-%dT%H:%M:%S"),
+                    amount=get_amount(),
+                    description=get_description()
+                )
+            )
+            if not (raw_data_dict["Funding Source"] != "" and raw_data_dict["Funding Source"] != "Venmo balance"):
+                amount += transaction_list[-1].amount
+            transaction_list[-1].account_balance = amount
+
+        return transaction_list
