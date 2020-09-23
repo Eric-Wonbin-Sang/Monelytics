@@ -5,13 +5,11 @@ from General import Functions
 
 class AbstractBank:
 
-    def __init__(self, bank_folder_dir, bank_type, statement_class=AbstractStatement.AbstractStatement,
-                 transaction_class=Transaction.Transaction):
+    def __init__(self, bank_folder_dir, bank_type, statement_class=AbstractStatement.AbstractStatement):
 
         self.bank_folder_dir = bank_folder_dir
         self.bank_type = bank_type
         self.statement_class = statement_class
-        self.transaction_class = transaction_class
 
         self.profile_dict = Functions.parse_json(self.bank_folder_dir + "/profile.json")
 
@@ -25,8 +23,7 @@ class AbstractBank:
         return [
             AbstractAccount.AbstractAccount(parent_bank=self,
                                             account_folder_dir=path,
-                                            statement_class=self.statement_class,
-                                            transaction_class=self.transaction_class)
+                                            statement_class=self.statement_class)
             for path in self.get_account_dir_list()
         ]
 

@@ -1,20 +1,18 @@
 import os
 import operator
 
-from Banks.AbstractSystem import AbstractStatement, Transaction
+from Banks.AbstractSystem import AbstractStatement
 
 from General import Functions
 
 
 class AbstractAccount:
 
-    def __init__(self, parent_bank, account_folder_dir, statement_class=AbstractStatement.AbstractStatement,
-                 transaction_class=Transaction.Transaction):
+    def __init__(self, parent_bank, account_folder_dir, statement_class=AbstractStatement.AbstractStatement):
 
         self.parent_bank = parent_bank
         self.account_folder_dir = account_folder_dir
         self.statement_class = statement_class
-        self.transaction_class = transaction_class
 
         self.info_dict = self.get_info_dict()
 
