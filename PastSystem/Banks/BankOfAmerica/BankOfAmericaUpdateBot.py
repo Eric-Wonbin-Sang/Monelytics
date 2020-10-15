@@ -3,8 +3,8 @@ import os
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 
-from Banks.AbstractSystem import UpdateBot
-from Banks.BankOfAmerica import BankOfAmericaAccount
+from PastSystem.Banks.AbstractSystem import UpdateBot
+from PastSystem.Banks.BankOfAmerica import BankOfAmericaAccount
 
 from General import Functions
 

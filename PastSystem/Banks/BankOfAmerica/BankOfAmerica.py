@@ -1,5 +1,5 @@
-from Banks.AbstractSystem import AbstractBank
-from Banks.BankOfAmerica import BankOfAmericaStatement
+from PastSystem.Banks.AbstractSystem import AbstractBank
+from PastSystem.Banks.BankOfAmerica import BankOfAmericaStatement
 
 
 class BankOfAmerica(AbstractBank.AbstractBank):

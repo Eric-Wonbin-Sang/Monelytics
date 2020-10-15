@@ -19,12 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="Transaction children removed from the abstract bank system.">
+    <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="Added a test script that tests out the projection idea I had for future prediction.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banks/AbstractSystem/AbstractStatement.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/AbstractSystem/AbstractStatement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmericaStatement.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmericaStatement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banks/Venmo/VenmoStatement.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/Venmo/VenmoStatement.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,15 +51,15 @@
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\ericw\CodingProjects\Monelytics\Banks\Venmo" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ericw\CodingProjects\Monelytics" />
       <recent name="C:\Users\ericw\CodingProjects\Monelytics\Banks\AbstractSystem" />
       <recent name="C:\Users\ericw\CodingProjects\Monelytics\Banks" />
-      <recent name="C:\Users\ericw\CodingProjects\Monelytics" />
       <recent name="C:\Users\ericw\CodingProjects\Monelytics\Banks\Venmo" />
       <recent name="C:\Users\ericw\CodingProjects\Monelytics\Banks\BankOfAmerica" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ericw\CodingProjects\Monelytics\Banks\Venmo" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
@@ -100,7 +96,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\ericw\CodingProjects\Monelytics\PastSystem\main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -193,27 +189,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1567637323358</updated>
-    </task>
-    <task id="LOCAL-00007" summary="New Profile class created for handling account login info. BankOfAmerica uses the profile class onw.">
-      <created>1598389220543</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1598389220543</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Removed bofa_login_credentials_json from Constants.py.">
-      <created>1598389233999</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1598389233999</updated>
-    </task>
-    <task id="LOCAL-00009" summary="main changed from creating a Bofa object to getting the profile list which creates the bank objects from the profile type.">
-      <created>1598389274846</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1598389274846</updated>
     </task>
     <task id="LOCAL-00010" summary="Added a Bank class to be a common parent class for bank objects.">
       <created>1598404696134</created>
@@ -537,7 +512,28 @@
       <option name="project" value="LOCAL" />
       <updated>1600822512064</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Changed the method for determining if the statement is current.">
+      <created>1602722851989</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1602722851990</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Updated main.">
+      <created>1602722874500</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1602722874500</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Added a test script that tests out the projection idea I had for future prediction.">
+      <created>1602722923461</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1602722923461</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -553,9 +549,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Removed old classes used in the previous abstract bank system." />
-    <MESSAGE value="bank_info.json is used to get the login_url for each bank when scraping statements. This will be replaced by individual bank_constants.json files." />
-    <MESSAGE value="UpdateBot children created for each bank for scraping statements." />
     <MESSAGE value="Replaced the parent of transaction children to the new abstract bank system." />
     <MESSAGE value="Imports/functions related to the candlestick graph were removed." />
     <MESSAGE value="get_path_list_in_dir and dict_to_json added to Functions.py." />
@@ -578,7 +571,10 @@
     <MESSAGE value="Removed children of the Transaction class as all logic associated with translating statements to abstract transactions occur in the Statement children." />
     <MESSAGE value="Bank specific transaction translation was moved to Statement children." />
     <MESSAGE value="Transaction children removed from the abstract bank system." />
-    <option name="LAST_COMMIT_MESSAGE" value="Transaction children removed from the abstract bank system." />
+    <MESSAGE value="Changed the method for determining if the statement is current." />
+    <MESSAGE value="Updated main." />
+    <MESSAGE value="Added a test script that tests out the projection idea I had for future prediction." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added a test script that tests out the projection idea I had for future prediction." />
   </component>
   <component name="WindowStateProjectService">
     <state x="593" y="182" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598589018310">
@@ -647,10 +643,11 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="1001" height="376" key="GridCell.Tab.1.right/0.0.2048.1112@0.0.2048.1112" timestamp="1598911677944" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1600635910333">
-      <screen x="0" y="0" width="2048" height="1112" />
+    <state x="2824" y="484" key="Vcs.Push.Dialog.v2" timestamp="1602722929004">
+      <screen x="2560" y="-5" width="1080" height="1880" />
     </state>
     <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600635910333" />
+    <state x="2824" y="484" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@2560.-5.1080.1880" timestamp="1602722929004" />
     <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1598510801640" />
     <state x="626" y="167" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600631932994">
       <screen x="0" y="0" width="2048" height="1112" />

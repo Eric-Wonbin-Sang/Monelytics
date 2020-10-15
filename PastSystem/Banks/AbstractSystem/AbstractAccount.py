@@ -1,7 +1,7 @@
 import os
 import operator
 
-from Banks.AbstractSystem import AbstractStatement
+from PastSystem.Banks.AbstractSystem import AbstractStatement
 
 from General import Functions
 

@@ -1,7 +1,7 @@
 import pandas
 import datetime
 
-from Banks.AbstractSystem import AbstractStatement, Transaction
+from PastSystem.Banks.AbstractSystem import Transaction, AbstractStatement
 
 
 class VenmoStatement(AbstractStatement.AbstractStatement):

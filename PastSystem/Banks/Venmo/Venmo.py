@@ -1,5 +1,5 @@
-from Banks.AbstractSystem import AbstractBank
-from Banks.Venmo import VenmoStatement
+from PastSystem.Banks.AbstractSystem import AbstractBank
+from PastSystem.Banks.Venmo import VenmoStatement
 
 
 class Venmo(AbstractBank.AbstractBank):

@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 
-from Banks.BankOfAmerica import BankOfAmerica
-from Banks.Venmo import Venmo
-from Banks.BankOfAmerica.BankOfAmericaUpdateBot import BankOfAmericaUpdateBot
-from Banks.Venmo.VenmoUpdateBot import VenmoUpdateBot
+from PastSystem.Banks.BankOfAmerica import BankOfAmerica
+from PastSystem.Banks.Venmo import Venmo
+from PastSystem.Banks.BankOfAmerica.BankOfAmericaUpdateBot import BankOfAmericaUpdateBot
+from PastSystem.Banks.Venmo.VenmoUpdateBot import VenmoUpdateBot
 
 from General import Constants, Functions
 

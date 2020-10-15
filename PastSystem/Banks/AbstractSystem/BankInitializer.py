@@ -3,7 +3,7 @@ import pickle
 import time
 from selenium.common import exceptions
 
-from Banks.AbstractSystem import bank_helper
+from PastSystem.Banks.AbstractSystem import bank_helper
 
 from General import Constants, Functions
 

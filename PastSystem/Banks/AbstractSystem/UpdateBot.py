@@ -1,4 +1,4 @@
-from Banks.AbstractSystem import AbstractBank, bank_helper
+from PastSystem.Banks.AbstractSystem import bank_helper, AbstractBank
 
 
 class UpdateBot:

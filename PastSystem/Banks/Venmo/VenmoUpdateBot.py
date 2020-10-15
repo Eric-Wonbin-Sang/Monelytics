@@ -2,8 +2,8 @@ import time
 import os
 from selenium.webdriver.common.keys import Keys
 
-from Banks.AbstractSystem import UpdateBot
-from Banks.Venmo import VenmoAccount
+from PastSystem.Banks.AbstractSystem import UpdateBot
+from PastSystem.Banks.Venmo import VenmoAccount
 
 from General import Functions
 

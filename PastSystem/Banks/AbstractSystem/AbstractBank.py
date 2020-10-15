@@ -1,4 +1,4 @@
-from Banks.AbstractSystem import AbstractAccount, AbstractStatement, Transaction
+from PastSystem.Banks.AbstractSystem import AbstractAccount, AbstractStatement
 
 from General import Functions
 
