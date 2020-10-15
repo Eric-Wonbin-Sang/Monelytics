@@ -1,4 +1,3 @@
-import operator
 import matplotlib.pyplot as plt
 
 from Banks.BankOfAmerica import BankOfAmerica
@@ -41,19 +40,19 @@ def main():
     account_list = []
     for bank in bank_list:
         account_list += bank.abstract_account_list
-    graph_account_transactions(account_list)
+    # graph_account_transactions(account_list)
 
     # graph_account_transactions([account for account in account_list if account.parent_bank.bank_type == "Venmo"])
 
-    # eric_venmo_account = None
-    # for bank in bank_list:
-    #     if bank.bank_type == "Venmo" and bank.profile_dict["owner"] == "Danielle Gin":
-    #         eric_venmo_account = bank.abstract_account_list[0]
-    #         break
-    #
-    # for t in eric_venmo_account.full_transaction_list:
-    #     print(t)
-    # graph_account_transactions([eric_venmo_account])
+    eric_venmo_account = None
+    for bank in bank_list:
+        if bank.bank_type == "Venmo" and bank.profile_dict["owner"] == "Eric Sang":
+            eric_venmo_account = bank.abstract_account_list[0]
+            break
+
+    for t in eric_venmo_account.full_transaction_list:
+        print(t)
+    graph_account_transactions([eric_venmo_account])
 
 
 main()

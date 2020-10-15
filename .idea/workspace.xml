@@ -19,10 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="Transaction class uses the appropriate values in the profile/info dicts. Description new lines are converted to dashes.">
+    <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="Transaction children removed from the abstract bank system.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banks/AbstractSystem/UpdateBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/AbstractSystem/UpdateBot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Banks/Venmo/VenmoAccount.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/Venmo/VenmoAccount.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banks/AbstractSystem/AbstractStatement.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/AbstractSystem/AbstractStatement.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmericaStatement.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/BankOfAmerica/BankOfAmericaStatement.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Banks/Venmo/VenmoStatement.py" beforeDir="false" afterPath="$PROJECT_DIR$/Banks/Venmo/VenmoStatement.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -174,10 +175,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.setup_bank_dir" />
         <item itemvalue="Python.CookieGetter" />
         <item itemvalue="Python.testing" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -192,48 +193,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1567637323358</updated>
-    </task>
-    <task id="LOCAL-00001" summary="New BankOfAmerica class in Banks dir with an account class that downloads all statement CSVs from a bank of america login using selenium.">
-      <created>1598387747727</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1598387747727</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Added Constants file for keeping references to download directories, common chromedriver path, etc. Removed local chromedriver from project.">
-      <created>1598387799138</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1598387799138</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Updated project dictionary for custom words.">
-      <created>1598387815533</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1598387815533</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Added parse_json and get_curr_parent_dir to Function.py.">
-      <created>1598387832662</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1598387832662</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Removed old test code for the venmo_account and bofa_account classes.">
-      <created>1598387865272</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1598387865272</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Removed testing script and committing updated project files.">
-      <created>1598387898823</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1598387898823</updated>
     </task>
     <task id="LOCAL-00007" summary="New Profile class created for handling account login info. BankOfAmerica uses the profile class onw.">
       <created>1598389220543</created>
@@ -536,7 +495,49 @@
       <option name="project" value="LOCAL" />
       <updated>1600635794842</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="UpdateBot's get_driver function now uses bank_helper.">
+      <created>1600635829634</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1600635829634</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Venmo statement year was reverted back to old month/day/year format.">
+      <created>1600635890657</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1600635890657</updated>
+    </task>
+    <task id="LOCAL-00052" summary="New main for graphing.">
+      <created>1600635905318</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1600635905318</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Removed children of the Transaction class as all logic associated with translating statements to abstract transactions occur in the Statement children.">
+      <created>1600822163243</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1600822163243</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Bank specific transaction translation was moved to Statement children.">
+      <created>1600822236198</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1600822236198</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Transaction children removed from the abstract bank system.">
+      <created>1600822512063</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1600822512064</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -552,12 +553,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="start_time, end_time, starting_balance, and ending_balance added to Statement classes." />
-    <MESSAGE value="current_statement_file_name_default added to Constants.py." />
-    <MESSAGE value="Graphing functions added for transaction viewing." />
-    <MESSAGE value="Added a UserWarning exception if get_bank had an unknown bank type." />
-    <MESSAGE value="Added an account_balance to Transactions." />
-    <MESSAGE value="New abstract bank system created. Previous version had the downloading of the statements too close to the abstract classes. This change allows for better separation between downloading and reading." />
     <MESSAGE value="Removed old classes used in the previous abstract bank system." />
     <MESSAGE value="bank_info.json is used to get the login_url for each bank when scraping statements. This will be replaced by individual bank_constants.json files." />
     <MESSAGE value="UpdateBot children created for each bank for scraping statements." />
@@ -577,7 +572,13 @@
     <MESSAGE value="AbstractAccount class has specified statement and transaction classes and has a full_transaction_list." />
     <MESSAGE value="setup.py files created for each bank class." />
     <MESSAGE value="Transaction class uses the appropriate values in the profile/info dicts. Description new lines are converted to dashes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Transaction class uses the appropriate values in the profile/info dicts. Description new lines are converted to dashes." />
+    <MESSAGE value="UpdateBot's get_driver function now uses bank_helper." />
+    <MESSAGE value="Venmo statement year was reverted back to old month/day/year format." />
+    <MESSAGE value="New main for graphing." />
+    <MESSAGE value="Removed children of the Transaction class as all logic associated with translating statements to abstract transactions occur in the Statement children." />
+    <MESSAGE value="Bank specific transaction translation was moved to Statement children." />
+    <MESSAGE value="Transaction children removed from the abstract bank system." />
+    <option name="LAST_COMMIT_MESSAGE" value="Transaction children removed from the abstract bank system." />
   </component>
   <component name="WindowStateProjectService">
     <state x="593" y="182" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598589018310">
@@ -593,37 +594,41 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="705" y="292" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600571152917" />
-    <state x="995" y="306" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1600522306709">
+    <state x="995" y="306" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1600822038721">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="995" y="306" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600522306709" />
+    <state x="995" y="306" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600822038721" />
     <state x="995" y="306" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595211019220" />
     <state x="761" y="298" key="FileChooserDialogImpl" timestamp="1599148087241">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="761" y="298" key="FileChooserDialogImpl/0.0.2048.1112@0.0.2048.1112" timestamp="1599148087241" />
-    <state width="2027" height="429" key="GridCell.Tab.0.bottom" timestamp="1600634457748">
-      <screen x="0" y="0" width="2048" height="1112" />
+    <state width="1038" height="284" key="GridCell.Tab.0.bottom" timestamp="1600971085674">
+      <screen x="2560" y="-5" width="1080" height="1880" />
     </state>
-    <state width="2027" height="429" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600634457748" />
+    <state width="2027" height="284" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600823102076" />
+    <state width="1038" height="284" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@2560.-5.1080.1880" timestamp="1600971085674" />
     <state width="391" height="775" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
     <state width="2027" height="455" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1599363859114" />
-    <state width="2027" height="429" key="GridCell.Tab.0.center" timestamp="1600634457747">
-      <screen x="0" y="0" width="2048" height="1112" />
+    <state width="1038" height="284" key="GridCell.Tab.0.center" timestamp="1600971085674">
+      <screen x="2560" y="-5" width="1080" height="1880" />
     </state>
-    <state width="2027" height="429" key="GridCell.Tab.0.center/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600634457747" />
+    <state width="2027" height="284" key="GridCell.Tab.0.center/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600823102076" />
+    <state width="1038" height="284" key="GridCell.Tab.0.center/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@2560.-5.1080.1880" timestamp="1600971085674" />
     <state width="391" height="775" key="GridCell.Tab.0.center/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
     <state width="2027" height="455" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1599363859114" />
-    <state width="2027" height="429" key="GridCell.Tab.0.left" timestamp="1600634457747">
-      <screen x="0" y="0" width="2048" height="1112" />
+    <state width="1038" height="284" key="GridCell.Tab.0.left" timestamp="1600971085674">
+      <screen x="2560" y="-5" width="1080" height="1880" />
     </state>
-    <state width="2027" height="429" key="GridCell.Tab.0.left/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600634457747" />
+    <state width="2027" height="284" key="GridCell.Tab.0.left/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600823102076" />
+    <state width="1038" height="284" key="GridCell.Tab.0.left/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@2560.-5.1080.1880" timestamp="1600971085674" />
     <state width="391" height="775" key="GridCell.Tab.0.left/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
     <state width="2027" height="455" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1599363859114" />
-    <state width="2027" height="429" key="GridCell.Tab.0.right" timestamp="1600634457748">
-      <screen x="0" y="0" width="2048" height="1112" />
+    <state width="1038" height="284" key="GridCell.Tab.0.right" timestamp="1600971085674">
+      <screen x="2560" y="-5" width="1080" height="1880" />
     </state>
-    <state width="2027" height="429" key="GridCell.Tab.0.right/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600634457748" />
+    <state width="2027" height="284" key="GridCell.Tab.0.right/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600823102076" />
+    <state width="1038" height="284" key="GridCell.Tab.0.right/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@2560.-5.1080.1880" timestamp="1600971085674" />
     <state width="391" height="775" key="GridCell.Tab.0.right/0.0.2048.1112/2560.-5.1080.1880/-1080.2.1080.1880@0.0.2048.1112" timestamp="1595549951813" />
     <state width="2027" height="455" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1599363859114" />
     <state width="1001" height="376" key="GridCell.Tab.1.bottom" timestamp="1598911677944">
@@ -642,10 +647,10 @@
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state width="1001" height="376" key="GridCell.Tab.1.right/0.0.2048.1112@0.0.2048.1112" timestamp="1598911677944" />
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1600574166788">
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2" timestamp="1600635910333">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600574166788" />
+    <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@0.0.2048.1112" timestamp="1600635910333" />
     <state x="617" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112@0.0.2048.1112" timestamp="1598510801640" />
     <state x="626" y="167" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600631932994">
       <screen x="0" y="0" width="2048" height="1112" />
