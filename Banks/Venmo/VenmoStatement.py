@@ -3,8 +3,6 @@ import datetime
 
 from Banks.AbstractSystem import AbstractStatement, Transaction
 
-from General import Constants
-
 
 class VenmoStatement(AbstractStatement.AbstractStatement):
 
@@ -57,7 +55,7 @@ class VenmoStatement(AbstractStatement.AbstractStatement):
             datetime.datetime.strptime(start_date_str, "%m-%d-%Y"), datetime.datetime.strptime(end_date_str, "%m-%d-%Y")
 
     def get_start_and_end_times(self):
-        if self.statement_file_path.split("/")[-1] == Constants.current_statement_file_name_default:
+        if self.is_current_statement:
             return self.get_times_as_current_statement()
         return [datetime.datetime.strptime(x, "%m-%d-%Y")
                 for x in self.statement_file_path.split("/")[-1][:-4].split(" to ")]

@@ -1,7 +1,7 @@
 import datetime
 import operator
 
-from General import Functions
+from General import Functions, Constants
 
 
 class AbstractStatement:
@@ -12,6 +12,7 @@ class AbstractStatement:
 
         self.parent_account = parent_account
         self.statement_file_path = statement_file_path
+        self.is_current_statement = self.get_is_current_statement()
 
         self.data_list_list = self.get_data_list_list()
 
@@ -20,6 +21,9 @@ class AbstractStatement:
         self.starting_balance = None
         self.ending_balance = None
         self.transaction_list = []
+
+    def get_is_current_statement(self):
+        return self.statement_file_path.split("/")[-1] == Constants.current_statement_file_name_default
 
     def get_data_list_list(self):
         return Functions.csv_to_list_list(self.statement_file_path)

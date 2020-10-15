@@ -13,6 +13,9 @@ class BankOfAmericaStatement(AbstractStatement.AbstractStatement):
             statement_file_path=statement_file_path
         )
 
+        self.start_time, self.end_time = None, None
+        self.transaction_list = []
+
         if self.data_list_list:
             self.info_dict = self.get_info_dict()
             self.dataframe = self.get_dataframe()
@@ -23,13 +26,8 @@ class BankOfAmericaStatement(AbstractStatement.AbstractStatement):
 
             self.transaction_list = self.get_transaction_list()
 
-        else:
-            # fix this by adding a 'is_current_statement' bool and running logic based on that
-            self.start_time, self.end_time = None, None
-            self.transaction_list = []
-
-        self.sort_transaction_list()
-        self.update_transaction_account_balances()
+            self.sort_transaction_list()
+            self.update_transaction_account_balances()
 
     def get_info_dict(self):
         return {data_list[0]: float(data_list[2]) for data_list in self.data_list_list[1:5]}
