@@ -20,6 +20,7 @@ class BankOfAmericaUpdateBot(UpdateBot.UpdateBot):
 
     def login(self):
         self.driver.find_element_by_name("onlineId1").send_keys(self.bank.profile_dict["username"])
+        time.sleep(1)
         self.driver.find_element_by_name("passcode1").send_keys(self.bank.profile_dict["password"])
         self.driver.find_element_by_id("signIn").send_keys(Keys.RETURN)
         time.sleep(2)
@@ -56,7 +57,8 @@ class BankOfAmericaUpdateBot(UpdateBot.UpdateBot):
 
             info_dict = {
                 "name": list_elem.text,
-                "account_type": account_elem.get("data-accounttype")
+                "account_type": account_elem.get("data-accounttype"),
+                "statement_suffix_url": list_elem.get("href")
             }
 
             if account := self.try_get_account(info_dict):

@@ -6,7 +6,7 @@ class UpdateBot:
     def __init__(self, bank_folder_dir, bank_type):
 
         self.bank_folder_dir = bank_folder_dir
-        self.bank = AbstractBank.AbstractBank(bank_folder_dir=self.bank_folder_dir)
+        self.bank = AbstractBank.AbstractBank(bank_folder_dir=self.bank_folder_dir, bank_type=bank_type)
 
         self.cookies_path = self.bank_folder_dir + "/cookies.pkl"
         self.login_url = bank_helper.get_bank_info_dict(bank_type)["login_url"]

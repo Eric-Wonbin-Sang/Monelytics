@@ -28,7 +28,8 @@ def get_driver(startup_url=None, cookies_path=None, detach=True, run_in_backgrou
 
 
 def get_bank_info_dict(bank_type):
-    for data_dict in Functions.parse_json(Constants.project_dir + "/Banks/bank_info.json"):
+    print(Constants.project_dir)
+    for data_dict in Functions.parse_json(Constants.project_dir + "/PastSystem/Banks/bank_info.json"):
         if data_dict["type"] == bank_type:
             return data_dict
     raise UserWarning("Bank type DNE in bank_info.json - {}".format(bank_type))
