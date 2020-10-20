@@ -1,8 +1,10 @@
-import itertools
 import os
 import csv
-import codecs
 import json
+import codecs
+import calendar
+import datetime
+import itertools
 
 
 def get_path_list_in_dir(some_dir):
@@ -85,3 +87,11 @@ def dataframe_to_str(dataframe, str_length=20, spacer=" | "):
     ret_str = spacer.join([str_to_length(x, str_length) for x in dataframe.columns]) + "\n"
     ret_str += "\n".join([spacer.join([str_to_length(x, str_length) for x in list(data_list)]) for data_list in dataframe.values])
     return ret_str
+
+
+def add_months(source_date, months):
+    month = source_date.month - 1 + months
+    year = source_date.year + month // 12
+    month = month % 12 + 1
+    day = min(source_date.day, calendar.monthrange(year, month)[1])
+    return datetime.datetime(year, month, day)
