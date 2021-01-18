@@ -23,11 +23,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="Moved existing files to a new PastSystem dir to segment the code for future finance projections.">
-      <change afterPath="$PROJECT_DIR$/PastSystem/Mint/mint_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FutureSystem/Classes/CustomClasses/SalaryIncome.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FutureSystem/future_main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PastSystem/Mint/Classes/Account.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PastSystem/Mint/Classes/Transaction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Monelytics.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Monelytics.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FutureSystem/Classes/Projection.py" beforeDir="false" afterPath="$PROJECT_DIR$/FutureSystem/Classes/Projection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FutureSystem/main.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/General/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/General/Constants.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/General/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/General/Functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PastSystem/mint_test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PastSystem/Mint/mint_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/PastSystem/Mint/mint_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PastSystem/chromedriver.exe" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PastSystem/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/PastSystem/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,14 +53,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
-  </component>
   <component name="ProjectId" id="1a6mLVJC4MFLXt6REZhTwNbJ3EM" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -62,57 +63,36 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SAL" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Banks/Venmo" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\ericw\CodingProjects\Monelytics\Banks\Venmo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\ericw\CodingProjects\Monelytics\PastSystem\Mint" />
       <recent name="C:\Users\ericw\CodingProjects\Monelytics\FutureSystem" />
       <recent name="C:\Users\ericw\CodingProjects\Monelytics\PastSystem" />
       <recent name="C:\Users\ericw\CodingProjects\Monelytics" />
       <recent name="C:\Users\ericw\CodingProjects\Monelytics\Banks\AbstractSystem" />
+      <recent name="C:\Users\ericw\CodingProjects\Monelytics\Banks" />
     </key>
   </component>
   <component name="RunManager" selected="Python.mint_test">
-    <configuration name="CookieGetter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="Monelytics" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="SDK_HOME" value="C:\Users\ericw\AppData\Local\Programs\Python\Python38-32\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CookieGetter.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Monelytics" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\ericw\CodingProjects\Monelytics\PastSystem\main.py" />
+      <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -149,54 +129,12 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/PastSystem" />
+      <option name="SDK_HOME" value="C:\Users\ericw\AppData\Local\Programs\Python\Python38-32\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/PastSystem/Mint" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\ericw\CodingProjects\Monelytics\PastSystem\Mint\mint_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="setup_bank_dir" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Monelytics" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Banks/BankOfAmerica" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\ericw\CodingProjects\Monelytics\Banks\Venmo\setup_bank_dir.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="testing" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Monelytics" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testing.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PastSystem/Mint/mint_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -209,9 +147,6 @@
       <list>
         <item itemvalue="Python.mint_test" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.main" />
-        <item itemvalue="Python.setup_bank_dir" />
-        <item itemvalue="Python.CookieGetter" />
       </list>
     </recent_temporary>
   </component>
@@ -612,5 +547,64 @@
     <MESSAGE value="Added a test script that tests out the projection idea I had for future prediction." />
     <MESSAGE value="Moved existing files to a new PastSystem dir to segment the code for future finance projections." />
     <option name="LAST_COMMIT_MESSAGE" value="Moved existing files to a new PastSystem dir to segment the code for future finance projections." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="479" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1610937018229">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="479" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610937018229" />
+    <state width="666" height="984" key="GridCell.Tab.0.bottom" timestamp="1610952909638">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="666" height="984" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610952909638" />
+    <state width="1038" height="246" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603227935453" />
+    <state width="666" height="984" key="GridCell.Tab.0.center" timestamp="1610952909638">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="666" height="984" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610952909638" />
+    <state width="1038" height="246" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603227935453" />
+    <state width="666" height="984" key="GridCell.Tab.0.left" timestamp="1610952909638">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="666" height="984" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610952909638" />
+    <state width="1038" height="246" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603227935453" />
+    <state width="666" height="984" key="GridCell.Tab.0.right" timestamp="1610952909638">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="666" height="984" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610952909638" />
+    <state width="1038" height="246" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603227935453" />
+    <state width="518" height="192" key="GridCell.Tab.1.bottom" timestamp="1603067101841">
+      <screen x="2560" y="0" width="1080" height="1880" />
+    </state>
+    <state width="518" height="192" key="GridCell.Tab.1.bottom/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603067101841" />
+    <state width="518" height="192" key="GridCell.Tab.1.center" timestamp="1603067101840">
+      <screen x="2560" y="0" width="1080" height="1880" />
+    </state>
+    <state width="518" height="192" key="GridCell.Tab.1.center/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603067101840" />
+    <state width="518" height="192" key="GridCell.Tab.1.left" timestamp="1603067101840">
+      <screen x="2560" y="0" width="1080" height="1880" />
+    </state>
+    <state width="518" height="192" key="GridCell.Tab.1.left/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603067101840" />
+    <state width="518" height="192" key="GridCell.Tab.1.right" timestamp="1603067101841">
+      <screen x="2560" y="0" width="1080" height="1880" />
+    </state>
+    <state width="518" height="192" key="GridCell.Tab.1.right/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603067101841" />
+    <state x="76" y="159" key="SettingsEditor" timestamp="1610937033274">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="76" y="159" key="SettingsEditor/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610937033274" />
+    <state x="2600" y="269" key="SettingsEditor/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603166541305" />
+    <state x="2824" y="484" key="Vcs.Push.Dialog.v2" timestamp="1602723709694">
+      <screen x="2560" y="-5" width="1080" height="1880" />
+    </state>
+    <state x="2824" y="484" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@2560.-5.1080.1880" timestamp="1602723709694" />
+    <state x="2760" y="139" width="734" height="1576" key="find.popup" timestamp="1603161784333">
+      <screen x="2560" y="0" width="1080" height="1880" />
+    </state>
+    <state x="2760" y="139" width="734" height="1576" key="find.popup/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603161784333" />
+    <state x="2922" y="411" width="672" height="1147" key="search.everywhere.popup" timestamp="1603163165092">
+      <screen x="2560" y="0" width="1080" height="1880" />
+    </state>
+    <state x="2922" y="411" width="672" height="1147" key="search.everywhere.popup/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603163165092" />
   </component>
 </project>
