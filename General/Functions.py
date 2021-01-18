@@ -2,9 +2,18 @@ import os
 import csv
 import json
 import codecs
+import pickle
 import calendar
 import datetime
 import itertools
+
+
+def pickle_this(some_variable, file_path):
+    pickle.dump(some_variable, open(file_path, "wb"))
+
+
+def unpickle(file_path):
+    return pickle.load(open(file_path, "rb"))
 
 
 def get_path_list_in_dir(some_dir):

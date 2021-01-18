@@ -23,10 +23,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="Moved existing files to a new PastSystem dir to segment the code for future finance projections.">
-      <change afterPath="$PROJECT_DIR$/PastSystem/mint_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Monelytics.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Monelytics.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PastSystem/Mint/mint_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/General/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/General/Constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/General/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/General/Functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PastSystem/mint_test.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +44,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="ProjectId" id="1a6mLVJC4MFLXt6REZhTwNbJ3EM" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -53,7 +62,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SAL" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -62,11 +71,11 @@
       <recent name="C:\Users\ericw\CodingProjects\Monelytics\Banks\Venmo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ericw\CodingProjects\Monelytics\PastSystem\Mint" />
       <recent name="C:\Users\ericw\CodingProjects\Monelytics\FutureSystem" />
       <recent name="C:\Users\ericw\CodingProjects\Monelytics\PastSystem" />
       <recent name="C:\Users\ericw\CodingProjects\Monelytics" />
       <recent name="C:\Users\ericw\CodingProjects\Monelytics\Banks\AbstractSystem" />
-      <recent name="C:\Users\ericw\CodingProjects\Monelytics\Banks" />
     </key>
   </component>
   <component name="RunManager" selected="Python.mint_test">
@@ -145,7 +154,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/PastSystem/mint_test.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\ericw\CodingProjects\Monelytics\PastSystem\Mint\mint_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -206,6 +215,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -568,13 +578,12 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Imports/functions related to the candlestick graph were removed." />
@@ -603,76 +612,5 @@
     <MESSAGE value="Added a test script that tests out the projection idea I had for future prediction." />
     <MESSAGE value="Moved existing files to a new PastSystem dir to segment the code for future finance projections." />
     <option name="LAST_COMMIT_MESSAGE" value="Moved existing files to a new PastSystem dir to segment the code for future finance projections." />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="237" y="156" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1610050983060">
-      <screen x="0" y="0" width="1563" height="1002" />
-    </state>
-    <state x="237" y="156" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1563.1002@0.0.1563.1002" timestamp="1610050983060" />
-    <state x="329" y="255" key="FileChooserDialogImpl" timestamp="1610051034767">
-      <screen x="0" y="0" width="1563" height="1002" />
-    </state>
-    <state x="329" y="255" key="FileChooserDialogImpl/0.0.1563.1002@0.0.1563.1002" timestamp="1610051034767" />
-    <state width="1542" height="520" key="GridCell.Tab.0.bottom" timestamp="1610168597967">
-      <screen x="0" y="0" width="1485" height="1074" />
-    </state>
-    <state width="1542" height="520" key="GridCell.Tab.0.bottom/0.0.1485.1074@0.0.1485.1074" timestamp="1610168597967" />
-    <state width="1542" height="520" key="GridCell.Tab.0.bottom/0.0.1563.1002@0.0.1563.1002" timestamp="1610092118547" />
-    <state width="1314" height="321" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1603138928671" />
-    <state width="1038" height="246" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603227935453" />
-    <state width="1542" height="520" key="GridCell.Tab.0.center" timestamp="1610168597966">
-      <screen x="0" y="0" width="1485" height="1074" />
-    </state>
-    <state width="1542" height="520" key="GridCell.Tab.0.center/0.0.1485.1074@0.0.1485.1074" timestamp="1610168597966" />
-    <state width="1542" height="520" key="GridCell.Tab.0.center/0.0.1563.1002@0.0.1563.1002" timestamp="1610092118546" />
-    <state width="1314" height="321" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1603138928671" />
-    <state width="1038" height="246" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603227935453" />
-    <state width="1542" height="520" key="GridCell.Tab.0.left" timestamp="1610168597966">
-      <screen x="0" y="0" width="1485" height="1074" />
-    </state>
-    <state width="1542" height="520" key="GridCell.Tab.0.left/0.0.1485.1074@0.0.1485.1074" timestamp="1610168597966" />
-    <state width="1542" height="520" key="GridCell.Tab.0.left/0.0.1563.1002@0.0.1563.1002" timestamp="1610092118546" />
-    <state width="1314" height="321" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1603138928671" />
-    <state width="1038" height="246" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603227935453" />
-    <state width="1542" height="520" key="GridCell.Tab.0.right" timestamp="1610168597967">
-      <screen x="0" y="0" width="1485" height="1074" />
-    </state>
-    <state width="1542" height="520" key="GridCell.Tab.0.right/0.0.1485.1074@0.0.1485.1074" timestamp="1610168597967" />
-    <state width="1542" height="520" key="GridCell.Tab.0.right/0.0.1563.1002@0.0.1563.1002" timestamp="1610092118547" />
-    <state width="1314" height="321" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1603138928671" />
-    <state width="1038" height="246" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603227935453" />
-    <state width="518" height="192" key="GridCell.Tab.1.bottom" timestamp="1603067101841">
-      <screen x="2560" y="0" width="1080" height="1880" />
-    </state>
-    <state width="518" height="192" key="GridCell.Tab.1.bottom/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603067101841" />
-    <state width="518" height="192" key="GridCell.Tab.1.center" timestamp="1603067101840">
-      <screen x="2560" y="0" width="1080" height="1880" />
-    </state>
-    <state width="518" height="192" key="GridCell.Tab.1.center/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603067101840" />
-    <state width="518" height="192" key="GridCell.Tab.1.left" timestamp="1603067101840">
-      <screen x="2560" y="0" width="1080" height="1880" />
-    </state>
-    <state width="518" height="192" key="GridCell.Tab.1.left/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603067101840" />
-    <state width="518" height="192" key="GridCell.Tab.1.right" timestamp="1603067101841">
-      <screen x="2560" y="0" width="1080" height="1880" />
-    </state>
-    <state width="518" height="192" key="GridCell.Tab.1.right/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603067101841" />
-    <state x="58" y="143" key="SettingsEditor" timestamp="1610051049947">
-      <screen x="0" y="0" width="1563" height="1002" />
-    </state>
-    <state x="58" y="143" key="SettingsEditor/0.0.1563.1002@0.0.1563.1002" timestamp="1610051049947" />
-    <state x="2600" y="269" key="SettingsEditor/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603166541305" />
-    <state x="2824" y="484" key="Vcs.Push.Dialog.v2" timestamp="1602723709694">
-      <screen x="2560" y="-5" width="1080" height="1880" />
-    </state>
-    <state x="2824" y="484" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@2560.-5.1080.1880" timestamp="1602723709694" />
-    <state x="2760" y="139" width="734" height="1576" key="find.popup" timestamp="1603161784333">
-      <screen x="2560" y="0" width="1080" height="1880" />
-    </state>
-    <state x="2760" y="139" width="734" height="1576" key="find.popup/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603161784333" />
-    <state x="2922" y="411" width="672" height="1147" key="search.everywhere.popup" timestamp="1603163165092">
-      <screen x="2560" y="0" width="1080" height="1880" />
-    </state>
-    <state x="2922" y="411" width="672" height="1147" key="search.everywhere.popup/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603163165092" />
   </component>
 </project>
