@@ -16,11 +16,19 @@ class Projection:
         self.frequency = kwargs.get("frequency")
         self.end_datetime = kwargs.get("end_datetime")
 
-        self.amount = kwargs.get("amount") if self.type == "income" else kwargs.get("amount") * -1
+        self.amount = kwargs.get("amount")
+        self.update_amount()
 
-        self.datetime_amount_df = self.get_datetime_amount_df()
+        self.dataframe = self.get_dataframe()
 
-    def get_datetime_amount_df(self):
+    def update_amount(self):
+        if self.type == "income":
+            pass
+        else:
+            self.amount *= -1
+        pass
+
+    def get_dataframe(self):
         curr_datetime = self.start_datetime
         datetime_list = []
         amount_list = []
@@ -39,21 +47,17 @@ class Projection:
             elif self.frequency == "yearly":
                 curr_datetime = Functions.add_months(curr_datetime, 12)
 
-        data = {
-            "date": datetime_list,
-            "amount": amount_list
-        }
-        return pd.DataFrame(data, columns=list(data.keys()))
+        data = {"result": amount_list}
+        full_dataframe = pd.DataFrame(data, index=datetime_list, columns=list(data.keys()))
+        full_dataframe = full_dataframe.sort_index()
+        return full_dataframe
 
     def plot(self):
         plt.plot(
-            'date', 'amount',
-            data=self.datetime_amount_df,
-            marker='.',
-            color=(0, 0, 1),
-            linewidth=1,
-            linestyle='--',
-            label="{} ({})".format(self.name, self.type)
+            self.dataframe.index,
+            self.dataframe["result"],
+            alpha=0.8,
+            marker="."
         )
 
     def __str__(self):
@@ -61,3 +65,18 @@ class Projection:
             self.name,
             self.type
         )
+
+
+def combine_projection_dfs(dataframe_0, dataframe_1, amount_type):
+    """ This assumes the date ranges for each dataframes are the same. """
+    data = {
+        "prev_result_0": dataframe_0["result"],
+        "prev_result_1": dataframe_1["result"]
+    }
+    full_dataframe = pd.DataFrame(data, index=dataframe_0.index, columns=list(data.keys()))
+    full_dataframe = full_dataframe.where(pd.notnull(full_dataframe), 0)
+    if amount_type == "value":
+        full_dataframe["result"] = full_dataframe["prev_result_0"] + full_dataframe["prev_result_1"]
+    else:
+        full_dataframe["result"] = full_dataframe["prev_result_0"] * full_dataframe["prev_result_1"]
+    return full_dataframe

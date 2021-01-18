@@ -22,8 +22,9 @@ def get_path_list_in_dir(some_dir):
     ]
 
 
-def get_curr_parent_dir(path_addition=None):
-    return os.path.dirname(os.getcwd()) + path_addition if path_addition is not None else ""
+def get_curr_parent_dir():
+    # return "/".join(os.path.dirname(os.getcwd()).replace("\\", "/").split("/")[:-1])
+    return "C:/Users/ericw/CodingProjects"
 
 
 def csv_to_list_list(csv_path):

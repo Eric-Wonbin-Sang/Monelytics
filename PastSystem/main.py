@@ -102,7 +102,7 @@ def graph_stack_plot(account_list):
 
 def main():
 
-    do_update = False
+    do_update = not True
 
     bank_list = []
     for path in Functions.get_path_list_in_dir(Constants.bank_source_info_dir):
@@ -120,8 +120,16 @@ def main():
         if bank.profile_dict["owner"] == "Eric Sang":
             account_list += bank.abstract_account_list
 
-    graph_account_transactions(account_list)
+    for account in account_list:
+        if account.parent_bank.bank_type == "Venmo":
+            # print(account)
+            for t in account.full_transaction_list:
+                if ("util" in t.description.lower() or "internet" in t.description.lower()) and "alex" in t.description.lower():
+                    print(t.amount, t.description)
+
+    # graph_account_transactions(account_list)
     # graph_stack_plot(account_list)
 
 
-main()
+if __name__ == '__main__':
+    main()

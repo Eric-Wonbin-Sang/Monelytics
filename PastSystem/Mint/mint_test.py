@@ -1,10 +1,14 @@
-import mintapi
+import os
+import json
 import pandas
 import pprint
-import json
+import mintapi
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+
+from PastSystem.Mint.Classes.Transaction import Transaction
+from PastSystem.Mint.Classes.Account import Account
 
 from General import Functions, Constants
 
@@ -16,32 +20,24 @@ pretty = pprint.PrettyPrinter()
 
 def get_driver(startup_url=None, cookies_path=None, detach=True, run_in_background=False):
     options = Options()
-
-    # if startup_url:
-    #     options.add_argument("--app={}".format(startup_url))
-
     options.add_argument("window-size={},{}".format(1280, 1000))
     options.add_experimental_option("detach", detach)
-
     # if run_in_background:
     #     options.add_argument('--disable-gpu')
     #     options.add_argument('--disable-software-rasterizer')
-
     driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
     # if cookies_path and os.path.exists(cookies_path):
     #     for cookie in pickle.load(open(cookies_path, "rb")):
     #         driver.add_cookie(cookie)
-
     driver.get(startup_url)
     return driver
 
 
-def save_transaction_df(transaction_df_path):
+def get_mint(mint_login_json):
 
-    mint_login_json = Constants.secrets_dir + "/Monelytics/mint_login.json"
     mint_login_dict = json.load(open(mint_login_json))
 
-    mint = mintapi.Mint(
+    return mintapi.Mint(
         mint_login_dict["username"],
         mint_login_dict["password"],
         mfa_method='sms',
@@ -56,64 +52,55 @@ def save_transaction_df(transaction_df_path):
         wait_for_sync_timeout=300
     )
 
-    # accounts = mint.get_accounts(True)
-    # for account in accounts:
-    #     # mint.get_transactions_csv(id=account["id"])
-    #     print(account)
-    #     print(mint.get_transactions_json(id=account["id"]))
-    #     print("\n----------------------\n")
-    #
-    # exit()
+
+def update_mint(mint_login_json, transaction_df_path, account_save_dir):
+    mint = get_mint(mint_login_json)
     Functions.pickle_this(mint.get_transactions(), transaction_df_path)
+    for account_dict in mint.get_accounts(True):
+        temp_account = Account(account_dict)
+        Functions.pickle_this(temp_account, account_save_dir + "/" + temp_account.get_save_filename())
 
 
-class Account:
-
-    def __init__(self):
-        pass
+def get_transaction_df(transaction_df_path):
+    return Functions.unpickle(transaction_df_path)
 
 
-class Transaction:
+def get_transaction_list(transaction_df):
+    transaction_list = []
+    for i, row in reversed(list(transaction_df.iterrows())):
+        transaction_list.append(Transaction(**{col: row[col] for col in transaction_df.columns}))
+    return transaction_list
 
-    def __init__(self, **kwargs):
 
-        self.init_kwargs = kwargs
-
-        self.date = kwargs.get("date")
-        self.description = kwargs.get("description")
-        self.original_description = kwargs.get("original_description")
-        self.amount = kwargs.get("amount")
-        self.transaction_type = kwargs.get("transaction_type")
-        self.category = kwargs.get("category")
-        self.account_name = kwargs.get("account_name")
-        self.labels = kwargs.get("labels")
-        self.notes = kwargs.get("notes")
-
-    def __str__(self):
-        return " | ".join(
-            [
-                Functions.str_to_length(self.date, 10, do_dots=False),
-                Functions.str_to_length(self.account_name, 19, do_dots=False),
-                # Functions.str_to_length(self.amount, 7, do_dots=True),
-                str(self.amount).center(7),
-                # Functions.str_to_length(self.description, 24, do_dots=True),
-                # Functions.str_to_length(self.original_description, 24, do_dots=True),
-                str(self.init_kwargs)
-            ]
-        )
+def get_account_list(save_dir):
+    return [Functions.unpickle(save_dir + "/" + path) for path in os.listdir(save_dir)]
 
 
 def main():
 
-    transaction_df_path = Constants.project_dir + "/PastSystem/Mint/transaction_df.p"
+    mint_login_json = Constants.secrets_dir + "/Monelytics/Mint/mint_login.json"
+    transaction_df_path = Constants.secrets_dir + "/Monelytics/Mint/transaction_df.p"
+    account_save_dir = Constants.secrets_dir + "/Monelytics/Mint/Accounts"
 
-    save_transaction_df(transaction_df_path=transaction_df_path)
-    transaction_df = Functions.unpickle(transaction_df_path)
+    update = False
 
-    transaction_list = []
-    for i, row in reversed(list(transaction_df.iterrows())):
-        transaction_list.append(Transaction(**{col: row[col] for col in transaction_df.columns}))
-        print(transaction_list[-1])
+    if update:
+        update_mint(
+            mint_login_json=mint_login_json,
+            transaction_df_path=transaction_df_path,
+            account_save_dir=account_save_dir
+        )
+
+    transaction_df = get_transaction_df(transaction_df_path)
+    transaction_list = get_transaction_list(transaction_df)
+    account_list = get_account_list(Constants.secrets_dir + "/Monelytics/Mint/Accounts")
+
+    for account in account_list:
+        print(account)
+
+    for transaction in transaction_list:
+        # if transaction.amount > 1000:
+        print(transaction)
 
 
 main()
