@@ -3,6 +3,8 @@ import json
 import pandas
 import pprint
 import mintapi
+import matplotlib.pyplot as plt
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
@@ -55,9 +57,13 @@ def get_mint(mint_login_json):
 
 def update_mint(mint_login_json, transaction_df_path, account_save_dir):
     mint = get_mint(mint_login_json)
-    Functions.pickle_this(mint.get_transactions(), transaction_df_path)
+
+    transaction_df = mint.get_transactions()
+    transaction_list = get_transaction_list(transaction_df)
+
+    Functions.pickle_this(transaction_df, transaction_df_path)
     for account_dict in mint.get_accounts(True):
-        temp_account = Account(account_dict)
+        temp_account = Account(account_dict, transaction_list)
         Functions.pickle_this(temp_account, account_save_dir + "/" + temp_account.get_save_filename())
 
 
@@ -76,14 +82,28 @@ def get_account_list(save_dir):
     return [Functions.unpickle(save_dir + "/" + path) for path in os.listdir(save_dir)]
 
 
+def graph_accounts(account_list):
+
+    for account in account_list:
+        plt.plot(*account.get_x_y_lists(), label=account.name)
+
+    # plt.xlabel("Date")
+    # plt.ylabel("Price")
+    plt.xticks(rotation=90)
+    # plt.title("Test Graph")
+    plt.legend(loc="upper left")
+    plt.grid()
+
+    plt.show()
+
+
 def main():
 
     mint_login_json = Constants.secrets_dir + "/Monelytics/Mint/mint_login.json"
     transaction_df_path = Constants.secrets_dir + "/Monelytics/Mint/transaction_df.p"
     account_save_dir = Constants.secrets_dir + "/Monelytics/Mint/Accounts"
 
-    update = False
-
+    update = not False
     if update:
         update_mint(
             mint_login_json=mint_login_json,
@@ -97,10 +117,7 @@ def main():
 
     for account in account_list:
         print(account)
-
-    for transaction in transaction_list:
-        # if transaction.amount > 1000:
-        print(transaction)
+    graph_accounts(account_list)
 
 
 main()

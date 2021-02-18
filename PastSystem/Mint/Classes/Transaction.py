@@ -11,7 +11,10 @@ class Transaction:
         self.description = kwargs.get("description")
         self.original_description = kwargs.get("original_description")
         self.amount = kwargs.get("amount")
+
         self.transaction_type = kwargs.get("transaction_type")
+        self.is_debit, self.is_credit = (True, False) if self.transaction_type == "debit" else (False, True)
+
         self.category = kwargs.get("category")
         self.account_name = kwargs.get("account_name")
         self.labels = kwargs.get("labels")

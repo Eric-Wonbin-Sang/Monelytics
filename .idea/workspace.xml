@@ -22,21 +22,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="Moved existing files to a new PastSystem dir to segment the code for future finance projections.">
-      <change afterPath="$PROJECT_DIR$/FutureSystem/Classes/CustomClasses/SalaryIncome.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FutureSystem/future_main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PastSystem/Mint/Classes/Account.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PastSystem/Mint/Classes/Transaction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Monelytics.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Monelytics.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="06678995-a2d1-4dff-b799-da19e3c1f0f2" name="Default Changelist" comment="Adding chromedriver from Mint API run.">
+      <change afterPath="$PROJECT_DIR$/PastSystem/Mint/Classes/Bank.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FutureSystem/Classes/Projection.py" beforeDir="false" afterPath="$PROJECT_DIR$/FutureSystem/Classes/Projection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FutureSystem/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/General/Constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/General/Constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/General/Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/General/Functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PastSystem/Mint/Classes/Account.py" beforeDir="false" afterPath="$PROJECT_DIR$/PastSystem/Mint/Classes/Account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PastSystem/Mint/Classes/Transaction.py" beforeDir="false" afterPath="$PROJECT_DIR$/PastSystem/Mint/Classes/Transaction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PastSystem/Mint/mint_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/PastSystem/Mint/mint_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PastSystem/chromedriver.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PastSystem/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/PastSystem/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,20 +152,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1567637323358</updated>
-    </task>
-    <task id="LOCAL-00011" summary="BankOfAmerica now uses the Bank parent class.">
-      <created>1598404738307</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1598404738307</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Added paths for profile_list.json and venmo_login_cookies_pkl in Constants.py.">
-      <created>1598404777790</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1598404777790</updated>
     </task>
     <task id="LOCAL-00013" summary="Added the Venmo class which scrapes transaction info from a venmo account.">
       <created>1598404848200</created>
@@ -505,7 +482,21 @@
       <option name="project" value="LOCAL" />
       <updated>1602723700890</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Saving Account and Transaction mint objects into secrets folder.">
+      <created>1610953250703</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1610953250704</updated>
+    </task>
+    <task id="LOCAL-00061" summary="Adding chromedriver from Mint API run.">
+      <created>1610953295753</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1610953295753</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -521,8 +512,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Imports/functions related to the candlestick graph were removed." />
-    <MESSAGE value="get_path_list_in_dir and dict_to_json added to Functions.py." />
     <MESSAGE value="setup_bank_dir.py is used to setup a new bank directory and save a profile.json associated with it." />
     <MESSAGE value="Account children no longer inherit the account class in the abstract bank system to avoid contamination of statement scraping. This will probably change in the future." />
     <MESSAGE value="Cookie paths and do_download were removed." />
@@ -546,32 +535,34 @@
     <MESSAGE value="Updated main." />
     <MESSAGE value="Added a test script that tests out the projection idea I had for future prediction." />
     <MESSAGE value="Moved existing files to a new PastSystem dir to segment the code for future finance projections." />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved existing files to a new PastSystem dir to segment the code for future finance projections." />
+    <MESSAGE value="Saving Account and Transaction mint objects into secrets folder." />
+    <MESSAGE value="Adding chromedriver from Mint API run." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding chromedriver from Mint API run." />
   </component>
   <component name="WindowStateProjectService">
     <state x="479" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1610937018229">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="479" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610937018229" />
-    <state width="666" height="984" key="GridCell.Tab.0.bottom" timestamp="1610952909638">
+    <state width="451" height="956" key="GridCell.Tab.0.bottom" timestamp="1611012889236">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="666" height="984" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610952909638" />
+    <state width="451" height="956" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1611012889236" />
     <state width="1038" height="246" key="GridCell.Tab.0.bottom/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603227935453" />
-    <state width="666" height="984" key="GridCell.Tab.0.center" timestamp="1610952909638">
+    <state width="451" height="956" key="GridCell.Tab.0.center" timestamp="1611012889236">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="666" height="984" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610952909638" />
+    <state width="451" height="956" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1611012889236" />
     <state width="1038" height="246" key="GridCell.Tab.0.center/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603227935453" />
-    <state width="666" height="984" key="GridCell.Tab.0.left" timestamp="1610952909638">
+    <state width="451" height="956" key="GridCell.Tab.0.left" timestamp="1611012889236">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="666" height="984" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610952909638" />
+    <state width="451" height="956" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1611012889236" />
     <state width="1038" height="246" key="GridCell.Tab.0.left/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603227935453" />
-    <state width="666" height="984" key="GridCell.Tab.0.right" timestamp="1610952909638">
+    <state width="451" height="956" key="GridCell.Tab.0.right" timestamp="1611012889236">
       <screen x="0" y="0" width="2048" height="1112" />
     </state>
-    <state width="666" height="984" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610952909638" />
+    <state width="451" height="956" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1611012889236" />
     <state width="1038" height="246" key="GridCell.Tab.0.right/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603227935453" />
     <state width="518" height="192" key="GridCell.Tab.1.bottom" timestamp="1603067101841">
       <screen x="2560" y="0" width="1080" height="1880" />
@@ -594,10 +585,11 @@
     </state>
     <state x="76" y="159" key="SettingsEditor/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610937033274" />
     <state x="2600" y="269" key="SettingsEditor/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@2560.0.1080.1880" timestamp="1603166541305" />
-    <state x="2824" y="484" key="Vcs.Push.Dialog.v2" timestamp="1602723709694">
-      <screen x="2560" y="-5" width="1080" height="1880" />
+    <state x="501" y="289" key="Vcs.Push.Dialog.v2" timestamp="1610953297682">
+      <screen x="0" y="0" width="2048" height="1112" />
     </state>
     <state x="2824" y="484" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.-5.1080.1880/-1080.-19.1080.1880@2560.-5.1080.1880" timestamp="1602723709694" />
+    <state x="501" y="289" key="Vcs.Push.Dialog.v2/0.0.2048.1112/2560.0.1080.1880/-1080.0.1080.1880@0.0.2048.1112" timestamp="1610953297682" />
     <state x="2760" y="139" width="734" height="1576" key="find.popup" timestamp="1603161784333">
       <screen x="2560" y="0" width="1080" height="1880" />
     </state>
