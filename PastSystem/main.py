@@ -5,6 +5,12 @@ import numpy as np
 import datetime
 import seaborn as sns
 
+import os
+
+print(os.getcwd())
+os.chdir("\\".join(os.getcwd().split("\\")[:-1]))
+print(os.getcwd())
+
 from PastSystem.Classes import SnappingCursor
 
 from PastSystem.Banks.BankOfAmerica import BankOfAmerica
