@@ -1,6 +1,6 @@
 
 from NewPastSystem.Classes.ParentClasses import Bank
-from NewPastSystem.Classes.ChildClasses import BofA
+from NewPastSystem.Classes.ChildClasses.BofASystem import BofABank
 
 from General import Functions, Constants
 
@@ -10,7 +10,7 @@ def get_bank_list(bank_dict_list):
     for bank_dict in bank_dict_list:
         bank_type = bank_dict.get("bank_type")
         if bank_type == "Bank of America":
-            bank_list.append(BofA.BofA(**bank_dict))
+            bank_list.append(BofABank.BofABank(**bank_dict))
         elif bank_type == "Discover":
             bank_list.append(Bank.Bank(**bank_dict))
         elif bank_type == "Chase":

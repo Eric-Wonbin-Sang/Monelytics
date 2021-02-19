@@ -16,8 +16,10 @@ class Bank:
         self.password = kwargs.get("password")
 
         self.dir_name = self.generate_dir_name()
+        self.general_path = self.banks_dir + "/" + self.dir_name            # this is where all related bank files go
+        self.source_files_path = self.general_path + "/" + "source_files"   # this is where source statements go
 
-        if not os.path.isdir(self.banks_dir + "/" + self.dir_name):
+        if not os.path.isdir(self.general_path):
             self.setup_directories()
 
     def generate_dir_name(self):
@@ -27,9 +29,8 @@ class Bank:
         )
 
     def setup_directories(self):
-        bank_path = self.banks_dir + "/" + self.dir_name
-        os.mkdir(bank_path)
-        os.mkdir(bank_path + "/" + "source_files")
+        os.mkdir(self.general_path)
+        os.mkdir(self.source_files_path)
 
     def __str__(self):
         return "Generic Bank - type: {}, id: {}\n\towner: {}\n\tusername: {}\n\tpassword: {}".format(
