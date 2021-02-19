@@ -151,3 +151,19 @@ class BofAParser:
                 )
             )
         return account_list
+
+    def download_statements(self):
+        # if account := self.try_get_account(info_dict):
+        #     account_folder_dir = account.account_folder_dir
+        # else:
+        #     account_folder_dir = self.get_new_account_folder_dir()
+        #     os.mkdir(account_folder_dir)
+        #     Functions.dict_to_json(info_dict, account_folder_dir + "/info.json")
+        #
+        # BankOfAmericaAccount.BankOfAmericaAccount(
+        #     parent_bank=self,
+        #     driver=self.driver,
+        #     info_dict=info_dict,
+        #     account_folder_dir=account_folder_dir
+        # )
+        pass

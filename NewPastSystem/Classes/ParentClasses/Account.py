@@ -4,6 +4,7 @@ class Account:
     def __init__(self, parent_bank, **kwargs):
 
         self.parent_bank = parent_bank
+        self.dir_name = ...
 
         self.name = kwargs.get("name")
         self.nickname = kwargs.get("nickname")
