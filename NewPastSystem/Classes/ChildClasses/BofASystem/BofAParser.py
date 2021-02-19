@@ -26,9 +26,6 @@ class BofAParser:
         self.account_dict_list = self.get_account_dict_list()
         self.account_list = self.get_account_list()
 
-        for account in self.account_list:
-            print(account)
-
     def get_driver(self):
         options = Options()
         options.add_argument("window-size={},{}".format(1280, 1000))
@@ -109,8 +106,14 @@ class BofAParser:
             except:
                 specific_type = None
             try:
-                self.driver.find_element_by_name("show_account_number").click()
-                account_number = self.driver.find_element_by_class_name("TL_NPI_AcctNum").text
+                if account_type == "debit":
+                    self.driver.find_element_by_name("show_account_number").click()
+                    account_number = self.driver.find_element_by_class_name("TL_NPI_AcctNum").text
+                elif account_type == "credit":
+                    self.driver.find_element_by_name("acc-num-show").click()
+                    account_number = self.driver.find_element_by_id("acctShow").text.split(" ")[0]
+                else:
+                    account_number = None
             except:
                 account_number = None
             soup = BeautifulSoup(self.driver.page_source, 'html.parser')
@@ -147,5 +150,4 @@ class BofAParser:
                     }
                 )
             )
-            print(account_list[-1])
         return account_list
