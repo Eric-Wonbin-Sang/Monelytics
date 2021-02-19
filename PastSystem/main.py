@@ -5,12 +5,6 @@ import numpy as np
 import datetime
 import seaborn as sns
 
-import os
-
-print(os.getcwd())
-os.chdir("\\".join(os.getcwd().split("\\")[:-1]))
-print(os.getcwd())
-
 from PastSystem.Classes import SnappingCursor
 
 from PastSystem.Banks.BankOfAmerica import BankOfAmerica
@@ -108,7 +102,7 @@ def graph_stack_plot(account_list):
 
 def main():
 
-    do_update = not True
+    do_update = True
 
     bank_list = []
     for path in Functions.get_path_list_in_dir(Constants.bank_source_info_dir):
