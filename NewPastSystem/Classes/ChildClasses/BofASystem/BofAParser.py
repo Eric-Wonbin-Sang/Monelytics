@@ -1,11 +1,14 @@
 import os
 import time
 import pickle
+import datetime
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+
+from NewPastSystem.Classes.ParentClasses import Account
 
 
 class BofAParser:
@@ -13,15 +16,18 @@ class BofAParser:
     login_url = "https://www.bankofamerica.com/"
     auth_url = "https://secure.bankofamerica.com/login/sign-in/entry/signOnV2.go"
 
-    def __init__(self, username, password, cookies_path):
+    def __init__(self, bofa_bank, cookies_path):
 
-        self.username = username
-        self.password = password
+        self.bofa_bank = bofa_bank
         self.cookies_path = cookies_path    # doesn't need it after you remember the comp
 
         self.driver = self.get_driver()
         self.login()
         self.account_dict_list = self.get_account_dict_list()
+        self.account_list = self.get_account_list()
+
+        for account in self.account_list:
+            print(account)
 
     def get_driver(self):
         options = Options()
@@ -34,9 +40,9 @@ class BofAParser:
 
     def login(self):
         self.driver.get(self.login_url)
-        self.driver.find_element_by_name("onlineId1").send_keys(self.username)
+        self.driver.find_element_by_name("onlineId1").send_keys(self.bofa_bank.username)
         time.sleep(1)
-        self.driver.find_element_by_name("passcode1").send_keys(self.password)
+        self.driver.find_element_by_name("passcode1").send_keys(self.bofa_bank.password)
         self.driver.find_element_by_id("signIn").send_keys(Keys.RETURN)
         time.sleep(2)
 
@@ -78,4 +84,68 @@ class BofAParser:
         return account_dict_list
 
     def get_account_list(self):
-        pass
+        account_list = []
+
+        for account_dict in self.account_dict_list:
+
+            name = account_dict["name"]
+
+            if account_dict["account_type"] == "Checking":
+                account_type = "debit"
+            elif account_dict["account_type"] == "Liability":
+                account_type = "credit"
+            else:
+                account_type = None
+
+            self.driver.get(account_dict["account_url"])
+            self.driver.find_element_by_name("Information_Services").click()
+
+            try:
+                nickname = self.driver.find_element_by_class_name("nickname").text
+            except:
+                nickname = None
+            try:
+                specific_type = self.driver.find_element_by_class_name("TL_NPI_AcctName").text
+            except:
+                specific_type = None
+            try:
+                self.driver.find_element_by_name("show_account_number").click()
+                account_number = self.driver.find_element_by_class_name("TL_NPI_AcctNum").text
+            except:
+                account_number = None
+            soup = BeautifulSoup(self.driver.page_source, 'html.parser')
+            details_row_div_list = soup.findAll("div", {"class": "details-row"})
+            try:
+                part_list = [part.strip() for part in details_row_div_list[3].text.split("\n") if part.strip() != ""]
+                paper, electronic = part_list[1], part_list[2][1:]
+            except:
+                paper, electronic = None, None
+            try:
+                wires = details_row_div_list[4].text.strip().split(" ")[0]
+            except:
+                wires = None
+            routing_number_dict = {
+                "paper": paper,
+                "electronic": electronic,
+                "wires": wires
+            }
+            try:
+                opened_date = datetime.datetime.strptime(details_row_div_list[5].text.strip().split("\n")[-1], "%m/%d/%Y")
+            except:
+                opened_date = None
+            account_list.append(
+                Account.Account(
+                    parent_bank=self.bofa_bank,
+                    **{
+                        "name": name,
+                        "nickname": nickname,
+                        "type": account_type,
+                        "specific_type": specific_type,
+                        "account_number": account_number,
+                        "routing_number_dict": routing_number_dict,
+                        "opened_date": opened_date
+                    }
+                )
+            )
+            print(account_list[-1])
+        return account_list
