@@ -9,6 +9,7 @@ class Account:
 
         self.parent_bank = parent_bank
         self.dir_name = dir_name if dir_name else self.get_dir_name()
+        self.dir_path = self.parent_bank.accounts_dir_path + "/" + self.dir_name
 
         self.name = kwargs.get("name")
         self.nickname = kwargs.get("nickname")
@@ -17,14 +18,16 @@ class Account:
         self.account_number = kwargs.get("account_number")
         self.routing_number_dict = kwargs.get("routing_number_dict")
         self.opened_date = kwargs.get("opened_date")
+        self.account_url = kwargs.get("account_url")
         self.account_dict = self.get_account_dict()
-        self.account_json_path = self.parent_bank.accounts_dir_path + "/" + self.dir_name + "/" + "account.json"
+        self.account_json_path = self.dir_path + "/" + "account.json"
 
         if dir_name is None and not is_temp:
-            print("Initializing account:", self.name)
+            # print("Initializing account:", self.name)
             self.initialize_account_structure()
         else:
-            print("Found account:", self.name)
+            # print("Found account:", self.name)
+            pass
 
     def get_dir_name(self):
         count = 1
@@ -44,7 +47,8 @@ class Account:
             "specific_type": self.specific_type,
             "account_number": self.account_number,
             "routing_number_dict": self.routing_number_dict,
-            # "opened_date": self.opened_date
+            # "opened_date": self.opened_date,
+            "account_url": self.account_url
         }
 
     def initialize_account_structure(self):
@@ -56,12 +60,12 @@ class Account:
     def __str__(self):
         return "Account - child of {}_id{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}".format(
             self.parent_bank.type,
-            self.parent_bank.id,
             self.name,
             self.nickname,
             self.type,
             self.specific_type,
             self.account_number,
             self.routing_number_dict,
-            self.opened_date
+            self.opened_date,
+            self.account_url
         )

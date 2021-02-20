@@ -57,8 +57,8 @@ def main():
     new_bank_list = get_bank_list(bank_dict_list, existing_bank_list)
 
     bank_list = existing_bank_list + new_bank_list
-    for bank in bank_list:
-        print(bank)
+    # for bank in bank_list:
+    #     print(bank)
 
 
 if __name__ == '__main__':
