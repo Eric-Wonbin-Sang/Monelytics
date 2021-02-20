@@ -23,7 +23,16 @@ class BofAParser:
 
         self.driver = self.get_driver()
         self.login()
+        self.init_account_dict_list = self.get_init_account_dict_list()
         self.account_dict_list = self.get_account_dict_list()
+
+        for account in self.bofa_bank.account_list:
+            print(account.account_dict)
+        print("-----")
+        for account_dict in self.account_dict_list:
+            print(account_dict)
+        print("-----")
+
         self.account_list = self.get_account_list()
 
     def get_driver(self):
@@ -64,7 +73,7 @@ class BofAParser:
         #     os.remove(self.cookies_path)
         # pickle.dump(driver.get_cookies(), open(self.cookies_path, "wb"))
 
-    def get_account_dict_list(self):
+    def get_init_account_dict_list(self):
         account_dict_list = []
         soup = BeautifulSoup(self.driver.page_source, 'html.parser')
         account_elem_list = soup.findAll("div", {"class": "AccountItem"})
@@ -80,21 +89,20 @@ class BofAParser:
             )
         return account_dict_list
 
-    def get_account_list(self):
-        account_list = []
+    def get_account_dict_list(self):
+        account_dict_list = []
+        for init_account_dict in self.init_account_dict_list:
 
-        for account_dict in self.account_dict_list:
+            name = init_account_dict["name"]
 
-            name = account_dict["name"]
-
-            if account_dict["account_type"] == "Checking":
+            if init_account_dict["account_type"] == "Checking":
                 account_type = "debit"
-            elif account_dict["account_type"] == "Liability":
+            elif init_account_dict["account_type"] == "Liability":
                 account_type = "credit"
             else:
                 account_type = None
 
-            self.driver.get(account_dict["account_url"])
+            self.driver.get(init_account_dict["account_url"])
             self.driver.find_element_by_name("Information_Services").click()
 
             try:
@@ -106,15 +114,28 @@ class BofAParser:
             except:
                 specific_type = None
             try:
+                start_time = datetime.datetime.now()
+
                 if account_type == "debit":
                     self.driver.find_element_by_name("show_account_number").click()
-                    account_number = self.driver.find_element_by_class_name("TL_NPI_AcctNum").text
                 elif account_type == "credit":
                     self.driver.find_element_by_name("acc-num-show").click()
-                    account_number = self.driver.find_element_by_id("acctShow").text.split(" ")[0]
+                while (datetime.datetime.now() - start_time).total_seconds() < 10:
+                    if account_type == "debit":
+                        account_number = self.driver.find_element_by_class_name("TL_NPI_AcctNum").text
+                    elif account_type == "credit":
+                        account_number = self.driver.find_element_by_id("acctShow").text.split(" ")[0]
+                    else:
+                        print("ACCOUNT", name, "IS NEITHER DEBIT OR CREDIT")
+                        break
+                    if account_number != "":
+                        break
+                    time.sleep(.2)
                 else:
+                    print("ACCOUNT", name, "ACCOUNT NUMBER PARSE FAILED")
                     account_number = None
             except:
+                print("ACCOUNT", name, "ACCOUNT NUMBER PARSE FAILED")
                 account_number = None
             soup = BeautifulSoup(self.driver.page_source, 'html.parser')
             details_row_div_list = soup.findAll("div", {"class": "details-row"})
@@ -136,34 +157,50 @@ class BofAParser:
                 opened_date = datetime.datetime.strptime(details_row_div_list[5].text.strip().split("\n")[-1], "%m/%d/%Y")
             except:
                 opened_date = None
+            account_dict_list.append(
+                {
+                    "name": name,
+                    "nickname": nickname,
+                    "type": account_type,
+                    "specific_type": specific_type,
+                    "account_number": account_number,
+                    "routing_number_dict": routing_number_dict,
+                    "opened_date": opened_date
+                }
+            )
+        return account_dict_list
+
+    def get_account_list(self):
+        account_list = []
+        for account_dict in self.account_dict_list:
+            if account_dict["account_number"] \
+                    in [existing_account.account_number for existing_account in self.bofa_bank.account_list]:
+
+                # ADD LOGIC HERE TO UPDATE ACCOUNT.JSON WITH A TEMP ACCOUNT OBJECT
+
+                continue
             account_list.append(
                 Account.Account(
                     parent_bank=self.bofa_bank,
-                    **{
-                        "name": name,
-                        "nickname": nickname,
-                        "type": account_type,
-                        "specific_type": specific_type,
-                        "account_number": account_number,
-                        "routing_number_dict": routing_number_dict,
-                        "opened_date": opened_date
-                    }
+                    dir_name=None,
+                    **account_dict
                 )
             )
+            print("Created Account:", account_list[-1].name, account_list[-1].type)
         return account_list
 
-    def download_statements(self):
-        # if account := self.try_get_account(info_dict):
-        #     account_folder_dir = account.account_folder_dir
-        # else:
-        #     account_folder_dir = self.get_new_account_folder_dir()
-        #     os.mkdir(account_folder_dir)
-        #     Functions.dict_to_json(info_dict, account_folder_dir + "/info.json")
-        #
-        # BankOfAmericaAccount.BankOfAmericaAccount(
-        #     parent_bank=self,
-        #     driver=self.driver,
-        #     info_dict=info_dict,
-        #     account_folder_dir=account_folder_dir
-        # )
-        pass
+    # def download_statements(self):
+    #     # if account := self.try_get_account(info_dict):
+    #     #     account_folder_dir = account.account_folder_dir
+    #     # else:
+    #     #     account_folder_dir = self.get_new_account_folder_dir()
+    #     #     os.mkdir(account_folder_dir)
+    #     #     Functions.dict_to_json(info_dict, account_folder_dir + "/info.json")
+    #     #
+    #     # BankOfAmericaAccount.BankOfAmericaAccount(
+    #     #     parent_bank=self,
+    #     #     driver=self.driver,
+    #     #     info_dict=info_dict,
+    #     #     account_folder_dir=account_folder_dir
+    #     # )
+    #     pass

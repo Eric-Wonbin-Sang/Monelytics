@@ -13,4 +13,4 @@ projects_dir = "/".join(project_dir.split("/")[:-1])
 secrets_dir = projects_dir + "/" + "0 - Secrets"
 
 banks_dir = secrets_dir + "/Monelytics"
-master_logins_json = secrets_dir + "/Monelytics/master_logins.json"
+bank_logins_json = secrets_dir + "/Monelytics/bank_logins.json"
