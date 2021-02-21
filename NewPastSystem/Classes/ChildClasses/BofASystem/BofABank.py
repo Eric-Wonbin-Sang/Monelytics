@@ -25,10 +25,11 @@ class BofABank(Bank.Bank):
     def update_super_statements(self):
         for account in self.account_list:
             print("--------------------------------------------------------")
-            print(account)
+            print("Account {}:".format(account.name))
             statement_list = []
             for path in os.listdir(account.statement_source_files_path):
                 file_path = account.statement_source_files_path + "/" + path
+                print("\tReading {}".format(file_path))
                 if account.type == "debit":
                     statement_list.append(BofADebitStatement.BofADebitStatement(file_path=file_path))
                 elif account.type == "credit":

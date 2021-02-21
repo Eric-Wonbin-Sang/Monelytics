@@ -115,3 +115,18 @@ def wait_for_temp_file(some_dir, second_limiter):
             csv_path = some_dir + "\\" + path
             break
     return csv_path
+
+
+def df_to_str(some_df):
+    statement_df = some_df.copy()
+
+    if statement_df.empty:
+        return "empty dataframe"
+
+    index_length = 23
+    col_length = 20
+
+    statement_df.index = statement_df.index.map(lambda x: str_to_length(x, index_length, do_dots=True, do_left=True))
+    statement_df = statement_df.applymap(lambda x: str_to_length(x, col_length, do_dots=True, do_left=True))
+    statement_df.columns = statement_df.columns.map(lambda x: str_to_length(x, col_length, do_dots=True, do_left=True))
+    return statement_df.to_string()

@@ -1,4 +1,5 @@
 import pandas
+import datetime
 
 from NewPastSystem.Classes.ParentClasses import Statement
 
@@ -24,7 +25,7 @@ class BofADebitStatement(Statement.Statement):
     def get_statement_df(self):
         statement_df = pandas.DataFrame(data={col_name: [] for col_name in Statement.Statement.col_name_list})
         if self.dataframe is not None:
-            statement_df["date"] = self.dataframe["Date"]
+            statement_df["date"] = [datetime.datetime.strptime(x, "%m/%d/%Y") for x in self.dataframe["Date"]]
             statement_df["amount"] = self.dataframe["Amount"]
             statement_df["running_balance"] = self.dataframe["Running Bal."]
             statement_df["description"] = self.dataframe["Description"]

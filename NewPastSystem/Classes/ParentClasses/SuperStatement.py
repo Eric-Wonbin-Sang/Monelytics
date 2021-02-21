@@ -18,10 +18,10 @@ class SuperStatement:
         self.super_statement_df = self.get_super_statement_df()
 
     def get_super_statement_df(self):
-        super_statement_df = pandas.DataFrame(data={col_name: [] for col_name in Statement.Statement.col_name_list})
+        super_statement_df = pandas.DataFrame(data={col_name: [] for col_name in Statement.Statement.col_name_list[1:]})
         for statement in self.statement_list:
             super_statement_df = super_statement_df.append(statement.statement_df)
-        super_statement_df = super_statement_df.sort_index()
+        super_statement_df = super_statement_df.sort_index(ascending=False)
         return super_statement_df
 
     def update_running_total(self, starting_balance):
@@ -34,12 +34,4 @@ class SuperStatement:
         self.super_statement_df["running_balance"] = running_balance_list
 
     def __str__(self):
-        statement_df = self.super_statement_df.copy()
-
-        if statement_df.empty:
-            return "empty dataframe"
-
-        statement_df = statement_df.applymap(lambda x: Functions.str_to_length(x, 20, do_dots=True, do_left=True))
-        statement_df.columns = statement_df.columns.map(lambda x: Functions.str_to_length(x, 20, do_dots=True, do_left=True))
-        statement_df.index = statement_df.index.map(lambda x: Functions.str_to_length(x, 14, do_dots=True, do_left=True))
-        return statement_df.to_string()
+        return Functions.df_to_str(self.super_statement_df)
