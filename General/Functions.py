@@ -107,14 +107,12 @@ def add_months(source_date, months):
     return datetime.datetime(year, month, day)
 
 
-def wait_for_temp_file(some_dir, second_limiter):
-    csv_path = None
+def wait_for_temp_file(some_dir, second_limiter, type_specifier=".csv"):
     base_time = datetime.datetime.now()
     while (datetime.datetime.now() - base_time).seconds < second_limiter:
         for path in os.listdir(some_dir):
-            csv_path = some_dir + "\\" + path
-            break
-    return csv_path
+            if path.endswith(type_specifier):
+                return some_dir + "\\" + path
 
 
 def df_to_str(some_df):
@@ -130,3 +128,7 @@ def df_to_str(some_df):
     statement_df = statement_df.applymap(lambda x: str_to_length(x, col_length, do_dots=True, do_left=True))
     statement_df.columns = statement_df.columns.map(lambda x: str_to_length(x, col_length, do_dots=True, do_left=True))
     return statement_df.to_string()
+
+
+def clean_money_str(some_str):
+    return round(float(some_str.replace("$", "").replace("+", "").replace(" ", "").replace(",", "")), 2)

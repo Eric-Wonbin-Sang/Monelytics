@@ -10,7 +10,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
-from NewPastSystem.Classes.ParentClasses import Account
+from NewPastSystem.Classes.ParentClasses import Account, Parser
 
 from General import Functions, Constants
 
@@ -23,9 +23,9 @@ class BofAParser:
     current_debit_statement_csv_name = "Current transactions.csv"
     current_credit_statement_csv_name = "transaction_period.csv"
 
-    def __init__(self, bofa_bank, cookies_path):
+    def __init__(self, parent_bank, cookies_path):
 
-        self.bofa_bank = bofa_bank
+        self.parent_bank = parent_bank
         self.cookies_path = cookies_path    # doesn't need it after you remember the comp
 
         self.driver = None
@@ -34,38 +34,25 @@ class BofAParser:
         self.account_list = None
 
     def update_statements(self):
-        self.driver = self.get_driver()
+        self.driver = Parser.get_driver(self.temp_download_dir)
         self.login()
         self.init_account_dict_list = self.get_init_account_dict_list()
         self.account_dict_list = self.get_account_dict_list()
 
-        self.account_list = self.get_account_list()
+        self.account_list = Parser.get_account_list(self.account_dict_list, self.parent_bank)
         self.download_statements()
         self.driver.quit()
-
-    def get_driver(self):
-        options = Options()
-        options.add_argument("window-size={},{}".format(1280, 1000))
-
-        prefs = {"download.default_directory": Constants.temp_download_dir}
-        options.add_experimental_option("prefs", prefs)
-
-        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-        if self.cookies_path and os.path.exists(self.cookies_path):
-            for cookie in pickle.load(open(self.cookies_path, "rb")):
-                driver.add_cookie(cookie)
-        return driver
 
     def login(self):
         self.driver.get(self.login_url)
         while self.driver.current_url == self.login_url:
             username_box = self.driver.find_element_by_name("onlineId1")
             username_box.clear()
-            username_box.send_keys(self.bofa_bank.username)
+            username_box.send_keys(self.parent_bank.username)
             time.sleep(1)
             password_box = self.driver.find_element_by_name("passcode1")
             password_box.clear()
-            password_box.send_keys(self.bofa_bank.password)
+            password_box.send_keys(self.parent_bank.password)
             self.driver.find_element_by_id("signIn").send_keys(Keys.RETURN)
             time.sleep(2)
 
@@ -189,26 +176,6 @@ class BofAParser:
                 }
             )
         return account_dict_list
-
-    def get_account_list(self):
-        account_list = []
-        for account_dict in self.account_dict_list:
-            print("THIS", account_dict["curr_balance"])
-            if account_dict["account_number"] \
-                    in [existing_account.account_number for existing_account in self.bofa_bank.account_list]:
-
-                # ADD LOGIC HERE TO UPDATE ACCOUNT.JSON WITH A TEMP ACCOUNT OBJECT
-
-                continue
-            account_list.append(
-                Account.Account(
-                    parent_bank=self.bofa_bank,
-                    dir_name=None,
-                    **account_dict
-                )
-            )
-            print("Created Account:", account_list[-1].name, account_list[-1].type)
-        return self.bofa_bank.account_list + account_list
 
     # statement downloading ---------------------------------------------------------------
     def get_debit_download_menu_elem(self):

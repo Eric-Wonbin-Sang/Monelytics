@@ -2,15 +2,17 @@ import os
 
 from NewPastSystem.Classes.ParentClasses import Bank
 from NewPastSystem.Classes.ChildClasses.BofASystem import BofABank
+from NewPastSystem.Classes.ChildClasses.DiscoverSystem import DiscoverBank
+from NewPastSystem.Classes.ChildClasses.VenmoSystem import VenmoBank
 
 from General import Functions, Constants
 
 
 type_to_bank_class_dict = {
     "Bank of America": BofABank.BofABank,
-    "Discover": Bank.Bank,
+    "Discover": DiscoverBank.DiscoverBank,
     "Chase": Bank.Bank,
-    "Venmo": Bank.Bank,
+    "Venmo": VenmoBank.VenmoBank,
     "Mint": Bank.Bank
 }
 

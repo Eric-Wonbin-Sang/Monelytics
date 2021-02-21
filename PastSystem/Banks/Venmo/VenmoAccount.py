@@ -69,15 +69,6 @@ class VenmoAccount:
             curr_time = curr_time - dateutil.relativedelta.relativedelta(months=1)
         return tuple_list
 
-    def try_to_get_csv_path(self):
-        base_time = datetime.datetime.now()
-        while (datetime.datetime.now() - base_time).seconds < 2:
-            if len(csv_list := glob.glob(self.user_download_dir + "/" + self.default_statement_csv_name)) > 0:
-                return csv_list[0]
-            print(".", end="")
-            time.sleep(.1)
-        return None
-
     def download_and_store(self):
         if self.current_statement_csv_name in os.listdir(self.account_folder_dir):
             os.remove(self.account_folder_dir + "/" + self.current_statement_csv_name)
@@ -94,7 +85,7 @@ class VenmoAccount:
 
             if not os.path.exists(new_cvs_path):
                 self.driver.get(download_url)
-                os.rename(self.try_to_get_csv_path(), new_cvs_path)
+                os.rename(Functions.wait_for_temp_file(self.temp_download_dir, 2), new_cvs_path)
                 print(new_cvs_path, "created!")
             else:
                 print(new_cvs_path, "exists!")

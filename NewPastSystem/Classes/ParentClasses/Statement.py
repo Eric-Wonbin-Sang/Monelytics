@@ -15,7 +15,12 @@ class Statement:
         "running_balance",
         "transaction_code",
         "address",
-        "description"
+        "description",
+        "status",           # added from Venmo
+        "funding_source",   # added from Venmo
+        "destination",      # added from Venmo
+        "from",             # added from Venmo
+        "to",               # added from Venmo
     ]
 
     def __init__(self, statement_df):

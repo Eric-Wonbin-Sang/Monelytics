@@ -3,6 +3,8 @@ import os
 from NewPastSystem.Classes.ParentClasses import Bank, SuperStatement
 from NewPastSystem.Classes.ChildClasses.BofASystem import BofAParser, BofADebitStatement, BofACreditStatement
 
+from General import Functions, Constants
+
 
 class BofABank(Bank.Bank):
 
@@ -13,13 +15,13 @@ class BofABank(Bank.Bank):
 
         super().__init__(**kwargs)
 
-        if not True:
+        if Constants.do_download:
             self.update_accounts()
 
         self.update_super_statements()
 
     def update_accounts(self):
-        bofa_parser = BofAParser.BofAParser(bofa_bank=self, cookies_path=None)
+        bofa_parser = BofAParser.BofAParser(parent_bank=self, cookies_path=None)
         bofa_parser.update_statements()
 
     def update_super_statements(self):
@@ -37,16 +39,10 @@ class BofABank(Bank.Bank):
                 else:
                     print("UNKNOWN ACCOUNT TYPE {}".format(account.type))
 
-            super_statement = SuperStatement.SuperStatement(statement_list=statement_list)
+            super_statement = SuperStatement.SuperStatement(
+                statement_list=statement_list, super_statement_path=account.super_statement_path
+            )
             if account.type == "credit":
                 super_statement.update_running_total(account.curr_balance)
 
-            print(super_statement, "\n")
-
-    # def __str__(self):
-    #     return "BofA Bank - type: {}\n\towner: {}\n\tusername: {}\n\tpassword: {}".format(
-    #         self.type,
-    #         self.owner,
-    #         self.username,
-    #         "*" * len(self.password)
-    #     )
+            print(Functions.tab_str(Functions.df_to_str(super_statement.super_statement_df), 2))
