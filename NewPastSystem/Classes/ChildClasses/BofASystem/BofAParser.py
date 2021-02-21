@@ -86,10 +86,6 @@ class BofAParser:
             submit_button = self.driver.find_element_by_id("continue-auth-number")
             submit_button.send_keys(Keys.RETURN)
 
-        # if os.path.exists(self.cookies_path):
-        #     os.remove(self.cookies_path)
-        # pickle.dump(driver.get_cookies(), open(self.cookies_path, "wb"))
-
     def get_init_account_dict_list(self):
         account_dict_list = []
         soup = BeautifulSoup(self.driver.page_source, 'html.parser')
@@ -101,7 +97,8 @@ class BofAParser:
                 {
                     "name": list_elem.text,
                     "account_type": account_elem.get("data-accounttype"),
-                    "account_url": "https://secure.bankofamerica.com" + list_elem.get("href")
+                    "account_url": "https://secure.bankofamerica.com" + list_elem.get("href"),
+                    "curr_balance": float(account_elem.find("span", {"class": "balanceValue TL_NPI_L1"}).text[1:].replace(",", ""))
                 }
             )
         return account_dict_list
@@ -118,6 +115,8 @@ class BofAParser:
                 account_type = "credit"
             else:
                 account_type = None
+
+            curr_balance = init_account_dict["curr_balance"]
 
             self.driver.get(init_account_dict["account_url"])
             self.driver.find_element_by_name("Information_Services").click()
@@ -182,6 +181,7 @@ class BofAParser:
                     "nickname": nickname,
                     "type": account_type,
                     "specific_type": specific_type,
+                    "curr_balance": curr_balance,
                     "account_number": account_number,
                     "routing_number_dict": routing_number_dict,
                     "opened_date": opened_date,
@@ -193,6 +193,7 @@ class BofAParser:
     def get_account_list(self):
         account_list = []
         for account_dict in self.account_dict_list:
+            print("THIS", account_dict["curr_balance"])
             if account_dict["account_number"] \
                     in [existing_account.account_number for existing_account in self.bofa_bank.account_list]:
 
@@ -231,8 +232,16 @@ class BofAParser:
                 option.click()
                 break
 
-    def get_period_option_list(self, option_parent_id):
-        return self.driver.find_element_by_id(option_parent_id).find_elements_by_tag_name("option")
+    def get_period_option_list(self, option_parent_id, account_type):
+        while True:
+            option_list = self.driver.find_element_by_id(option_parent_id).find_elements_by_tag_name("option")
+            option = option_list[0]
+            if option.is_displayed() and option.is_enabled():
+                return option_list
+            if account_type == "debit":
+                ActionChains(self.driver).click(self.get_debit_download_menu_elem()).perform()
+            else:
+                ActionChains(self.driver).click(self.get_credit_download_menu_elem()).perform()
 
     def get_debit_download_button_elem(self):
         for elem in self.driver.find_elements_by_tag_name("a"):
@@ -259,9 +268,9 @@ class BofAParser:
         return Functions.wait_for_temp_file(self.temp_download_dir, 2)
 
     def download_debit_account_statements(self, account):
-        for i in range(len(self.get_period_option_list("select_txnperiod"))):
-            ActionChains(self.driver).click(self.get_debit_download_menu_elem()).perform()
-            option = self.get_period_option_list("select_txnperiod")[i]
+        ActionChains(self.driver).click(self.get_debit_download_menu_elem()).perform()
+        for i in range(len(self.get_period_option_list("select_txnperiod", "debit"))):
+            option = self.get_period_option_list("select_txnperiod", "debit")[i]
             option.click()
             self.change_file_type_to_excel()
 
@@ -279,11 +288,12 @@ class BofAParser:
                     print(new_path, "created! - empty")
             else:
                 print(new_path, "exists!")
+            ActionChains(self.driver).click(self.get_debit_download_menu_elem()).perform()
 
     def download_credit_account_statements(self, account):
-        for i in range(len(self.get_period_option_list("select_transaction"))):
-            ActionChains(self.driver).click(self.get_credit_download_menu_elem()).perform()
-            option = self.get_period_option_list("select_transaction")[i]
+        ActionChains(self.driver).click(self.get_credit_download_menu_elem()).perform()
+        for i in range(len(self.get_period_option_list("select_transaction", "credit"))):
+            option = self.get_period_option_list("select_transaction", "credit")[i]
             option.click()
             self.change_file_type_to_excel()
 
@@ -297,6 +307,7 @@ class BofAParser:
                 print(new_path, "created!")
             else:
                 print(new_path, "exists!")
+            ActionChains(self.driver).click(self.get_credit_download_menu_elem()).perform()
 
     def download_statements(self):
         for account in self.account_list:

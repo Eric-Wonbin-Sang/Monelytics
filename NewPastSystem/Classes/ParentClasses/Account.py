@@ -12,11 +12,13 @@ class Account:
         self.dir_path = self.parent_bank.accounts_dir_path + "/" + self.dir_name
         self.statement_source_files_path = self.dir_path + "/source_files"
         self.account_json_path = self.dir_path + "/" + "account.json"
+        self.super_statement_path = self.dir_path + "/" + "super_statement.p"
 
         self.name = kwargs.get("name")
         self.nickname = kwargs.get("nickname")
         self.type = kwargs.get("type")
         self.specific_type = kwargs.get("specific_type")
+        self.curr_balance = kwargs.get("curr_balance")
         self.account_number = kwargs.get("account_number")
         self.routing_number_dict = kwargs.get("routing_number_dict")
         self.opened_date = kwargs.get("opened_date")
@@ -24,11 +26,7 @@ class Account:
         self.account_dict = self.get_account_dict()
 
         if dir_name is None and not is_temp:
-            # print("Initializing account:", self.name)
             self.initialize_account_structure()
-        else:
-            # print("Found account:", self.name)
-            pass
 
     def get_dir_name(self):
         count = 1
@@ -46,6 +44,7 @@ class Account:
             "nickname": self.nickname,
             "type": self.type,
             "specific_type": self.specific_type,
+            "curr_balance": self.curr_balance,
             "account_number": self.account_number,
             "routing_number_dict": self.routing_number_dict,
             # "opened_date": self.opened_date,
