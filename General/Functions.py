@@ -105,3 +105,13 @@ def add_months(source_date, months):
     month = month % 12 + 1
     day = min(source_date.day, calendar.monthrange(year, month)[1])
     return datetime.datetime(year, month, day)
+
+
+def wait_for_temp_file(some_dir, second_limiter):
+    csv_path = None
+    base_time = datetime.datetime.now()
+    while (datetime.datetime.now() - base_time).seconds < second_limiter:
+        for path in os.listdir(some_dir):
+            csv_path = some_dir + "\\" + path
+            break
+    return csv_path

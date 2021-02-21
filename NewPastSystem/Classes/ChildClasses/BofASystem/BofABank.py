@@ -16,6 +16,7 @@ class BofABank(Bank.Bank):
 
     def update_accounts(self):
         bofa_parser = BofAParser.BofAParser(bofa_bank=self, cookies_path=None)
+        bofa_parser.update_statements()
 
     # def __str__(self):
     #     return "BofA Bank - type: {}\n\towner: {}\n\tusername: {}\n\tpassword: {}".format(

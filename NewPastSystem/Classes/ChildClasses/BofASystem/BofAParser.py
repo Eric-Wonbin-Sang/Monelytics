@@ -1,6 +1,5 @@
 import os
 import time
-import glob
 import pickle
 import datetime
 from bs4 import BeautifulSoup
@@ -13,22 +12,28 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 from NewPastSystem.Classes.ParentClasses import Account
 
-from General import Constants
+from General import Functions, Constants
 
 
 class BofAParser:
 
     login_url = "https://www.bankofamerica.com/"
     auth_url = "https://secure.bankofamerica.com/login/sign-in/entry/signOnV2.go"
-    current_statement_csv_name = "Current transactions.csv"
-    current_credit_statement_csv_name = "currentTransaction_{}.csv"
-    default_statement_csv_name = "stmt.csv"
+    temp_download_dir = Constants.temp_download_dir
+    current_debit_statement_csv_name = "Current transactions.csv"
+    current_credit_statement_csv_name = "transaction_period.csv"
 
     def __init__(self, bofa_bank, cookies_path):
 
         self.bofa_bank = bofa_bank
         self.cookies_path = cookies_path    # doesn't need it after you remember the comp
 
+        self.driver = None
+        self.init_account_dict_list = None
+        self.account_dict_list = None
+        self.account_list = None
+
+    def update_statements(self):
         self.driver = self.get_driver()
         self.login()
         self.init_account_dict_list = self.get_init_account_dict_list()
@@ -36,10 +41,15 @@ class BofAParser:
 
         self.account_list = self.get_account_list()
         self.download_statements()
+        self.driver.quit()
 
     def get_driver(self):
         options = Options()
         options.add_argument("window-size={},{}".format(1280, 1000))
+
+        prefs = {"download.default_directory": Constants.temp_download_dir}
+        options.add_experimental_option("prefs", prefs)
+
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         if self.cookies_path and os.path.exists(self.cookies_path):
             for cookie in pickle.load(open(self.cookies_path, "rb")):
@@ -236,8 +246,7 @@ class BofAParser:
                     == "btn-bofa btn-bofa-small btn-bofa-blue submit-download btn-bofa-noRight":
                 return elem
 
-    def try_debit_download_and_get_csv_path(self):
-        download_button_elem = self.get_debit_download_button_elem()
+    def try_statement_download(self, download_button_elem):
         print("Attempting to download statement...", end="")
         while True:
             try:
@@ -247,102 +256,56 @@ class BofAParser:
                 time.sleep(.1)
                 print(".", end="")
         print("Waiting for csv...", end="")
-        csv_path = None
-        base_time = datetime.datetime.now()
-        while (datetime.datetime.now() - base_time).seconds < 2:
-            if len(csv_list := glob.glob(Constants.user_download_dir + "/" + self.default_statement_csv_name)) > 0:
-                csv_path = csv_list[0]
-                break
-            print(".", end="")
-            time.sleep(.1)
-        return csv_path
-
-    def try_credit_download_and_get_csv_path(self):
-        download_button_elem = self.get_credit_download_button_elem()
-        print("Attempting to download statement...", end="")
-        while True:
-            try:
-                download_button_elem.click()
-                break
-            except Exception as e:
-                time.sleep(.1)
-                print(".", end="")
-        print("Waiting for csv...", end="")
-        csv_path = None
-        base_time = datetime.datetime.now()
-        while (datetime.datetime.now() - base_time).seconds < 2:
-            if len(csv_list := glob.glob(Constants.user_download_dir + "/" + self.default_statement_csv_name)) > 0:
-                csv_path = csv_list[0]
-                break
-            print(".", end="")
-            time.sleep(.1)
-        return csv_path
+        return Functions.wait_for_temp_file(self.temp_download_dir, 2)
 
     def download_debit_account_statements(self, account):
-        ActionChains(self.driver).click(self.get_debit_download_menu_elem()).perform()
-        self.change_file_type_to_excel()
+        for i in range(len(self.get_period_option_list("select_txnperiod"))):
+            ActionChains(self.driver).click(self.get_debit_download_menu_elem()).perform()
+            option = self.get_period_option_list("select_txnperiod")[i]
+            option.click()
+            self.change_file_type_to_excel()
 
-        if self.current_statement_csv_name in os.listdir(account.dir_path):
-            os.remove(account.dir_path + "/" + self.current_statement_csv_name)
-
-        option_list = self.get_period_option_list("select_txnperiod")
-        for i in range(len(option_list)):
-            (option := option_list[i]).click()
             period_name = option.get_attribute("value").strip().replace("/", ".")
+            csv_name = period_name + ".csv"
+            new_path = account.statement_source_files_path + "/" + csv_name
             print(period_name + " - ", end="")
-            if not os.path.exists(account.dir_path + "/" + (csv_name := period_name + ".csv")):
-                csv_path = self.try_debit_download_and_get_csv_path()
-                new_path = account.dir_path + "/" + csv_name
+            if not os.path.exists(new_path):
+                csv_path = self.try_statement_download(self.get_debit_download_button_elem())
                 if csv_path is not None:
                     os.rename(csv_path, new_path)
                     print(new_path, "created!")
                 else:
                     open(new_path, "w").close()
                     print(new_path, "created! - empty")
-
-                    ActionChains(self.driver).click(self.get_debit_download_menu_elem()).perform()
-                    self.change_file_type_to_excel()
-                    option_list = self.get_period_option_list("select_txnperiod")
             else:
-                print(account.dir_path + "/" + csv_name, "exists!")
+                print(new_path, "exists!")
 
     def download_credit_account_statements(self, account):
-        ActionChains(self.driver).click(self.get_credit_download_menu_elem()).perform()
-        self.change_file_type_to_excel()
+        for i in range(len(self.get_period_option_list("select_transaction"))):
+            ActionChains(self.driver).click(self.get_credit_download_menu_elem()).perform()
+            option = self.get_period_option_list("select_transaction")[i]
+            option.click()
+            self.change_file_type_to_excel()
 
-        current_credit_statement_csv_name = self.current_credit_statement_csv_name.format(account.account_number[-4:])
-        if current_credit_statement_csv_name in os.listdir(account.dir_path):
-            os.remove(account.dir_path + "/" + current_credit_statement_csv_name)
-
-        option_list = self.get_period_option_list("select_transaction")
-        for i in range(len(option_list)):
-            (option := option_list[i]).click()
             period_name = option.get_attribute("name")
+            csv_name = period_name + ".csv"
+            new_path = account.statement_source_files_path + "/" + csv_name
             print(period_name + " - ", end="")
-            if not os.path.exists(account.dir_path + "/" + (csv_name := period_name + ".csv")):
-
-                csv_path = self.try_credit_download_and_get_csv_path()
-
-                new_path = account.dir_path + "/" + csv_name
-                print(csv_path)
-                print(new_path)
-                print("------------")
-                if csv_path is not None:
-                    os.rename(csv_path, new_path)
-                    print(new_path, "created!")
-                else:
-                    open(new_path, "w").close()
-                    print(new_path, "created! - empty")
-                    ActionChains(self.driver).click(self.get_credit_download_menu_elem()).perform()
-                    option_list = self.get_period_option_list("select_transaction")
-                    self.change_file_type_to_excel()
+            if not os.path.exists(new_path):
+                csv_path = self.try_statement_download(self.get_credit_download_button_elem())
+                os.rename(csv_path, new_path)
+                print(new_path, "created!")
             else:
-                print(account.dir_path + "/" + csv_name, "exists!")
+                print(new_path, "exists!")
 
     def download_statements(self):
         for account in self.account_list:
             self.driver.get(account.account_url)
             if account.type == "debit":
+                if self.current_debit_statement_csv_name in os.listdir(account.statement_source_files_path):
+                    os.remove(account.statement_source_files_path + "/" + self.current_debit_statement_csv_name)
                 self.download_debit_account_statements(account)
             elif account.type == "credit":
+                if self.current_credit_statement_csv_name in os.listdir(account.statement_source_files_path):
+                    os.remove(account.statement_source_files_path + "/" + self.current_credit_statement_csv_name)
                 self.download_credit_account_statements(account)

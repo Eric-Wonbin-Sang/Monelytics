@@ -10,6 +10,8 @@ class Account:
         self.parent_bank = parent_bank
         self.dir_name = dir_name if dir_name else self.get_dir_name()
         self.dir_path = self.parent_bank.accounts_dir_path + "/" + self.dir_name
+        self.statement_source_files_path = self.dir_path + "/source_files"
+        self.account_json_path = self.dir_path + "/" + "account.json"
 
         self.name = kwargs.get("name")
         self.nickname = kwargs.get("nickname")
@@ -20,7 +22,6 @@ class Account:
         self.opened_date = kwargs.get("opened_date")
         self.account_url = kwargs.get("account_url")
         self.account_dict = self.get_account_dict()
-        self.account_json_path = self.dir_path + "/" + "account.json"
 
         if dir_name is None and not is_temp:
             # print("Initializing account:", self.name)
@@ -53,6 +54,7 @@ class Account:
 
     def initialize_account_structure(self):
         os.mkdir(self.parent_bank.accounts_dir_path + "/" + self.dir_name)
+        os.mkdir(self.statement_source_files_path)
         print(self.account_dict)
         print("----------")
         Functions.dict_to_json(self.account_dict, self.account_json_path)
