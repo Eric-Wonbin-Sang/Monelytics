@@ -13,6 +13,7 @@ class Account:
         self.statement_source_files_path = self.dir_path + "/source_files"
         self.account_json_path = self.dir_path + "/" + "account.json"
         self.super_statement_path = self.dir_path + "/" + "super_statement.p"
+        self.super_statement_pd = self.get_super_statement_pd()
 
         self.name = kwargs.get("name")
         self.nickname = kwargs.get("nickname")
@@ -37,6 +38,10 @@ class Account:
             if count not in num_list:
                 return "account_{}".format(str(count).rjust(2, "0"))
             count += 1
+
+    def get_super_statement_pd(self):
+        if os.path.exists(self.super_statement_path):
+            return Functions.unpickle(self.super_statement_path)
 
     def get_account_dict(self):
         return {
