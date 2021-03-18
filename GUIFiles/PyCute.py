@@ -121,6 +121,21 @@ class Thread(PyQt5.QtCore.QRunnable):
         self.connect_func()
 
 
+class Image(PyQt5.QtWidgets.QLabel):
+
+    def __init__(self, image_path, width=None, height=None):    # this is not finished
+
+        super().__init__()
+
+        pixmap = PyQt5.QtGui.QPixmap(image_path)
+
+        if height:
+            new_width = height * (pixmap.height() / pixmap.width())
+            pixmap = pixmap.scaled(height, new_width)
+
+        self.setPixmap(pixmap)
+
+
 def get_spacer():
     return PyQt5.QtWidgets.QSpacerItem(20, 40, PyQt5.QtWidgets.QSizePolicy.Minimum, PyQt5.QtWidgets.QSizePolicy.Expanding)
 
@@ -141,3 +156,22 @@ def add_to_layout(parent_layout, *args):
         else:
             parent_layout.addWidget(arg)
     return parent_layout
+
+
+def get_container_widget(layout):
+    container = PyQt5.QtWidgets.QWidget()
+    container.setLayout(layout)
+    return container
+
+
+def get_stacked_layout(widget_list):
+    stacked_layout = PyQt5.QtWidgets.QStackedLayout()
+    for widget in widget_list:
+        stacked_layout.addWidget(widget)
+    return stacked_layout
+
+
+def change_stack_index(stacked_layout, index):
+    def helper():
+        stacked_layout.setCurrentIndex(index)
+    return helper

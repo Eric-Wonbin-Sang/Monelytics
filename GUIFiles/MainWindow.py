@@ -4,8 +4,12 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
-from General import Constants
+from GUIFiles import PastWidget, FutureWidget, AccountWidget
 from GUIFiles import PyCute
+
+from NewPastSystem import main as past_system
+
+from General import Functions, Constants
 
 
 class MainWindow(QMainWindow):
@@ -18,46 +22,39 @@ class MainWindow(QMainWindow):
 
         super().__init__()
 
-        # self.vertical_layout = self.get_vertical_layout()
-        # self.menu_layout = self.get_menu_layout()
+        bank_list = past_system.get_full_bank_list()
+        for bank in bank_list:
+            print(bank)
 
         self.main_widget = QWidget()
         self.setCentralWidget(self.main_widget)
+
+        self.content_widget_list = [
+            PastWidget.PastWidget(bank_list),
+            FutureWidget.FutureWidget(),
+            AccountWidget.AccountWidget()
+        ]
+        self.stacked_layout = PyCute.get_stacked_layout(self.content_widget_list)
 
         self.setup_gui()
         self.show()
 
     def get_menu_widget(self):
-        container = QWidget()
-        container.setStyleSheet("background-color:rgb(173, 217, 255);")
 
         menu_layout = QHBoxLayout()
-        container.setLayout(menu_layout)
 
-        label = QLabel()
-        pixmap = QPixmap("GUIFiles/ImageFiles/monelytics logo.jpg")
-        new_height = self.init_height * .25
-        new_width = new_height * (pixmap.height() / pixmap.width())
-        pixmap = pixmap.scaled(new_height, new_width)
-        label.setPixmap(pixmap)
+        image_widget = PyCute.Image("GUIFiles/ImageFiles/monelytics logo.jpg", height=self.init_height * .25)
+        past_button = PyCute.Button("Past", connect_func=PyCute.change_stack_index(self.stacked_layout, 0))
+        future_button = PyCute.Button("Future", connect_func=PyCute.change_stack_index(self.stacked_layout, 1))
+        account_button = PyCute.Button("Account", connect_func=PyCute.change_stack_index(self.stacked_layout, 2))
 
-        past_button = PyCute.Button("Past", connect_func=None, parent_widget=container, shortcut_command=None)
-        future_button = PyCute.Button("Future", connect_func=None, parent_widget=container, shortcut_command=None)
-        account_button = PyCute.Button("Account", connect_func=None, parent_widget=container, shortcut_command=None)
-
-
-        menu_layout.addWidget(label)
+        menu_layout.addWidget(image_widget, alignment=Qt.AlignLeft)
         menu_layout.addWidget(past_button, alignment=Qt.AlignLeft)
         menu_layout.addWidget(future_button, alignment=Qt.AlignLeft)
         menu_layout.addWidget(account_button, alignment=Qt.AlignRight)
 
-        return container
-
-    def get_content_widget(self):
-        container = QWidget()
-
-        stacked_layout = QStackedLayout()
-        container.setLayout(stacked_layout)
+        container = PyCute.get_container_widget(menu_layout)
+        container.setStyleSheet("background-color:rgb(173, 217, 255);")
 
         return container
 
@@ -70,7 +67,7 @@ class MainWindow(QMainWindow):
         self.main_widget.setLayout(main_layout)
 
         main_layout.addWidget(self.get_menu_widget(), 0, 0, 1, 1)
-        main_layout.addWidget(self.get_content_widget(), 1, 0, 9, 1)
+        main_layout.addWidget(PyCute.get_container_widget(self.stacked_layout), 1, 0, 9, 1)
 
         self.setGeometry(init_x, init_y, self.init_width, self.init_height)
         self.setWindowTitle(self.main_window_title)

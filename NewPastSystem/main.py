@@ -84,58 +84,21 @@ def graph_account_transactions(bank_list):
     #         pass
 
 
-def main():
-
+def get_full_bank_list():
     existing_bank_list = get_existing_bank_list(Constants.banks_dir)
     bank_dict_list = Functions.parse_json(Constants.bank_logins_json)
     new_bank_list = get_bank_list(bank_dict_list, existing_bank_list)
+    return existing_bank_list + new_bank_list
 
-    bank_list = existing_bank_list + new_bank_list
+
+def main():
+
+    bank_list = get_full_bank_list()
     for bank in bank_list:
         print(bank)
 
     # graph_account_transactions(bank_list)
 
 
-# def add_number_to_num_list(num, num_list):
-#     return [x + num for x in num_list]
-
-
-def add_n(n):
-    def helper(num_list):
-
-        for i, item in enumerate(num_list):
-            num_list[i] = item + n
-        return num_list
-
-        # return [num + n for num in num_list]
-    return helper
-
-
-def multiply(x, y):
-    return x * y
-
-
 if __name__ == '__main__':
-    # main()
-    # result = multiply(2, 3)
-    # print(type(multiply), multiply)
-
-    # print(add_n(10)([1, 5, 3]))
-    #
-    # add_number_to_num_list = add_n(10)
-    # print(type(add_number_to_num_list), add_number_to_num_list)
-    #
-    # print(add_number_to_num_list([1, 5, 3]))
-
-    for x in range(1, 5):
-        for y in range(1, x + 1):
-            print(x * 2, end=" ")
-        print("")
-
-'''
-
-
-
-
-'''
+    main()

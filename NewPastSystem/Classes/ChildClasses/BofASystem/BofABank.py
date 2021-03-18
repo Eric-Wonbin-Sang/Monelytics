@@ -15,8 +15,8 @@ class BofABank(Bank.Bank):
 
         super().__init__(**kwargs)
 
-        # if Constants.do_download:
-        self.update_accounts()
+        if Constants.do_download:
+            self.update_accounts()
 
         self.update_super_statements()
 
