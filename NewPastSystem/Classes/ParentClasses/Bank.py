@@ -66,6 +66,15 @@ class Bank:
             )
         return account_list
 
+    def to_dict(self):
+        return {
+            "type": self.type,
+            "owner": self.owner,
+            "username": self.username,
+            "password": "*" * len(self.password),
+            "account_list": [account.to_dict() for account in self.account_list]
+        }
+
     def __str__(self):
         return "Generic Bank - type: {}\n\towner: {}\n\tusername: {}\n\tpassword: {}".format(
             self.type,

@@ -63,6 +63,15 @@ class Account:
         print("----------")
         Functions.dict_to_json(self.account_dict, self.account_json_path)
 
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "nickname": self.nickname,
+            "type": self.type,
+            "specific_type": self.specific_type,
+            "curr_balance": self.curr_balance,
+        }
+
     def __str__(self):
         return "Account - child of {}_id{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}".format(
             self.parent_bank.type,
