@@ -48,3 +48,13 @@ a.nav_option.active {
     margin-right: 7px;
     justify-content: flex-end
 }
+
+.footer {
+    background-color: rgb(209, 46, 46);
+    font-family:Helvetica;
+
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px;
+}

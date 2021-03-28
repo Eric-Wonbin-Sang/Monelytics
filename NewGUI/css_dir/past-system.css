@@ -1,31 +1,19 @@
 
+div.wrapper_div {
+    border: 1px solid black;
+    overflow: hidden;
+}
+
 #banks_and_accounts_sidebar {
-    background-color: rgb(197, 197, 197);
+    background-color: rgb(236, 235, 235);
     width: 30%;
     height: 100vh;
+    overflow: auto;
+
+    float: left;
 }
 
-div.bank_div {
-    background-color: rgb(233, 243, 255);
-    /* border-radius: 15px; */
-    border: 2px solid #b1b1b1;
-}
-
-div.account_div {
-    /* background-color: rgb(248, 252, 255);
-    border-radius: 15px;
-    border: 2px solid #a3ceff;
-    margin-left: 20px; */
-
-    padding: 0 18px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
-    background-color: #f1f1f1;
-    height: 100%;
-}
-
-button.collapsible {
+button.bank_collapsible {
     background-color: rgb(209, 87, 87);
     color: white;
     cursor: pointer;
@@ -39,12 +27,62 @@ button.collapsible {
 
 button.active, button.collapsible:hover {
     background-color: rgb(233, 72, 72);
-  }
+}
+
+div.bank_div {
+    background-color: rgb(233, 243, 255);
+    border: 2px solid #b1b1b1;
+}
+
+div.all_accounts_div {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+div.account_div {
+    background-color: rgb(213, 215, 218);
+    padding-left: 14px;
+    padding-top: 6px;
+}
 
 span.bank_type_span {
     float: left;
 }
 
 span.bank_total_span {
+    float: right;
+}
+
+button.account_button {
+    background-color: rgb(252, 252, 252);
+    color: white;
+    cursor: pointer;
+    padding: 14px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 14px;
+}
+
+span.account_name_span {
+    float: left;
+    width: 100%;
+    color: rgb(63, 63, 63)
+}
+
+span.account_amount_span {
+    float: right;
+    color: rgb(63, 63, 63)
+}
+
+#analysis_content {
+    background-color: rgb(129, 42, 42);
+    width: 70%;
+    height: 100vh;
+    overflow: auto;
     float: right;
 }
