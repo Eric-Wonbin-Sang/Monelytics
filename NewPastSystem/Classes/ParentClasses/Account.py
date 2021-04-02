@@ -1,4 +1,7 @@
 import os
+import plotly.graph_objects as go
+import plotly
+import flask
 
 from General import Functions
 
@@ -29,6 +32,8 @@ class Account:
         if dir_name is None and not is_temp:
             self.initialize_account_structure()
 
+        self.graph_url = self.get_graph_div()
+
     def get_dir_name(self):
         count = 1
         num_list = []
@@ -42,6 +47,7 @@ class Account:
     def get_super_statement_pd(self):
         if os.path.exists(self.super_statement_path):
             return Functions.unpickle(self.super_statement_path)
+        return None
 
     def get_account_dict(self):
         return {
@@ -71,6 +77,26 @@ class Account:
             "specific_type": self.specific_type,
             "curr_balance": self.curr_balance,
         }
+
+    def get_graph_div(self):
+
+        if self.super_statement_pd is None:
+            return None
+
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=self.super_statement_pd.index,
+                                 y=self.super_statement_pd["running_balance"],
+                                 mode='lines+markers',
+                                 name='lines+markers'))
+        # print("\ttraces created")
+        div = plotly.offline.plot(fig, include_plotlyjs=False, output_type='div')
+
+        # fig.show()  # this is just to see it in browser in case you want to, it isn't necessary.
+        # html = fig.to_html(full_html=True, include_plotlyjs=True)
+        # print(html)
+        # print("\tdiv created:", div)
+
+        return flask.Markup(div)
 
     def __str__(self):
         return "Account - child of {}_id{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}".format(
