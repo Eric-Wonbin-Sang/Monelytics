@@ -1,0 +1,37 @@
+
+button.bank_collapsible {
+    background-color: rgb(209, 106, 106);
+    color: white;
+    cursor: pointer;
+    padding: 16px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 14px;
+}
+
+button.bank_collapsible.active, button.bank_collapsible:hover {
+    background-color: rgb(233, 72, 72);
+}
+
+span.bank_type_span {
+    float: left;
+}
+
+span.bank_total_span {
+    float: right;
+}
+
+div.bank_div {
+    background-color: rgb(233, 243, 255);
+    border: 2px solid #b1b1b1;
+}
+
+div.all_accounts_div {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+    height: 100%;
+}

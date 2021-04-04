@@ -1,0 +1,33 @@
+
+div.account_div {
+    background-color: rgb(213, 215, 218);
+    padding-left: 14px;
+    padding-top: 6px;
+}
+
+button.account_button {
+    background-color: rgb(252, 252, 252);
+    color: white;
+    cursor: pointer;
+    padding: 14px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 14px;
+}
+
+button.account_button.active, button.account_button:hover {
+    background-color: rgb(207, 207, 207);
+}
+
+span.account_name_span {
+    float: left;
+    width: 100%;
+    color: rgb(63, 63, 63)
+}
+
+span.account_amount_span {
+    float: right;
+    color: rgb(63, 63, 63)
+}
