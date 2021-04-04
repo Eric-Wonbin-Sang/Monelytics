@@ -28,21 +28,22 @@ class Account {
 
         var self = this;
         button.onclick = function() {
-            if (self.button.classList.contains("active")) {
-                self.button.classList.toggle("active");
-            }
-            else {
-                self.parent_bank.past_system.reset_all_active_account_buttons();
-                self.button.classList.toggle("active");
-            }
 
-            var url = "http://127.0.0.1:5000/get_graph/" + self.parent_bank.type + "/" + self.parent_bank.owner + "/" + self.name;
+            self.button.classList.toggle("active")
+            
+            var url = self.parent_bank.past_system.get_active_accounts_graph_rest_url();
             request = new XMLHttpRequest();
             request.open("GET", url);
             request.send();
             request.onload = (e) => {
                 var analysis_content_div = document.getElementById("analysis_content");
-                analysis_content_div.innerHTML = DOMPurify.sanitize(JSON.parse(request.response)["result"]);
+
+                var iframe = create_elem("iframe", "accounts_graph");
+                iframe.setAttribute("src", JSON.parse(request.response)["result"]);
+
+                analysis_content_div.innerHTML = "";
+                analysis_content_div.appendChild(iframe);
+
             }
             request.onerror = (e) => {
                 console.log("error");

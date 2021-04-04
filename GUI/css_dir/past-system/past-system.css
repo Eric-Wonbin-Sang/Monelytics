@@ -19,3 +19,9 @@ div.wrapper_div {
     overflow: auto;
     float: right;
 }
+
+iframe.accounts_graph {
+    width: 100%;
+    height: 60vh;
+    margin: 0%;
+}

@@ -82,12 +82,4 @@ class Bank {
         bank_div.appendChild(account_list_div);
         return bank_div;
     }
-
-    reset_active_account_buttons() {
-        for (let i in this.account_list) {
-            if (this.account_list[i].button.classList.contains("active")) {
-                this.account_list[i].button.classList.toggle("active");
-            }
-        }
-    }
 }

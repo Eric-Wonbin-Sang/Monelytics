@@ -27,6 +27,22 @@ class PastSystem {
                 break;
             }
         }
+        var url = "http://127.0.0.1:5000/graph_past_system/show_all";
+        request = new XMLHttpRequest();
+        request.open("GET", url);
+        request.send();
+        request.onload = (e) => {
+            var analysis_content_div = document.getElementById("analysis_content");
+
+            var iframe = create_elem("iframe", "accounts_graph");
+            iframe.setAttribute("src", JSON.parse(request.response)["result"]);
+
+            analysis_content_div.innerHTML = "";
+            analysis_content_div.appendChild(iframe);
+        }
+        request.onerror = (e) => {
+            console.log("error");
+        }
     }
 
     get_banks_and_accounts_sidebar_div() {
@@ -36,9 +52,33 @@ class PastSystem {
         }
     }
 
-    reset_all_active_account_buttons() {
-        for (let i in this.bank_list) {
-            this.bank_list[i].reset_active_account_buttons();
+    get_active_accounts_graph_rest_url() {
+
+        var base_url = "http://127.0.0.1:5000/graph_past_system/";
+        var url_suffix = "";
+        
+        for (let b_i in this.bank_list) {
+            var bank = this.bank_list[b_i];
+            
+            var account_name_list = [];
+            for (let a_i in bank.account_list) {
+                var account = this.bank_list[b_i].account_list[a_i];
+                if (account.button.classList.contains("active")) {
+                    account_name_list.push(account.name);
+                }
+            }
+
+            if (account_name_list.length != 0) {
+                url_suffix += "BANK" + bank.type + "-" + bank.owner + "|";
+                for (let a_i in account_name_list) {
+                    url_suffix += account_name_list[a_i] + "|";
+                }
+            }
         }
+
+        if (url_suffix === "") {
+            url_suffix = "show_all";
+        }
+        return base_url + url_suffix;
     }
 }

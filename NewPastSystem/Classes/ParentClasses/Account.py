@@ -3,7 +3,7 @@ import plotly.graph_objects as go
 import plotly
 import flask
 
-from General import Functions
+from General import Functions, Constants
 
 
 class Account:
@@ -110,3 +110,36 @@ class Account:
             self.opened_date,
             self.account_url
         )
+
+
+def graph_accounts(account_list):
+
+    fig = go.Figure()
+    for account in account_list:
+        if account.super_statement_pd is None:
+            continue
+
+        fig.add_trace(go.Scatter(
+            x=account.super_statement_pd.index,
+            y=[float(data) for data in account.super_statement_pd["running_balance"]],
+            mode='lines+markers',
+            name=account.name)
+        )
+
+    fig.update_layout(
+        # template='simple_white',
+        yaxis_title='Time',
+        title='Accounts',
+        hovermode="x"
+    )
+
+    fig.update_layout(legend=dict(
+        yanchor="top",
+        y=0.99,
+        xanchor="left",
+        x=0.01
+    ))
+
+    graph_filepath = Constants.temp_download_dir + "/accounts_graph.html"
+    fig.write_html(graph_filepath)
+    return graph_filepath

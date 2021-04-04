@@ -82,3 +82,17 @@ class Bank:
             self.username,
             "*" * len(self.password)
         ) + "\n\thas {} account(s)".format(len(self.account_list))
+
+
+def find_bank_by_type_and_owner(bank_type, owner, bank_list):
+    for bank in bank_list:
+        if bank.type == bank_type and bank.owner == owner:
+            return bank
+    return None
+
+
+def find_bank_account_by_name(name, bank):
+    for account in bank.account_list:
+        if account.name == name:
+            return account
+    return None

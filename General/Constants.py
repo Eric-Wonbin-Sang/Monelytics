@@ -14,6 +14,6 @@ secrets_dir = projects_dir + "/" + "0 - Secrets"
 temp_download_dir = (project_dir + "/temp").replace("/", "\\")
 do_download = False
 
-# banks_dir = secrets_dir + "/Monelytics"
-banks_dir = "C:/Users/ericw/Desktop/Monelytics"
+banks_dir = secrets_dir + "/Monelytics"
+# banks_dir = "C:/Users/ericw/Desktop/Monelytics"
 bank_logins_json = banks_dir + "/bank_logins.json"
