@@ -8,8 +8,6 @@ bank_source_info_dir = Functions.get_curr_parent_dir() + "/0 - Secrets/Monelytic
 current_statement_file_name_default = "Current transactions.csv"    # move to to-be-created account parent class
 user_download_dir = "C:/Users/ericw/Downloads"
 
-do_download = False
-
 # project dirs and paths -------------------------------------
 
 project_dir = "/".join(os.path.dirname(os.path.realpath(__file__)).replace("\\", "/").split("/")[:-1])

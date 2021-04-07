@@ -29,6 +29,8 @@ class Bank:
 
         self.account_list = self.get_account_list()     # these are accounts that already exist
 
+        self.update_super_statements()
+
     def get_bank_dict(self):
         return {
             "type": self.type,
