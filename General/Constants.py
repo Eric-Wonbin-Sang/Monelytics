@@ -11,7 +11,6 @@ user_download_dir = "C:/Users/ericw/Downloads"
 project_dir = "/".join(os.path.dirname(os.path.realpath(__file__)).replace("\\", "/").split("/")[:-1])
 projects_dir = "/".join(project_dir.split("/")[:-1])
 secrets_dir = projects_dir + "/" + "0 - Secrets"
-temp_download_dir = (project_dir + "/temp").replace("/", "\\")
 do_download = False
 
 # -------------------------------------
@@ -21,6 +20,7 @@ monelytics_folder = secrets_dir + "/Monelytics"
 
 past_system_dir = monelytics_folder + "/past_system"
 past_system_graph_path = past_system_dir + "/accounts_graph.html"
+temp_download_dir = past_system_dir + "/temp"
 banks_dir = past_system_dir + "/banks_dir"
 bank_logins_json = past_system_dir + "/bank_logins.json"
 

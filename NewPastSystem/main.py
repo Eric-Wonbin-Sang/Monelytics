@@ -4,6 +4,7 @@ from NewPastSystem.Classes.ParentClasses import Bank, Account
 from NewPastSystem.Classes.ChildClasses.BofASystem import BofABank
 from NewPastSystem.Classes.ChildClasses.DiscoverSystem import DiscoverBank
 from NewPastSystem.Classes.ChildClasses.VenmoSystem import VenmoBank
+from NewPastSystem.Classes.ChildClasses.ChaseSystem import ChaseBank
 
 from General import Functions, Constants
 
@@ -11,7 +12,7 @@ from General import Functions, Constants
 type_to_bank_class_dict = {
     "Bank of America": BofABank.BofABank,
     "Discover": DiscoverBank.DiscoverBank,
-    "Chase": Bank.Bank,
+    "Chase": ChaseBank.ChaseBank,
     "Venmo": VenmoBank.VenmoBank,
     # "Mint": Bank.Bank
 }
@@ -64,7 +65,7 @@ def main():
     bank_list = get_full_bank_list()
     for bank in bank_list:
         if bank.type in ["Chase"]:
-            # bank.update_accounts()
+            bank.update_accounts()
             Account.graph_accounts(bank.account_list)
         print(bank.type)
 
