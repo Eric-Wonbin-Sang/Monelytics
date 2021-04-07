@@ -1,14 +1,14 @@
 import os
 import plotly.graph_objects as go
 
-from NewPastSystem.Classes.ParentClasses import StatementCleaner
+from NewPastSystem.Classes.ParentClasses import StatementCleaner, SuperStatement
 
 from General import Functions, Constants
 
 
 class Account:
 
-    def __init__(self, parent_bank, dir_name, is_temp=False, **kwargs):
+    def __init__(self, parent_bank, dir_name, type_to_statement_class_dict, is_temp=False, **kwargs):
 
         self.parent_bank = parent_bank
         self.dir_name = dir_name if dir_name else self.get_dir_name()
@@ -34,6 +34,11 @@ class Account:
 
         if not is_temp:
             self.check_dirs()
+
+        self.statement_cleaner = StatementCleaner.StatementCleaner(
+            self,
+            type_to_statement_class_dict=type_to_statement_class_dict
+        )
 
     def get_dir_name(self):
         count = 1
@@ -70,6 +75,14 @@ class Account:
             os.mkdir(self.clean_statement_files_path)
         if not os.path.exists(self.account_json_path):
             Functions.dict_to_json(self.account_dict, self.account_json_path)
+
+    def refresh_super_statement_p(self):
+        SuperStatement.SuperStatement(
+            statement_list=self.statement_cleaner.statement_list,
+            super_statement_path=self.super_statement_path,
+            is_credit=self.type == "credit",
+            starting_balance=self.curr_balance if self.type == "credit" else None
+        )
 
     def to_dict(self):
         return {

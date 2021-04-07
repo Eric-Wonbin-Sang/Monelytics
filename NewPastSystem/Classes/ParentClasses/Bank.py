@@ -9,7 +9,7 @@ class Bank:
 
     banks_dir = Constants.banks_dir
 
-    def __init__(self, dir_name, **kwargs):
+    def __init__(self, dir_name, type_to_statement_class_dict, **kwargs):
 
         self.type = kwargs.get("type")
         self.owner = kwargs.get("owner")
@@ -18,6 +18,8 @@ class Bank:
         self.bank_dict = self.get_bank_dict()
 
         self.dir_name = dir_name if dir_name else self.generate_dir_name()
+        self.type_to_statement_class_dict = type_to_statement_class_dict if type_to_statement_class_dict else {}
+
         self.general_path = self.banks_dir + "/" + self.dir_name
         self.accounts_dir_path = self.general_path + "/" + "accounts"
         self.bank_json_path = self.general_path + "/" + "bank.json"
@@ -61,10 +63,15 @@ class Bank:
                 Account.Account(
                     parent_bank=self,
                     dir_name=dir_name,
+                    type_to_statement_class_dict=self.type_to_statement_class_dict,
                     **account_dict
                 )
             )
         return account_list
+
+    def update_super_statements(self):
+        for account in self.account_list:
+            account.refresh_super_statement_p()
 
     def to_dict(self):
         return {
