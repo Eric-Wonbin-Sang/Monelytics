@@ -4,19 +4,24 @@ import datetime
 
 from NewPastSystem.Classes.ParentClasses import Statement
 
-from General import Functions
+from General import Functions, Constants
 
 
 class VenmoStatement(Statement.Statement):
 
-    def __init__(self, file_path):
+    def __init__(self, parent_account, file_path):
 
+        self.parent_account = parent_account
         self.file_path = file_path
         self.data_list_list = Functions.csv_to_list_list(self.file_path)
 
         self.dataframe = self.get_dataframe()
 
-        super().__init__(self.get_statement_df())
+        super().__init__(
+            self.parent_account,
+            self.file_path,
+            self.get_statement_df()
+        )
 
     def get_dataframe(self):
         if self.data_list_list:

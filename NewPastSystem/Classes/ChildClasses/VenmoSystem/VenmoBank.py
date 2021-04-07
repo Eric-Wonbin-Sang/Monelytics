@@ -1,6 +1,6 @@
 import os
 
-from NewPastSystem.Classes.ParentClasses import Bank, SuperStatement
+from NewPastSystem.Classes.ParentClasses import Bank, SuperStatement, StatementCleaner
 from NewPastSystem.Classes.ChildClasses.VenmoSystem import VenmoParser, VenmoStatement
 
 from General import Functions, Constants
@@ -17,6 +17,14 @@ class VenmoBank(Bank.Bank):
 
         self.update_super_statements()
 
+        for account in self.account_list:
+            StatementCleaner.StatementCleaner(
+                account,
+                type_to_statement_class_dict={
+                    "debit": VenmoStatement.VenmoStatement
+                }
+            )
+
     def update_accounts(self):
         parser = VenmoParser.VenmoParser(parent_bank=self, cookies_path=None)
         parser.update_statements()
@@ -29,7 +37,7 @@ class VenmoBank(Bank.Bank):
             for path in os.listdir(account.statement_source_files_path):
                 file_path = account.statement_source_files_path + "/" + path
                 # print("\tReading {}".format(file_path))
-                statement_list.append(VenmoStatement.VenmoStatement(file_path=file_path))
+                statement_list.append(VenmoStatement.VenmoStatement(parent_account=account, file_path=file_path))
 
             super_statement = SuperStatement.SuperStatement(
                 statement_list=statement_list,

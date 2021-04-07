@@ -63,11 +63,11 @@ def get_full_bank_list():
 def main():
 
     bank_list = get_full_bank_list()
-    for bank in bank_list:
-        if bank.type in ["Chase"]:
-            bank.update_accounts()
-            Account.graph_accounts(bank.account_list)
-        print(bank.type)
+    # for bank in bank_list:
+    #     # if bank.type in ["Chase"]:
+    #     #     bank.update_accounts()
+    #     #     Account.graph_accounts(bank.account_list)
+    #     print(bank.type)
 
     # account_list = [account for bank in bank_list for account in bank.account_list]
 

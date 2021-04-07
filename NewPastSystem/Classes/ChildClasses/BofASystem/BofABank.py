@@ -1,6 +1,6 @@
 import os
 
-from NewPastSystem.Classes.ParentClasses import Bank, SuperStatement
+from NewPastSystem.Classes.ParentClasses import Bank, SuperStatement, StatementCleaner
 from NewPastSystem.Classes.ChildClasses.BofASystem import BofAParser, BofADebitStatement, BofACreditStatement
 
 from General import Functions, Constants
@@ -20,6 +20,15 @@ class BofABank(Bank.Bank):
 
         self.update_super_statements()
 
+        for account in self.account_list:
+            StatementCleaner.StatementCleaner(
+                account,
+                type_to_statement_class_dict={
+                    "debit": BofADebitStatement.BofADebitStatement,
+                    "credit": BofACreditStatement.BofACreditStatement
+                }
+            )
+
     def update_accounts(self):
         bofa_parser = BofAParser.BofAParser(parent_bank=self, cookies_path=None)
         bofa_parser.update_statements()
@@ -33,9 +42,9 @@ class BofABank(Bank.Bank):
                 file_path = account.statement_source_files_path + "/" + path
                 # print("\tReading {}".format(file_path))
                 if account.type == "debit":
-                    statement_list.append(BofADebitStatement.BofADebitStatement(file_path=file_path))
+                    statement_list.append(BofADebitStatement.BofADebitStatement(parent_account=account, file_path=file_path))
                 elif account.type == "credit":
-                    statement_list.append(BofACreditStatement.BofACreditStatement(file_path=file_path))
+                    statement_list.append(BofACreditStatement.BofACreditStatement(parent_account=account, file_path=file_path))
                 else:
                     print("UNKNOWN ACCOUNT TYPE {}".format(account.type))
 

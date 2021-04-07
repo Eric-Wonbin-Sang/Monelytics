@@ -8,24 +8,18 @@ from General import Functions
 
 class BofADebitStatement(Statement.Statement):
 
-    def __init__(self, file_path):
+    def __init__(self, parent_account, file_path):
 
         self.file_path = file_path
         self.data_list_list = Functions.csv_to_list_list(self.file_path)
 
         self.dataframe = self.get_dataframe()
 
-        super().__init__(self.get_statement_df(), self.get_start_date(), self.get_end_date())
-
-    def get_start_date(self):
-        if self.data_list_list:
-            return datetime.datetime.strptime(self.data_list_list[1][0].split(" ")[-1], "%m/%d/%Y")
-        return None
-
-    def get_end_date(self):
-        if self.data_list_list:
-            return datetime.datetime.strptime(self.data_list_list[4][0].split(" ")[-1], "%m/%d/%Y")
-        return None
+        super().__init__(
+            parent_account,
+            file_path,
+            self.get_statement_df()
+        )
 
     def get_dataframe(self):
         if self.data_list_list:

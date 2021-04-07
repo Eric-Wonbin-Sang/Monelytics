@@ -1,6 +1,6 @@
 import os
 
-from NewPastSystem.Classes.ParentClasses import Account
+from NewPastSystem.Classes.ParentClasses import Account, StatementCleaner
 
 from General import Functions, Constants
 

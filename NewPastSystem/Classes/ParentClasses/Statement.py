@@ -1,4 +1,6 @@
+import os
 import pandas
+import datetime
 
 from General import Functions
 
@@ -23,15 +25,32 @@ class Statement:
         "to",               # added from Venmo
     ]
 
-    def __init__(self, statement_df, start_date=None, end_date=None):
+    def __init__(self, parent_account, source_statement_file_path, statement_df):
 
+        self.parent_account = parent_account
+        self.source_statement_file_path = source_statement_file_path
         self.statement_df = statement_df
+
         self.statement_df["amount"] = [float(x) for x in self.statement_df["amount"]]
+        self.is_empty = self.statement_df.empty
 
-        self.start_date = start_date
-        self.end_date = end_date
+        self.first_transaction_date = self.statement_df.iloc[[0]].index[0] if not self.is_empty else None
+        self.last_transaction_date = self.statement_df.iloc[[-1]].index[0] if not self.is_empty else None
+        self.clean_statement_file_name = self.get_clean_statement_file_name()
+        self.clean_statement_file_path = self.get_clean_statement_file_path()
 
-        # print("start: {}\t\tend: {}".format(self.start_date, self.end_date))
+    def get_clean_statement_file_name(self):
+        if self.first_transaction_date is not None and self.last_transaction_date is not None:
+            return "{} to {} Transactions.csv".format(
+                self.first_transaction_date.strftime("%Y-%m-%d"),
+                self.last_transaction_date.strftime("%Y-%m-%d"),
+            )
+        return None
+
+    def get_clean_statement_file_path(self):
+        if self.clean_statement_file_name:
+            return self.parent_account.clean_statement_files_path + "/" + self.clean_statement_file_name
+        return None
 
     def __str__(self):
         statement_df = self.statement_df.copy()

@@ -8,35 +8,23 @@ from General import Functions
 
 class DiscoverStatement(Statement.Statement):
 
-    def __init__(self, file_path):
+    def __init__(self, parent_account, file_path):
 
+        self.parent_account = parent_account
         self.file_path = file_path
         self.data_list_list = Functions.csv_to_list_list(self.file_path)
 
         self.dataframe = self.get_dataframe()
 
-        self.starting_balance = self.get_starting_balance()
-
-        super().__init__(self.get_statement_df(), self.get_start_date(), self.get_end_date())
+        super().__init__(
+            self.parent_account,
+            self.file_path,
+            self.get_statement_df()
+        )
 
     def get_dataframe(self):
         if self.data_list_list[1:]:
             return pandas.DataFrame(self.data_list_list[1:], columns=self.data_list_list[0])
-        return None
-
-    def get_start_date(self):
-        if self.data_list_list[1:]:
-            return datetime.datetime.strptime(self.data_list_list[1][0], "%m/%d/%Y")
-        return None
-
-    def get_end_date(self):
-        if self.data_list_list[1:]:
-            return datetime.datetime.strptime(self.data_list_list[-1][0], "%m/%d/%Y")
-        return None
-
-    def get_starting_balance(self):
-        if self.data_list_list[1:]:
-            return None     # there's no way to get starting balance from each statement...
         return None
 
     def get_statement_df(self):
@@ -51,14 +39,5 @@ class DiscoverStatement(Statement.Statement):
             # statement_df["address"] = self.dataframe["Address"]
             statement_df["description"] = self.dataframe["Description"]
         statement_df = statement_df.set_index(['date'])
-
-        if self.starting_balance is not None:
-            running_balance_list = []
-            for i, amount in enumerate(statement_df["amount"]):
-                if i == 0:
-                    running_balance_list.append(self.starting_balance)
-                else:
-                    running_balance_list.append(round(running_balance_list[-1] + amount, 2))
-            statement_df["running_balance"] = running_balance_list
 
         return statement_df

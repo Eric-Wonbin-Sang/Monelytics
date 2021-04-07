@@ -1,6 +1,6 @@
 import os
 
-from NewPastSystem.Classes.ParentClasses import Bank, SuperStatement
+from NewPastSystem.Classes.ParentClasses import Bank, SuperStatement, StatementCleaner
 from NewPastSystem.Classes.ChildClasses.BofASystem import BofAParser, BofADebitStatement, BofACreditStatement
 from NewPastSystem.Classes.ChildClasses.DiscoverSystem import DiscoverParser, DiscoverStatement
 
@@ -18,6 +18,14 @@ class DiscoverBank(Bank.Bank):
 
         self.update_super_statements()
 
+        for account in self.account_list:
+            StatementCleaner.StatementCleaner(
+                account,
+                type_to_statement_class_dict={
+                    "credit": DiscoverStatement.DiscoverStatement,
+                }
+            )
+
     def update_accounts(self):
         parser = DiscoverParser.DiscoverParser(parent_bank=self, cookies_path=None)
         parser.update_statements()
@@ -31,7 +39,7 @@ class DiscoverBank(Bank.Bank):
                 file_path = account.statement_source_files_path + "/" + path
                 # print("\tReading {}".format(file_path))
                 if account.type == "credit":
-                    statement_list.append(DiscoverStatement.DiscoverStatement(file_path=file_path))
+                    statement_list.append(DiscoverStatement.DiscoverStatement(parent_account=account, file_path=file_path))
                 else:
                     print("UNKNOWN ACCOUNT TYPE {}".format(account.type))
 
