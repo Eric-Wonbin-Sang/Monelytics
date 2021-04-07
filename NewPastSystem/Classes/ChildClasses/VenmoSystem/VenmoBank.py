@@ -23,16 +23,16 @@ class VenmoBank(Bank.Bank):
 
     def update_super_statements(self):
         for account in self.account_list:
-            print("--------------------------------------------------------")
-            print("Account {}:".format(account.name))
+            # print("--------------------------------------------------------")
+            # print("Account {}:".format(account.name))
             statement_list = []
             for path in os.listdir(account.statement_source_files_path):
                 file_path = account.statement_source_files_path + "/" + path
-                print("\tReading {}".format(file_path))
+                # print("\tReading {}".format(file_path))
                 statement_list.append(VenmoStatement.VenmoStatement(file_path=file_path))
 
             super_statement = SuperStatement.SuperStatement(
                 statement_list=statement_list,
                 super_statement_path=account.super_statement_path
             )
-            print(Functions.tab_str(Functions.df_to_str(super_statement.super_statement_df), 2))
+            # print(Functions.tab_str(Functions.df_to_str(super_statement.super_statement_df), 2))

@@ -18,10 +18,23 @@ function get_p_elem(some_text) {
 }
 
 function get_dollar_str(num) {
+    var ret_str = "";
     if (num < 0) {
-        return "-$" + num.toLocaleString().substring(1);
+        ret_str = "-$" + num.toLocaleString().substring(1);
     }
-    return "$" + num.toLocaleString();
+    else {
+        ret_str = "$" + num.toLocaleString();
+    }
+    var split_str = ret_str.split(".");
+    if (split_str.length == 1) {
+        return ret_str + ".00";
+    }
+    else {
+        if (split_str[1].length == 1) {
+            return ret_str + "0"
+        }
+    }
+    return ret_str;
 }
 
 window.onload = function() {

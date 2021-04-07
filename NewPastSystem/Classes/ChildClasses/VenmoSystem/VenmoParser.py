@@ -125,7 +125,7 @@ class VenmoParser:
         """ returns [(08-01-2020, 08-25-2020), (07-01-2020, 07-31-2020), ...] """
         tuple_list = []
         curr_time = datetime.datetime.now()
-        for i in range(int(12 * 4)):
+        for i in range(int(12 * 6)):
             base_date_str = curr_time.strftime("%m-{}-%Y")
             start_date_str = base_date_str.format("01")
             if i == 0:

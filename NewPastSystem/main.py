@@ -1,12 +1,6 @@
 import os
-import numpy
-import pandas
-import datetime
-import seaborn as sns
-import matplotlib.dates
-import matplotlib.pyplot as plt
 
-from NewPastSystem.Classes.ParentClasses import Bank
+from NewPastSystem.Classes.ParentClasses import Bank, Account
 from NewPastSystem.Classes.ChildClasses.BofASystem import BofABank
 from NewPastSystem.Classes.ChildClasses.DiscoverSystem import DiscoverBank
 from NewPastSystem.Classes.ChildClasses.VenmoSystem import VenmoBank
@@ -19,7 +13,7 @@ type_to_bank_class_dict = {
     "Discover": DiscoverBank.DiscoverBank,
     "Chase": Bank.Bank,
     "Venmo": VenmoBank.VenmoBank,
-    "Mint": Bank.Bank
+    # "Mint": Bank.Bank
 }
 
 
@@ -58,32 +52,6 @@ def get_bank_list(bank_dict_list, existing_bank_list):
     return bank_list
 
 
-def graph_account_transactions(bank_list):
-
-    result_df_list = []
-    for bank in bank_list:
-        for account in bank.account_list:
-
-            if account.super_statement_pd is None:
-                break
-
-            temp_df = account.super_statement_pd[["running_balance"]]
-            temp_df = temp_df.rename(columns={"running_balance": account.name})
-
-            result_df_list.append(temp_df)
-
-    # for result_df in result_df_list:
-    #     # result_df = result_df.fillna(method='ffill')
-    #     # result_df = result_df.where(pandas.notnull(result_df), 0)
-    #     try:
-    #         print(result_df)
-    #         result_df.plot()
-    #         plt.legend(loc='upper left')
-    #         plt.show()
-    #     except:
-    #         pass
-
-
 def get_full_bank_list():
     existing_bank_list = get_existing_bank_list(Constants.banks_dir)
     bank_dict_list = Functions.parse_json(Constants.bank_logins_json)
@@ -95,7 +63,14 @@ def main():
 
     bank_list = get_full_bank_list()
     for bank in bank_list:
-        print(bank)
+        if bank.type in ["Chase"]:
+            # bank.update_accounts()
+            Account.graph_accounts(bank.account_list)
+        print(bank.type)
+
+    # account_list = [account for bank in bank_list for account in bank.account_list]
+
+    # Account.get_all_account_transaction_dict_list(account_list)
 
     # graph_account_transactions(bank_list)
 

@@ -20,7 +20,12 @@ class VenmoStatement(Statement.Statement):
 
     def get_dataframe(self):
         if self.data_list_list:
-            return pandas.DataFrame(self.data_list_list[1:], columns=self.data_list_list[0])
+
+            temp_list_list = self.data_list_list[3:]
+            for row in temp_list_list:
+                del row[0]
+
+            return pandas.DataFrame(temp_list_list, columns=self.data_list_list[2][1:])
         return None
 
     def get_statement_df(self):
@@ -30,7 +35,6 @@ class VenmoStatement(Statement.Statement):
         ending_balance = Functions.clean_money_str(self.dataframe["Ending Balance"].iloc[-1])
         temp_dataframe = self.dataframe.drop(
             columns=[
-                "Username",
                 "Statement Period Venmo Fees",
                 "Year to Date Venmo Fees",
                 "Beginning Balance",

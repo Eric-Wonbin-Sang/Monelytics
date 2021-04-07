@@ -27,22 +27,8 @@ class PastSystem {
                 break;
             }
         }
-        var url = "http://127.0.0.1:5000/graph_past_system/show_all";
-        request = new XMLHttpRequest();
-        request.open("GET", url);
-        request.send();
-        request.onload = (e) => {
-            var analysis_content_div = document.getElementById("analysis_content");
-
-            var iframe = create_elem("iframe", "accounts_graph");
-            iframe.setAttribute("src", JSON.parse(request.response)["result"]);
-
-            analysis_content_div.innerHTML = "";
-            analysis_content_div.appendChild(iframe);
-        }
-        request.onerror = (e) => {
-            console.log("error");
-        }
+        this.update_graph();
+        this.update_transactions();
     }
 
     get_banks_and_accounts_sidebar_div() {
@@ -52,9 +38,8 @@ class PastSystem {
         }
     }
 
-    get_active_accounts_graph_rest_url() {
+    get_active_accounts_url_suffix() {
 
-        var base_url = "http://127.0.0.1:5000/graph_past_system/";
         var url_suffix = "";
         
         for (let b_i in this.bank_list) {
@@ -79,6 +64,87 @@ class PastSystem {
         if (url_suffix === "") {
             url_suffix = "show_all";
         }
-        return base_url + url_suffix;
+        return url_suffix;
+    }
+
+    get_active_accounts_graph_rest_url() {
+        var base_url = "http://127.0.0.1:5000/graph_past_system/";
+        return base_url + this.get_active_accounts_url_suffix();
+    }
+
+    update_graph() {
+        var url = this.get_active_accounts_graph_rest_url();
+        request = new XMLHttpRequest();
+        request.open("GET", url);
+        request.send();
+        request.onload = (e) => {
+            var analysis_content_div = document.getElementById("graph_div");
+
+            var iframe = create_elem("iframe", "accounts_graph");
+            iframe.setAttribute("src", JSON.parse(request.response)["result"]);
+
+            analysis_content_div.innerHTML = "";
+            analysis_content_div.appendChild(iframe);
+
+        }
+        request.onerror = (e) => {
+            console.log("error");
+        }
+    }
+
+    get_active_accounts_transactions_rest_url() {
+        var base_url = "http://127.0.0.1:5000/get_past_system_transactions/";
+        return base_url + this.get_active_accounts_url_suffix();
+    }
+
+    update_transactions() {
+        var url = this.get_active_accounts_transactions_rest_url();
+        
+        $.getJSON(url, function(data) {
+
+            var table = create_elem("table", "transactions_table");
+
+            var key_to_header_dict = {
+                "date": "Date", 
+                "Source": "Source", 
+                "from": "From", 
+                "amount": "Amount", 
+                "description": "Description"
+            };
+
+            var temp_tr = create_elem("tr", "transactions_table_header_row");
+            for (let key in key_to_header_dict) {
+                var temp_th = create_elem("th", "transactions_table_header", key);
+                temp_th.innerHTML = key_to_header_dict[key];
+                temp_tr.appendChild(temp_th);
+            }
+            table.appendChild(temp_tr);
+
+            var transaction_dict_list = data["result"];
+            for (let i in transaction_dict_list) {
+
+                var transaction_dict = transaction_dict_list[i];
+                var key_to_data_dict = {
+                    "date": transaction_dict["date"], 
+                    "source": transaction_dict["source"], 
+                    "from": transaction_dict["from"], 
+                    "amount": get_dollar_str(transaction_dict["amount"]), 
+                    "description": transaction_dict["description"]
+                };
+
+                var temp_tr = create_elem("tr", "transactions_table_data_row");
+                for (let key in key_to_data_dict) {
+                    var temp_td = create_elem("td", "transactions_table_data " + key);
+                    temp_td.innerHTML = key_to_data_dict[key];
+                    temp_tr.appendChild(temp_td);
+                }
+                table.appendChild(temp_tr);
+            }
+
+            var div = document.getElementById("transactions_div");
+            div.innerHTML = "";
+            div.appendChild(table);
+
+        });
     }
 }

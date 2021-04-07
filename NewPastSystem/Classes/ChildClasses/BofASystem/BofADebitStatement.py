@@ -15,7 +15,17 @@ class BofADebitStatement(Statement.Statement):
 
         self.dataframe = self.get_dataframe()
 
-        super().__init__(self.get_statement_df())
+        super().__init__(self.get_statement_df(), self.get_start_date(), self.get_end_date())
+
+    def get_start_date(self):
+        if self.data_list_list:
+            return datetime.datetime.strptime(self.data_list_list[1][0].split(" ")[-1], "%m/%d/%Y")
+        return None
+
+    def get_end_date(self):
+        if self.data_list_list:
+            return datetime.datetime.strptime(self.data_list_list[4][0].split(" ")[-1], "%m/%d/%Y")
+        return None
 
     def get_dataframe(self):
         if self.data_list_list:

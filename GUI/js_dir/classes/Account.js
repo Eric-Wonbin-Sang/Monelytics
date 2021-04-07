@@ -30,24 +30,8 @@ class Account {
         button.onclick = function() {
 
             self.button.classList.toggle("active")
-            
-            var url = self.parent_bank.past_system.get_active_accounts_graph_rest_url();
-            request = new XMLHttpRequest();
-            request.open("GET", url);
-            request.send();
-            request.onload = (e) => {
-                var analysis_content_div = document.getElementById("analysis_content");
-
-                var iframe = create_elem("iframe", "accounts_graph");
-                iframe.setAttribute("src", JSON.parse(request.response)["result"]);
-
-                analysis_content_div.innerHTML = "";
-                analysis_content_div.appendChild(iframe);
-
-            }
-            request.onerror = (e) => {
-                console.log("error");
-            }
+            self.parent_bank.past_system.update_graph();
+            self.parent_bank.past_system.update_transactions();
         };
         return button;
     }

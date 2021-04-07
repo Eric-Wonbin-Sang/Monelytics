@@ -12,12 +12,14 @@ pandas.set_option('display.max_colwidth', 100)
 
 class SuperStatement:
 
-    def __init__(self, statement_list, super_statement_path):
+    def __init__(self, statement_list, super_statement_path, is_credit=False, starting_balance=None):
 
         self.statement_list = statement_list
         self.super_statement_path = super_statement_path
 
         self.super_statement_df = self.get_super_statement_df()
+        if is_credit:
+            self.update_running_total(starting_balance)
         self.save()
 
     def get_super_statement_df(self):

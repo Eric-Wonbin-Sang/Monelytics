@@ -23,10 +23,15 @@ class Statement:
         "to",               # added from Venmo
     ]
 
-    def __init__(self, statement_df):
+    def __init__(self, statement_df, start_date=None, end_date=None):
 
         self.statement_df = statement_df
         self.statement_df["amount"] = [float(x) for x in self.statement_df["amount"]]
+
+        self.start_date = start_date
+        self.end_date = end_date
+
+        # print("start: {}\t\tend: {}".format(self.start_date, self.end_date))
 
     def __str__(self):
         statement_df = self.statement_df.copy()

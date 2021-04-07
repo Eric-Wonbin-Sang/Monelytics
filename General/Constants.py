@@ -14,6 +14,15 @@ secrets_dir = projects_dir + "/" + "0 - Secrets"
 temp_download_dir = (project_dir + "/temp").replace("/", "\\")
 do_download = False
 
-banks_dir = secrets_dir + "/Monelytics"
-# banks_dir = "C:/Users/ericw/Desktop/Monelytics"
-bank_logins_json = banks_dir + "/bank_logins.json"
+# -------------------------------------
+
+monelytics_folder = secrets_dir + "/Monelytics"
+# monelytics_folder = "C:/Users/ericw/Desktop/Monelytics"
+
+past_system_dir = monelytics_folder + "/past_system"
+past_system_graph_path = past_system_dir + "/accounts_graph.html"
+banks_dir = past_system_dir + "/banks_dir"
+bank_logins_json = past_system_dir + "/bank_logins.json"
+
+future_system_dir = monelytics_folder + "/future_system"
+projections_dir = future_system_dir + "/projections_dir"

@@ -102,8 +102,7 @@ class DiscoverParser:
 
     def try_statement_download(self):
         print("Attempting to download statement...", end="")
-        download_button = self.get_download_statement_button()
-        self.driver.execute_script("arguments[0].click()", download_button)
+        self.driver.find_element_by_id("submitDownload").click()
         print("Waiting for csv...", end="")
         return Functions.wait_for_temp_file(self.temp_download_dir, 2)
 
@@ -111,33 +110,6 @@ class DiscoverParser:
         for path in os.listdir(account.statement_source_files_path):
             if self.curr_statement_name_segment in path:
                 return path
-
-    def get_download_button_for_menu(self):
-        print("Getting download button for menu... ", end="")
-        while True:
-            try:
-                print("DONE")
-                return self.driver.find_element_by_class_name("download-link")
-            except:
-                pass
-
-    def click_download_button_for_menu(self):
-        print("Clicking download button for menu... ", end="")
-        while True:
-            try:
-                print("DONE")
-                return self.get_download_button_for_menu().click()
-            except:
-                pass
-
-    def click_excel_option(self):
-        option_list = self.driver.find_elements_by_class_name("icon-radio")
-        excel_button = option_list[2]
-        while True:
-            try:
-                excel_button.click()
-            except:
-                pass
 
     def download_statements(self):
         self.driver.get("https://card.discover.com/cardmembersvcs/statements/app/activity#/recent")
@@ -164,10 +136,17 @@ class DiscoverParser:
 
             for period_url in period_url_list:
                 self.driver.get(period_url)
-                self.click_download_button_for_menu()
-                self.click_excel_option()
-
+                while True:
+                    try:
+                        download_modal_button = self.driver.find_element_by_class_name("download-link")
+                        download_modal_button.click()
+                        break
+                    except:
+                        time.sleep(.1)
+                self.driver.find_element_by_css_selector("input[type='radio'][name='outputFormat'][id='radio4'][value='csv']").click()
                 csv_path = self.try_statement_download()
+                self.driver.find_element_by_css_selector("a[class='link modal-close-link']").click()
+
                 new_path = account.statement_source_files_path + "/" + csv_path.replace("\\", "/").split("/")[-1]
                 print(new_path + " - ", end="")
                 if not os.path.exists(new_path):
@@ -175,6 +154,7 @@ class DiscoverParser:
                     print(new_path, "created!")
                 else:
                     print(new_path, "exists!")
+                    os.remove(csv_path)
 
     def update_statements(self):
         self.driver = Parser.get_driver(self.temp_download_dir)
