@@ -41,5 +41,6 @@ class BofACreditStatement(Statement.Statement):
             statement_df["address"] = self.dataframe["Address"]
             statement_df["description"] = self.dataframe["Payee"]
         statement_df = statement_df.set_index(['date'])
+        statement_df = statement_df.iloc[::-1]
 
         return statement_df

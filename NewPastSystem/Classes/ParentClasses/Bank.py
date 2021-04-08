@@ -1,6 +1,6 @@
 import os
 
-from NewPastSystem.Classes.ParentClasses import Account, StatementCleaner
+from NewPastSystem.Classes.ParentClasses import Account
 
 from General import Functions, Constants
 
@@ -28,8 +28,6 @@ class Bank:
             self.initialize_bank_structure()
 
         self.account_list = self.get_account_list()     # these are accounts that already exist
-
-        self.update_super_statements()
 
     def get_bank_dict(self):
         return {
@@ -70,10 +68,6 @@ class Bank:
                 )
             )
         return account_list
-
-    def update_super_statements(self):
-        for account in self.account_list:
-            account.refresh_super_statement_p()
 
     def to_dict(self):
         return {

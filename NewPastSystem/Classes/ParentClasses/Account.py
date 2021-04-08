@@ -1,7 +1,7 @@
 import os
 import plotly.graph_objects as go
 
-from NewPastSystem.Classes.ParentClasses import StatementCleaner, SuperStatement
+from NewPastSystem.Classes.ParentClasses import StatementManager, SuperStatement
 
 from General import Functions, Constants
 
@@ -18,8 +18,9 @@ class Account:
         self.clean_statement_files_path = self.dir_path + "/clean_statements"
 
         self.account_json_path = self.dir_path + "/" + "account.json"
-        self.super_statement_path = self.dir_path + "/" + "super_statement.p"
-        self.super_statement_pd = self.get_super_statement_pd()
+
+        self.super_statement_csv_name = "super_statement.csv"
+        self.super_statement_csv_path = self.dir_path + "/" + self.super_statement_csv_name
 
         self.name = kwargs.get("name")
         self.nickname = kwargs.get("nickname")
@@ -35,7 +36,7 @@ class Account:
         if not is_temp:
             self.check_dirs()
 
-        self.statement_cleaner = StatementCleaner.StatementCleaner(
+        self.statement_cleaner = StatementManager.StatementManager(
             self,
             type_to_statement_class_dict=type_to_statement_class_dict
         )
@@ -49,11 +50,6 @@ class Account:
             if count not in num_list:
                 return "account_{}".format(str(count).rjust(2, "0"))
             count += 1
-
-    def get_super_statement_pd(self):
-        if os.path.exists(self.super_statement_path):
-            return Functions.unpickle(self.super_statement_path)
-        return None
 
     def get_account_dict(self):
         return {
@@ -75,14 +71,6 @@ class Account:
             os.mkdir(self.clean_statement_files_path)
         if not os.path.exists(self.account_json_path):
             Functions.dict_to_json(self.account_dict, self.account_json_path)
-
-    def refresh_super_statement_p(self):
-        SuperStatement.SuperStatement(
-            statement_list=self.statement_cleaner.statement_list,
-            super_statement_path=self.super_statement_path,
-            is_credit=self.type == "credit",
-            starting_balance=self.curr_balance if self.type == "credit" else None
-        )
 
     def to_dict(self):
         return {
@@ -112,15 +100,12 @@ def graph_accounts(account_list):
     fig = go.Figure()
     for account in account_list:
 
-        if account.super_statement_pd is None:
+        if account.statement_cleaner.super_statement_df is None:
             continue
 
-        # print(account.super_statement_pd.index)
-        # print(account.super_statement_pd["running_balance"])
-
         fig.add_trace(go.Scatter(
-            x=account.super_statement_pd.index,
-            y=[float(data) for data in account.super_statement_pd["running_balance"]],
+            x=account.statement_cleaner.super_statement_df.index,
+            y=[float(data) for data in account.statement_cleaner.super_statement_df["running_balance"]],
             mode='lines+markers',
             name=account.name)
         )
@@ -147,10 +132,10 @@ def get_all_account_transaction_dict_list(account_list):
 
     super_super_statement_pd = None
     for account in account_list:
-        if account.super_statement_pd is None:
+        if account.statement_cleaner.super_statement_df is None:
             continue
 
-        temp_super_statement_pd = account.super_statement_pd
+        temp_super_statement_pd = account.statement_cleaner.super_statement_df
         temp_super_statement_pd["source"] = account.parent_bank.type + " - " + account.parent_bank.owner + " | " + account.name
         if super_super_statement_pd is None:
             super_super_statement_pd = temp_super_statement_pd

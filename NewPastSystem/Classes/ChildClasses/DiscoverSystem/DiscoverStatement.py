@@ -32,12 +32,9 @@ class DiscoverStatement(Statement.Statement):
 
         if self.dataframe is not None:
             statement_df["date"] = [datetime.datetime.strptime(x, "%m/%d/%Y") for x in self.dataframe["Post Date"]]
-            statement_df["amount"] = self.dataframe["Amount"]
-            # statement_df["amount"] = (float(x) for x in self.dataframe["Amount"])
-            # statement_df["running_balance"] = self.dataframe[""]
-            # statement_df["transaction_code"] = self.dataframe["Reference Number"]
-            # statement_df["address"] = self.dataframe["Address"]
+            statement_df["amount"] = [float(x) * -1 for x in self.dataframe["Amount"]]
             statement_df["description"] = self.dataframe["Description"]
         statement_df = statement_df.set_index(['date'])
+        statement_df = statement_df.iloc[::-1]
 
         return statement_df
