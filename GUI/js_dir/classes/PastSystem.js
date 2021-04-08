@@ -106,7 +106,9 @@ class PastSystem {
 
             var key_to_header_dict = {
                 "date": "Date", 
-                "Source": "Source", 
+                "parent_bank_type": "Bank", 
+                "parent_bank_owner": "Owner", 
+                "account_name": "Account Name", 
                 "from": "From", 
                 "amount": "Amount", 
                 "description": "Description"
@@ -126,7 +128,9 @@ class PastSystem {
                 var transaction_dict = transaction_dict_list[i];
                 var key_to_data_dict = {
                     "date": transaction_dict["date"], 
-                    "source": transaction_dict["source"], 
+                    "parent_bank_type": transaction_dict["parent_bank_type"], 
+                    "parent_bank_owner": transaction_dict["parent_bank_owner"], 
+                    "account_name": transaction_dict["account_name"], 
                     "from": transaction_dict["from"], 
                     "amount": get_dollar_str(transaction_dict["amount"]), 
                     "description": transaction_dict["description"]

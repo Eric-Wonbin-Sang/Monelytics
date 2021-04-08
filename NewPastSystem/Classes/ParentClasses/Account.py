@@ -145,7 +145,6 @@ def get_all_account_transaction_dict_list(account_list):
         if account.statement_cleaner.super_statement_df is None:
             continue
         temp_super_statement_pd = account.statement_cleaner.super_statement_df
-        temp_super_statement_pd["source"] = account.parent_bank.type + " - " + account.parent_bank.owner + " | " + account.name
         temp_super_statement_pd["parent_bank_type"] = account.parent_bank.type
         temp_super_statement_pd["parent_bank_owner"] = account.parent_bank.owner
         temp_super_statement_pd["account_name"] = account.name
@@ -158,7 +157,6 @@ def get_all_account_transaction_dict_list(account_list):
         transaction_dict_list.append(
             {
                 "date": str(index),
-                "source": str(row["source"]),
                 "parent_bank_type": str(row["parent_bank_type"]),
                 "parent_bank_owner": str(row["parent_bank_owner"]),
                 "account_name": str(row["account_name"]),
