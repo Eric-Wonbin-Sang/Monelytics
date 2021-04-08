@@ -243,7 +243,7 @@ class BofAParser:
 
             period_name = option.get_attribute("value").strip().replace("/", ".")
             csv_name = period_name + ".csv"
-            new_path = account.statement_source_files_path + "/" + csv_name
+            new_path = account.statement_source_files_dir + "/" + csv_name
             print(period_name + " - ", end="")
             if not os.path.exists(new_path):
                 csv_path = self.try_statement_download(self.get_debit_download_button_elem())
@@ -266,7 +266,7 @@ class BofAParser:
 
             period_name = option.get_attribute("name")
             csv_name = period_name + ".csv"
-            new_path = account.statement_source_files_path + "/" + csv_name
+            new_path = account.statement_source_files_dir + "/" + csv_name
             print(period_name + " - ", end="")
             if not os.path.exists(new_path):
                 csv_path = self.try_statement_download(self.get_credit_download_button_elem())
@@ -280,10 +280,10 @@ class BofAParser:
         for account in self.account_list:
             self.driver.get(account.account_url)
             if account.type == "debit":
-                if self.current_debit_statement_csv_name in os.listdir(account.statement_source_files_path):
-                    os.remove(account.statement_source_files_path + "/" + self.current_debit_statement_csv_name)
+                if self.current_debit_statement_csv_name in os.listdir(account.statement_source_files_dir):
+                    os.remove(account.statement_source_files_dir + "/" + self.current_debit_statement_csv_name)
                 self.download_debit_account_statements(account)
             elif account.type == "credit":
-                if self.current_credit_statement_csv_name in os.listdir(account.statement_source_files_path):
-                    os.remove(account.statement_source_files_path + "/" + self.current_credit_statement_csv_name)
+                if self.current_credit_statement_csv_name in os.listdir(account.statement_source_files_dir):
+                    os.remove(account.statement_source_files_dir + "/" + self.current_credit_statement_csv_name)
                 self.download_credit_account_statements(account)

@@ -49,7 +49,7 @@ class Statement:
 
     def get_clean_statement_file_path(self):
         if self.clean_statement_file_name:
-            return self.parent_account.clean_statement_files_path + "/" + self.clean_statement_file_name
+            return self.parent_account.clean_statement_files_dir + "/" + self.clean_statement_file_name
         return None
 
     def __str__(self):

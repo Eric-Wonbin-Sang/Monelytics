@@ -107,7 +107,7 @@ class DiscoverParser:
         return Functions.wait_for_temp_file(self.temp_download_dir, 2)
 
     def find_curr_statement_path(self, account):
-        for path in os.listdir(account.statement_source_files_path):
+        for path in os.listdir(account.statement_source_files_dir):
             if self.curr_statement_name_segment in path:
                 return path
 
@@ -131,7 +131,7 @@ class DiscoverParser:
         for account in self.account_list:
 
             current_statement_path = self.find_curr_statement_path(account)
-            if current_statement_path in os.listdir(account.statement_source_files_path):
+            if current_statement_path in os.listdir(account.statement_source_files_dir):
                 os.remove(account.statement_sorce_files_path + "/" + current_statement_path)
 
             for period_url in period_url_list:
@@ -147,7 +147,7 @@ class DiscoverParser:
                 csv_path = self.try_statement_download()
                 self.driver.find_element_by_css_selector("a[class='link modal-close-link']").click()
 
-                new_path = account.statement_source_files_path + "/" + csv_path.replace("\\", "/").split("/")[-1]
+                new_path = account.statement_source_files_dir + "/" + csv_path.replace("\\", "/").split("/")[-1]
                 print(new_path + " - ", end="")
                 if not os.path.exists(new_path):
                     os.rename(csv_path, new_path)

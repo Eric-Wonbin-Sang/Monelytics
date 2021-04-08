@@ -6,6 +6,10 @@ from General import Functions
 
 class StatementManager:
 
+    """
+    This class should be used by Accounts for converting downloaded statements to clean statement CSVs.
+    """
+
     def __init__(self, parent_account, type_to_statement_class_dict):
 
         self.parent_account = parent_account
@@ -13,6 +17,7 @@ class StatementManager:
 
         self.statement_list = self.get_statement_list()
 
+        self.remove_clean_statement_CSVs()
         self.create_clean_statement_CSVs()
 
         self.super_statement_df = self.get_super_statement_df()
@@ -20,8 +25,8 @@ class StatementManager:
 
     def get_statement_list(self):
         statement_list = []
-        for path in os.listdir(self.parent_account.statement_source_files_path):
-            file_path = self.parent_account.statement_source_files_path + "/" + path
+        for path in os.listdir(self.parent_account.statement_source_files_dir):
+            file_path = self.parent_account.statement_source_files_dir + "/" + path
             if self.parent_account.type in self.type_to_statement_class_dict:
                 statement_list.append(
                     self.type_to_statement_class_dict[self.parent_account.type](
@@ -40,33 +45,19 @@ class StatementManager:
 
     def remove_clean_statement_CSVs(self):
         for statement in self.statement_list:
-            if statement.clean_statement_file_name is not None:
-                file_path = self.parent_account.clean_statement_files_path + "/" + statement.clean_statement_file_name
-                if os.path.exists(file_path):
-                    os.remove(file_path)
+            if statement.clean_statement_file_name and not os.path.exists(statement.clean_statement_file_path):
+                os.remove(statement.clean_statement_file_path)
 
     def create_clean_statement_CSVs(self):
-        self.remove_clean_statement_CSVs()
-        # print("STATEMENT CLEANER -", self.parent_account.type, self.parent_account.name)
         for statement in self.statement_list:
-            if statement.clean_statement_file_name is not None:
-                # print("\t", end="")
-                file_path = self.parent_account.clean_statement_files_path + "/" + statement.clean_statement_file_name
-                if not os.path.exists(file_path):
-                    statement.statement_df.to_csv(file_path, index=True, header=True)
-                    # print(statement.clean_statement_file_name, "created!")
-                else:
-                    # print(statement.clean_statement_file_name, "exists!")
-                    pass
-            else:
-                # print("Empty Statement")
-                pass
+            if statement.clean_statement_file_name and not os.path.exists(statement.clean_statement_file_path):
+                statement.statement_df.to_csv(statement.clean_statement_file_path, index=True, header=True)
 
     def get_super_statement_df(self):
         super_statement_df = pandas.concat(
             [
                 pandas.read_csv(path)
-                for path in Functions.get_path_list_in_dir(self.parent_account.clean_statement_files_path)
+                for path in Functions.get_path_list_in_dir(self.parent_account.clean_statement_files_dir)
             ]
         )
         super_statement_df.index = super_statement_df["date"]

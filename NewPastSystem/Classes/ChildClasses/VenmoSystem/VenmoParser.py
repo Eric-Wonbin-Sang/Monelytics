@@ -148,8 +148,8 @@ class VenmoParser:
 
         account = self.account_list[0]
 
-        if self.current_statement_csv_name in os.listdir(account.statement_source_files_path):
-            os.remove(account.statement_source_files_path + "/" + self.current_statement_csv_name)
+        if self.current_statement_csv_name in os.listdir(account.statement_source_files_dir):
+            os.remove(account.statement_source_files_dir + "/" + self.current_statement_csv_name)
 
         for i, (start_date_str, end_date_str) in enumerate(self.get_start_end_date_tuple_list()):
             download_url = base_download_url.format(start_date=start_date_str, end_date=end_date_str)
@@ -158,7 +158,7 @@ class VenmoParser:
             new_csv_name = "{} to {}.csv".format(start_date_str, end_date_str)
             if i == 0:
                 new_csv_name = self.current_statement_csv_name
-            new_cvs_path = account.statement_source_files_path + "/" + new_csv_name
+            new_cvs_path = account.statement_source_files_dir + "/" + new_csv_name
 
             if not os.path.exists(new_cvs_path):
                 print(download_url, end=" - ")
