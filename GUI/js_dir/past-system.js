@@ -38,7 +38,7 @@ function get_dollar_str(num) {
 }
 
 window.onload = function() {
-    var url = "http://127.0.0.1:5000/get_bank_and_account_info";
+    var url = "http://127.0.0.1:5000/past_system/get_bank_and_account_info";
     request = new XMLHttpRequest();
     request.open("GET", url);
     request.send();

@@ -23,9 +23,9 @@ class PastSystem {
     initialize_ui() {
         for (let i in this.bank_list) {
             this.bank_list[i].button.click();
-            if (i == 0) {
-                break;
-            }
+            // if (i == 0) {
+            //     break;
+            // }
         }
         this.update_graph();
         this.update_transactions();
@@ -68,7 +68,7 @@ class PastSystem {
     }
 
     get_active_accounts_graph_rest_url() {
-        var base_url = "http://127.0.0.1:5000/graph_past_system/";
+        var base_url = "http://127.0.0.1:5000/past_system/graph/";
         return base_url + this.get_active_accounts_url_suffix();
     }
 
@@ -93,7 +93,7 @@ class PastSystem {
     }
 
     get_active_accounts_transactions_rest_url() {
-        var base_url = "http://127.0.0.1:5000/get_past_system_transactions/";
+        var base_url = "http://127.0.0.1:5000/past_system/get_transactions/";
         return base_url + this.get_active_accounts_url_suffix();
     }
 

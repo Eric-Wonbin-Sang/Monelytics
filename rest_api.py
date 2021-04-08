@@ -4,14 +4,18 @@ from flask_cors import CORS
 
 from NewPastSystem.Classes.ParentClasses import Bank, Account
 
-from NewPastSystem import main as past_system
+from NewPastSystem import past_main as past_system
+from FutureSystem import future_main as future_system
 
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
 bank_list = past_system.get_full_bank_list()
+scenario_list = future_system.get_scenario_list()
 
+
+# PAST SYSTEM -------------------------------------------------
 
 class BankToAccount(Resource):
 
@@ -70,9 +74,40 @@ def bank_to_accounts_str_to_account_list(bank_to_accounts_str):
     return account_list
 
 
-api.add_resource(BankToAccount, '/get_bank_and_account_info')
-api.add_resource(GraphPastSystem, '/graph_past_system/<bank_to_accounts_str>')
-api.add_resource(TransactionDictList, '/get_past_system_transactions/<bank_to_accounts_str>')
+# FUTURE SYSTEM -------------------------------------------------
+
+class GetScenarioInfo(Resource):
+
+    def get(self):
+        print([scenario.to_dict() for scenario in scenario_list])
+        return {
+            "comment": "WORKED",
+            "result": [scenario.to_dict() for scenario in scenario_list]
+        }
+
+
+class GraphFutureSystem(Resource):
+
+    def get(self, scenario_name):
+
+        for scenario in scenario_list:
+            if scenario.name == scenario_name:
+                return {
+                    "comment": "WORKED",
+                    "result": scenario.create_graph()
+                }
+        return {
+            "comment": "FAILED",
+            "result": None
+        }
+
+
+api.add_resource(BankToAccount,         '/past_system/get_bank_and_account_info')
+api.add_resource(GraphPastSystem,       '/past_system/graph/<bank_to_accounts_str>')
+api.add_resource(TransactionDictList,   '/past_system/get_transactions/<bank_to_accounts_str>')
+
+api.add_resource(GetScenarioInfo,       '/future_system/get_scenarios')
+api.add_resource(GraphFutureSystem,     '/future_system/graph/<scenario_name>')
 
 
 if __name__ == '__main__':

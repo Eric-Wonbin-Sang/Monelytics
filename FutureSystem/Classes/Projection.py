@@ -1,8 +1,7 @@
 import datetime
 import pandas as pd
-import matplotlib.pyplot as plt
 
-from General import Functions
+from General import Functions, Constants
 
 
 class Projection:
@@ -10,23 +9,15 @@ class Projection:
     def __init__(self, **kwargs):
 
         self.name = kwargs.get("name")
-        self.type = kwargs.get("type")
 
         self.start_datetime = kwargs.get("start_datetime")
         self.frequency = kwargs.get("frequency")
         self.end_datetime = kwargs.get("end_datetime")
 
         self.amount = kwargs.get("amount")
-        self.update_amount()
+        self.type = "income" if self.amount >= 0 else "expense"
 
         self.dataframe = self.get_dataframe()
-
-    def update_amount(self):
-        if self.type == "income":
-            pass
-        else:
-            self.amount *= -1
-        pass
 
     def get_dataframe(self):
         curr_datetime = self.start_datetime
@@ -52,19 +43,23 @@ class Projection:
         full_dataframe = full_dataframe.sort_index()
         return full_dataframe
 
-    def plot(self):
-        plt.plot(
-            self.dataframe.index,
-            self.dataframe["result"],
-            alpha=0.8,
-            marker="."
-        )
+    def to_dict(self):
+        return {
+            "name": self.name,
+            "start_datetime": self.start_datetime.strftime("%Y-%m-%d"),
+            "end_datetime": self.end_datetime.strftime("%Y-%m-%d"),
+            "frequency": self.frequency,
+            "amount": self.amount,
+        }
 
     def __str__(self):
-        return "Projection: {}, {}".format(
-            self.name,
-            self.type
-        )
+        return "Projection: {}".format(
+            self.name
+        ) \
+               + "\n\tstart_datetime: {}".format(self.start_datetime) \
+               + "\n\tend_datetime: {}".format(self.end_datetime) \
+               + "\n\tfrequency: {}".format(self.frequency) \
+               + "\n\tamount: {}".format(self.amount)
 
 
 def combine_projection_dfs(dataframe_0, dataframe_1, amount_type):
@@ -80,3 +75,9 @@ def combine_projection_dfs(dataframe_0, dataframe_1, amount_type):
     else:
         full_dataframe["result"] = full_dataframe["prev_result_0"] * full_dataframe["prev_result_1"]
     return full_dataframe
+
+
+def json_dict_to_projection(json_dict):
+    json_dict["start_datetime"] = datetime.datetime.strptime(json_dict["start_datetime"], "%Y-%m-%d")
+    json_dict["end_datetime"] = datetime.datetime.strptime(json_dict["end_datetime"], "%Y-%m-%d")
+    return Projection(**json_dict)

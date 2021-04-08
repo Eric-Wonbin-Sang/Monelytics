@@ -24,4 +24,5 @@ banks_dir = past_system_dir + "/banks_dir"
 bank_logins_json = past_system_dir + "/bank_logins.json"
 
 future_system_dir = monelytics_folder + "/future_system"
-projections_dir = future_system_dir + "/projections_dir"
+scenarios_dir = future_system_dir + "/scenarios_dir"
+future_system_graph_path = future_system_dir + "/future_system_graph.html"

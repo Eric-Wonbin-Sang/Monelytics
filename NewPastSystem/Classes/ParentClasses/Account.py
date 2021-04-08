@@ -160,9 +160,9 @@ def get_all_account_transaction_dict_list(account_list):
                 "parent_bank_type": str(row["parent_bank_type"]),
                 "parent_bank_owner": str(row["parent_bank_owner"]),
                 "account_name": str(row["account_name"]),
-                "from": str(row["from"]) if str(row["from"]) != "nan" else "Unknown",
+                "from": str(row["from"]) if str(row["from"]) != "nan" else "--",
                 "amount": str(row["amount"]),
-                "description": str(row["description"]),
+                "description": str(row["description"]) if str(row["from"]) != "nan" else "--",
             }
         )
     return list(reversed(transaction_dict_list))[:50]
