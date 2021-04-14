@@ -7,6 +7,8 @@ from NewPastSystem.Classes.ParentClasses import Bank, Account
 from NewPastSystem import past_main as past_system
 from FutureSystem import future_main as future_system
 
+from General import Constants, Functions
+
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
@@ -79,7 +81,6 @@ def bank_to_accounts_str_to_account_list(bank_to_accounts_str):
 class GetScenarioInfo(Resource):
 
     def get(self):
-        print([scenario.to_dict() for scenario in scenario_list])
         return {
             "comment": "WORKED",
             "result": [scenario.to_dict() for scenario in scenario_list]
@@ -102,12 +103,34 @@ class GraphFutureSystem(Resource):
         }
 
 
+# Account Info ------------------------------------
+
+class GetAccountInfo(Resource):
+
+    def get(self):
+
+        bank_logins_dict_list = Functions.parse_json(Constants.bank_logins_json)
+        for bank_logins_dict in bank_logins_dict_list:
+            bank_logins_dict["username"] = bank_logins_dict["username"][:3] + (len(bank_logins_dict["username"]) - 3) * "*"
+            bank_logins_dict["password"] = len(bank_logins_dict["password"]) * "*"
+
+        return {
+            "comment": "SUCCESS",
+            "result": {
+                "name": "Eric Sang",
+                "bank_logins_dict_list": bank_logins_dict_list
+            }
+        }
+
+
 api.add_resource(BankToAccount,         '/past_system/get_bank_and_account_info')
 api.add_resource(GraphPastSystem,       '/past_system/graph/<bank_to_accounts_str>')
 api.add_resource(TransactionDictList,   '/past_system/get_transactions/<bank_to_accounts_str>')
 
 api.add_resource(GetScenarioInfo,       '/future_system/get_scenarios')
 api.add_resource(GraphFutureSystem,     '/future_system/graph/<scenario_name>')
+
+api.add_resource(GetAccountInfo,     '/account/get_info')
 
 
 if __name__ == '__main__':

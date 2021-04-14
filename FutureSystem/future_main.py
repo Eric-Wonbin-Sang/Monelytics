@@ -1,7 +1,6 @@
 import os
 import datetime
 import pandas as pd
-import matplotlib.pyplot as plt
 
 from FutureSystem.Classes import Projection, Scenario
 from FutureSystem.Classes.ComplexProjections import SalaryIncome
@@ -71,29 +70,6 @@ def main():
         #     bonus_end=datetime.datetime(year=2025, month=8, day=1)
         # )
     ]
-
-    # complete_df = get_complete_df(projection_list)
-    #
-    # for p in projection_list:
-    #     plt.plot(
-    #         p.dataframe.index,
-    #         p.dataframe["result"],
-    #         alpha=0.8,
-    #         marker=".",
-    #         label=p.name
-    #     )
-    #
-    # plt.plot(
-    #     complete_df.index,
-    #     complete_df["result"],
-    #     alpha=0.8,
-    #     marker=".",
-    #     label="running total"
-    # )
-    # plt.legend(loc='upper left')
-    #
-    # plt.grid()
-    # plt.show()
 
     scenario_list = get_scenario_list()
     # scenario_list[-1].rewrite_projection_list(projection_list)
