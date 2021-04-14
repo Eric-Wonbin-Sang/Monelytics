@@ -1,5 +1,5 @@
-from NewPastSystem.Classes.ParentClasses import Bank
-from NewPastSystem.Classes.ChildClasses.VenmoSystem import VenmoParser, VenmoStatement
+from PastSystem.Classes.ParentClasses import Bank
+from PastSystem.Classes.ChildClasses.VenmoSystem import VenmoParser, VenmoStatement
 
 
 class VenmoBank(Bank.Bank):

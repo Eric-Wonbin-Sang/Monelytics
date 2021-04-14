@@ -14,7 +14,7 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 
-from NewPastSystem.Classes.ParentClasses import Parser
+from PastSystem.Classes.ParentClasses import Parser
 
 from General import Functions, Constants
 

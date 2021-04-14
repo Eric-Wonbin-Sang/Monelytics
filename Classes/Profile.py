@@ -1,9 +1,9 @@
 import os
 
-from NewPastSystem.Classes.ChildClasses.BofASystem import BofABank
-from NewPastSystem.Classes.ChildClasses.DiscoverSystem import DiscoverBank
-from NewPastSystem.Classes.ChildClasses.VenmoSystem import VenmoBank
-from NewPastSystem.Classes.ChildClasses.ChaseSystem import ChaseBank
+from PastSystem.Classes.ChildClasses.BofASystem import BofABank
+from PastSystem.Classes.ChildClasses.DiscoverSystem import DiscoverBank
+from PastSystem.Classes.ChildClasses.VenmoSystem import VenmoBank
+from PastSystem.Classes.ChildClasses.ChaseSystem import ChaseBank
 
 from FutureSystem.Classes import Scenario
 

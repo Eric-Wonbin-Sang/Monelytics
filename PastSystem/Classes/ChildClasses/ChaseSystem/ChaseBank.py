@@ -1,5 +1,5 @@
-from NewPastSystem.Classes.ParentClasses import Bank
-from NewPastSystem.Classes.ChildClasses.ChaseSystem import ChaseParser, ChaseDebitStatement, ChaseCreditStatement
+from PastSystem.Classes.ParentClasses import Bank
+from PastSystem.Classes.ChildClasses.ChaseSystem import ChaseParser, ChaseDebitStatement, ChaseCreditStatement
 
 
 class ChaseBank(Bank.Bank):

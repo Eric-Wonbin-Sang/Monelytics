@@ -1,5 +1,5 @@
-from NewPastSystem.Classes.ParentClasses import Bank
-from NewPastSystem.Classes.ChildClasses.BofASystem import BofAParser, BofADebitStatement, BofACreditStatement
+from PastSystem.Classes.ParentClasses import Bank
+from PastSystem.Classes.ChildClasses.BofASystem import BofAParser, BofADebitStatement, BofACreditStatement
 
 
 class BofABank(Bank.Bank):

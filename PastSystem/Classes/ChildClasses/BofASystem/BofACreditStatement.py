@@ -1,7 +1,7 @@
 import pandas
 import datetime
 
-from NewPastSystem.Classes.ParentClasses import Statement
+from PastSystem.Classes.ParentClasses import Statement
 
 from General import Functions
 

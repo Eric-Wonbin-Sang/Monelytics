@@ -2,7 +2,7 @@ import os
 import pandas
 import plotly.graph_objects as go
 
-from NewPastSystem.Classes.ParentClasses import StatementManager, SuperStatement
+from PastSystem.Classes.ParentClasses import StatementManager, SuperStatement
 
 from General import Functions, Constants
 

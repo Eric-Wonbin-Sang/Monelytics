@@ -2,11 +2,11 @@ from flask import Flask
 from flask_restful import Resource, Api
 from flask_cors import CORS
 
-from NewPastSystem.Classes.ParentClasses import Bank, Account
+from PastSystem.Classes.ParentClasses import Bank, Account
 
 from Classes import Profile
 
-from General import Constants, Functions
+from General import Functions
 
 app = Flask(__name__)
 CORS(app)
@@ -110,7 +110,7 @@ class GetAccountInfo(Resource):
 
     def get(self):
 
-        bank_logins_dict_list = Functions.parse_json(Constants.bank_logins_json)
+        bank_logins_dict_list = Functions.parse_json(main_profile.bank_logins_json)
         for bank_logins_dict in bank_logins_dict_list:
             bank_logins_dict["username"] = bank_logins_dict["username"][:3] + (len(bank_logins_dict["username"]) - 3) * "*"
             bank_logins_dict["password"] = len(bank_logins_dict["password"]) * "*"

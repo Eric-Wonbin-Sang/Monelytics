@@ -1,5 +1,5 @@
-from NewPastSystem.Classes.ParentClasses import Bank
-from NewPastSystem.Classes.ChildClasses.DiscoverSystem import DiscoverParser, DiscoverStatement
+from PastSystem.Classes.ParentClasses import Bank
+from PastSystem.Classes.ChildClasses.DiscoverSystem import DiscoverParser, DiscoverStatement
 
 
 class DiscoverBank(Bank.Bank):

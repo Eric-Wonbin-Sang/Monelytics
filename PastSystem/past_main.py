@@ -1,10 +1,10 @@
 import os
 
-from NewPastSystem.Classes.ParentClasses import Bank, Account
-from NewPastSystem.Classes.ChildClasses.BofASystem import BofABank
-from NewPastSystem.Classes.ChildClasses.DiscoverSystem import DiscoverBank
-from NewPastSystem.Classes.ChildClasses.VenmoSystem import VenmoBank
-from NewPastSystem.Classes.ChildClasses.ChaseSystem import ChaseBank
+from PastSystem.Classes.ParentClasses import Bank, Account
+from PastSystem.Classes.ChildClasses.BofASystem import BofABank
+from PastSystem.Classes.ChildClasses.DiscoverSystem import DiscoverBank
+from PastSystem.Classes.ChildClasses.VenmoSystem import VenmoBank
+from PastSystem.Classes.ChildClasses.ChaseSystem import ChaseBank
 
 from General import Functions, Constants
 
