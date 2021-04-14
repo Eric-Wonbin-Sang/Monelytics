@@ -19,7 +19,6 @@ class DiscoverParser:
 
     login_url = "https://portal.discover.com/customersvcs/universalLogin/ac_main"
     # auth_url = "https://secure.bankofamerica.com/login/sign-in/entry/signOnV2.go"
-    temp_download_dir = Constants.temp_download_dir
     curr_statement_name_segment = "Discover-Recent"
 
     def __init__(self, parent_bank, cookies_path):
@@ -104,7 +103,7 @@ class DiscoverParser:
         print("Attempting to download statement...", end="")
         self.driver.find_element_by_id("submitDownload").click()
         print("Waiting for csv...", end="")
-        return Functions.wait_for_temp_file(self.temp_download_dir, 2)
+        return Functions.wait_for_temp_file(self.parent_bank.profile.temp_download_dir, 2)
 
     def find_curr_statement_path(self, account):
         for path in os.listdir(account.statement_source_files_dir):
@@ -157,7 +156,7 @@ class DiscoverParser:
                     os.remove(csv_path)
 
     def update_statements(self):
-        self.driver = Parser.get_driver(self.temp_download_dir)
+        self.driver = Parser.get_driver(self.parent_bank.profile.temp_download_dir)
         self.login()
         self.account_dict_list = self.get_account_dict_list()
 

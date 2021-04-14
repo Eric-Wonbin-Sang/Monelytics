@@ -105,7 +105,7 @@ class Account:
         )
 
 
-def graph_accounts(account_list):
+def graph_accounts(profile, account_list):
 
     fig = go.Figure()
     for account in account_list:
@@ -134,8 +134,8 @@ def graph_accounts(account_list):
         }
     )
 
-    fig.write_html(Constants.past_system_graph_path)
-    return Constants.past_system_graph_path
+    fig.write_html(profile.past_system_graph_path)
+    return profile.past_system_graph_path
 
 
 def get_all_account_transaction_dict_list(account_list):

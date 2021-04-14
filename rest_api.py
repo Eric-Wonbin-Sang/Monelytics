@@ -4,8 +4,7 @@ from flask_cors import CORS
 
 from NewPastSystem.Classes.ParentClasses import Bank, Account
 
-from NewPastSystem import past_main as past_system
-from FutureSystem import future_main as future_system
+from Classes import Profile
 
 from General import Constants, Functions
 
@@ -13,8 +12,10 @@ app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
-bank_list = past_system.get_full_bank_list()
-scenario_list = future_system.get_scenario_list()
+profile_list = Profile.get_profile_list()
+main_profile = profile_list[0]
+bank_list = main_profile.bank_list
+scenario_list = main_profile.scenario_list
 
 
 # PAST SYSTEM -------------------------------------------------
@@ -31,14 +32,14 @@ class GraphPastSystem(Resource):
         if bank_to_accounts_str == "show_all":
             return {
                 "comment": "showing all",
-                "result": Account.graph_accounts([account for bank in bank_list for account in bank.account_list]),
+                "result": Account.graph_accounts(main_profile, [account for bank in bank_list for account in bank.account_list]),
             }
 
         account_list = bank_to_accounts_str_to_account_list(bank_to_accounts_str)
 
         return {
             "comment": "WORKED",
-            "result": Account.graph_accounts(account_list),
+            "result": Account.graph_accounts(main_profile, account_list),
         }
 
 

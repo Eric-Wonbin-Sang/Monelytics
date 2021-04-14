@@ -10,12 +10,12 @@ from General import Functions, Constants
 pd.set_option('display.expand_frame_repr', False)
 
 
-def get_scenario_list():
-    scenario_list = []
-    for file_name in os.listdir(Constants.scenarios_dir):
-        file_path = Constants.scenarios_dir + "/" + file_name
-        scenario_list.append(Scenario.Scenario(file_path))
-    return scenario_list
+# def get_scenario_list():
+#     scenario_list = []
+#     for file_name in os.listdir(Constants.scenarios_dir):
+#         file_path = Constants.scenarios_dir + "/" + file_name
+#         scenario_list.append(Scenario.Scenario(file_path))
+#     return scenario_list
 
 
 def main():
@@ -71,7 +71,7 @@ def main():
         # )
     ]
 
-    scenario_list = get_scenario_list()
+    # scenario_list = get_scenario_list()
     # scenario_list[-1].rewrite_projection_list(projection_list)
 
 

@@ -22,10 +22,9 @@ from General import Functions, Constants
 class VenmoParser:
 
     login_url = "https://venmo.com/account/sign-in"
-    temp_download_dir = Constants.temp_download_dir
     base_url = "https://venmo.com"
     statement_url = base_url + "/account/statement"
-    current_statement_csv_name = Constants.current_statement_file_name_default
+    current_statement_csv_name = "Current transactions.csv"
 
     def __init__(self, parent_bank, cookies_path):
 
@@ -164,7 +163,7 @@ class VenmoParser:
                 print(download_url, end=" - ")
                 for _ in range(4):
                     self.driver.get(download_url)
-                    csv_path = Functions.wait_for_temp_file(self.temp_download_dir, 4)
+                    csv_path = Functions.wait_for_temp_file(self.parent_bank.profile.temp_download_dir, 4)
                     if csv_path:
                         os.rename(csv_path, new_cvs_path)
                         break
@@ -173,7 +172,7 @@ class VenmoParser:
                 print(new_cvs_path, "exists!")
 
     def update_statements(self):
-        self.driver = Parser.get_driver(self.temp_download_dir)
+        self.driver = Parser.get_driver(self.parent_bank.profile.temp_download_dir)
         self.login()
         self.account_dict_list = self.get_account_dict_list()
 

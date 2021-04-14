@@ -20,8 +20,6 @@ class ChaseParser:
     login_url = "https://secure05c.chase.com/web/auth/dashboard"
     auth_url = "https://secure05c.chase.com/web/auth/dashboard#/dashboard/overviewAccounts/overview/index"
     success_url = "https://secure03b.chase.com/web/auth/dashboard#/dashboard/overviewAccounts/overview/multiProduct"
-
-    temp_download_dir = Constants.temp_download_dir
     # current_debit_statement_csv_name = "Current transactions.csv"
     # current_credit_statement_csv_name = "transaction_period.csv"
 
@@ -36,7 +34,7 @@ class ChaseParser:
         self.account_list = None
 
     def update_statements(self):
-        self.driver = Parser.get_driver(self.temp_download_dir)
+        self.driver = Parser.get_driver(self.parent_bank.profile.temp_download_dir)
         self.login()
         self.init_account_dict_list = self.get_init_account_dict_list()
         self.account_dict_list = self.get_account_dict_list()

@@ -9,7 +9,9 @@ from General import Functions, Constants
 
 class Scenario:
 
-    def __init__(self, scenario_json_path):
+    def __init__(self, profile, scenario_json_path):
+
+        self.profile = profile
 
         self.scenario_json_path = scenario_json_path
         self.name = self.get_name()
@@ -94,8 +96,11 @@ class Scenario:
             }
         )
 
-        fig.write_html(Constants.future_system_graph_path)
-        return Constants.future_system_graph_path
+        fig.write_html(self.profile.future_system_graph_path)
+        return self.profile.future_system_graph_path
+
+    def create_empty_scenario(self, scenario_name):
+        Functions.dict_to_json([], self.profile.scenarios_dir + "/" + "Scenario - {}.json".format(scenario_name))
 
     def to_dict(self):
         return {
@@ -112,7 +117,3 @@ class Scenario:
             ret_str += str(projection)
         ret_str = "\t" + ret_str.replace("\n", "\n\t")
         return "Scenario: {}\n".format(self.name) + ret_str
-
-
-def create_empty_scenario(scenario_name):
-    Functions.dict_to_json([], Constants.scenarios_dir + "/" + "Scenario - {}.json".format(scenario_name))

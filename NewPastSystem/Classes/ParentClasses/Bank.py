@@ -7,9 +7,11 @@ from General import Functions, Constants
 
 class Bank:
 
-    banks_dir = Constants.banks_dir
+    # banks_dir = Constants.banks_dir
 
-    def __init__(self, dir_name, type_to_statement_class_dict, **kwargs):
+    def __init__(self, profile, dir_name, type_to_statement_class_dict, **kwargs):
+
+        self.profile = profile
 
         self.type = kwargs.get("type")
         self.owner = kwargs.get("owner")
@@ -20,7 +22,7 @@ class Bank:
         self.dir_name = dir_name if dir_name else self.generate_dir_name()
         self.type_to_statement_class_dict = type_to_statement_class_dict if type_to_statement_class_dict else {}
 
-        self.general_path = self.banks_dir + "/" + self.dir_name
+        self.general_path = self.profile.banks_dir + "/" + self.dir_name
         self.accounts_dir_path = self.general_path + "/" + "accounts"
         self.bank_json_path = self.general_path + "/" + "bank.json"
 
