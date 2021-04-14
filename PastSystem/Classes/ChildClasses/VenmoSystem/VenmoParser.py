@@ -1,18 +1,11 @@
 import os
 import time
-import glob
-import pickle
 import calendar
 import datetime
 import dateutil
 from bs4 import BeautifulSoup
-from selenium import webdriver
 from dateutil import relativedelta
-from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.select import Select
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 
 from PastSystem.Classes.ParentClasses import Parser
 

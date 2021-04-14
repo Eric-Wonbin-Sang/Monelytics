@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 
 from FutureSystem.Classes import Projection
 
-from General import Functions, Constants
+from General import Functions
 
 
 class Scenario:
@@ -34,11 +34,6 @@ class Scenario:
         )
 
     def get_complete_df(self):
-
-        # datetime_list = pd.date_range(
-        #     start=datetime.datetime(year=2020, month=10, day=14),
-        #     periods=365 * 6
-        # ).to_pydatetime().tolist()
 
         dataframe_list = []
         for projection in self.projection_list:

@@ -1,7 +1,7 @@
 import datetime
 import pandas as pd
 
-from General import Functions, Constants
+from General import Functions
 
 
 class Projection:

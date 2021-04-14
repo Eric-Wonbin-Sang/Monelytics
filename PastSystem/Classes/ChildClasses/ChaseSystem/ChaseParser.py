@@ -1,18 +1,8 @@
-import os
 import time
-import pickle
-import datetime
-from bs4 import BeautifulSoup
-from selenium import webdriver
 from selenium.webdriver import ActionChains
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.select import Select
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 
-from PastSystem.Classes.ParentClasses import Account, Parser
+from PastSystem.Classes.ParentClasses import Parser
 
-from General import Functions, Constants
 
 
 class ChaseParser:

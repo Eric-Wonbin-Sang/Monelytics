@@ -2,12 +2,10 @@ import os
 
 from PastSystem.Classes.ParentClasses import Account
 
-from General import Functions, Constants
+from General import Functions
 
 
 class Bank:
-
-    # banks_dir = Constants.banks_dir
 
     def __init__(self, profile, dir_name, type_to_statement_class_dict, **kwargs):
 

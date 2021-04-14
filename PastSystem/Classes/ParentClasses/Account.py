@@ -2,9 +2,9 @@ import os
 import pandas
 import plotly.graph_objects as go
 
-from PastSystem.Classes.ParentClasses import StatementManager, SuperStatement
+from PastSystem.Classes.ParentClasses import StatementManager
 
-from General import Functions, Constants
+from General import Functions
 
 
 class Account:

@@ -1,10 +1,9 @@
-import numpy
 import pandas
 import datetime
 
 from PastSystem.Classes.ParentClasses import Statement
 
-from General import Functions, Constants
+from General import Functions
 
 
 class VenmoStatement(Statement.Statement):
