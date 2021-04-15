@@ -35,6 +35,8 @@ class Profile:
         self.scenarios_dir = self.future_system_dir + "/scenarios_dir"
         self.future_system_graph_path = self.future_system_dir + "/future_system_graph.html"
 
+        self.photo_path = self.source_dir + "/photo.jpg"
+
         self.bank_list = self.get_full_bank_list()
         self.scenario_list = self.get_scenario_list()
 
@@ -78,6 +80,17 @@ class Profile:
             file_path = self.scenarios_dir + "/" + file_name
             scenario_list.append(Scenario.Scenario(self, file_path))
         return scenario_list
+
+    def to_dict(self):
+        bank_logins_dict_list = Functions.parse_json(self.bank_logins_json)
+        for bank_logins_dict in bank_logins_dict_list:
+            bank_logins_dict["password"] = len(bank_logins_dict["password"]) * "*"
+        return {
+            "name": self.name,
+            "source_dir": self.source_dir,
+            "photo_path": self.photo_path,
+            "bank_logins_dict_list": bank_logins_dict_list
+        }
 
     def __str__(self):
         return "Profile '{}' -> {}".format(

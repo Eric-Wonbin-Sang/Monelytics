@@ -1,0 +1,23 @@
+
+div.wrapper_div {
+    overflow: hidden;
+    width: 80%;
+    text-align: center;
+    margin: auto;
+}
+
+#profile_photo_div {
+    background-color: rgb(236, 235, 235);
+    width: 40%;
+    height: 87vh;
+    overflow: auto;
+    float: left;
+}
+
+#info_div {
+    background-color: rgb(158, 158, 158);
+    width: 60%;
+    height: 87vh;
+    overflow: auto;
+    float: right;
+}

@@ -8,7 +8,7 @@
 }
 
 #analysis_content {
-    background-color: rgb(139, 48, 48);
+    background-color: rgb(158, 158, 158);
     width: 75%;
     height: 100vh;
     overflow: auto;
@@ -22,6 +22,8 @@ iframe.scenario_graph {
 }
 
 #projections_div {
+    justify-content: center;
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }

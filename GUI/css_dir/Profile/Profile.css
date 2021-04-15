@@ -1,0 +1,59 @@
+
+p.profile_name_p {
+    font-family:Helvetica;
+    font-size: 30px;
+}
+
+img.profile_image {
+    width: 80%;
+    border-radius: 8px;
+}
+
+
+
+
+
+
+div.bank_logins_div {
+    width: 80%;
+    margin: auto;
+}
+
+div.bank_login_div {
+    padding-top: 1px;
+    background-color: rgb(240, 215, 107);
+    margin: 14px;
+}
+
+p.type_p {
+    font-family:Helvetica;
+    font-size: 24px;
+    /* margin-top: 10px; */
+    /* margin-bottom: 10px; */
+    /* height: 300px; */
+    /* background-color: rgb(56, 248, 56); */
+    width: 100%;
+}
+
+table.bank_login_table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: auto;
+    table-layout: fixed;
+}
+
+tr.bank_login_table_row:nth-child(odd) {
+    background-color: #f0f0f0
+}
+
+tr.bank_login_table_row:nth-child(even) {
+    background-color: #d8d8d8
+}
+
+td.bank_login_table_label, td.bank_login_table_value {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 4px;
+    font-family:Helvetica;
+    font-size: 12px;
+}

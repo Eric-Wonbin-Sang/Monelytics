@@ -6,15 +6,15 @@ div.wrapper_div {
 #banks_and_accounts_sidebar {
     background-color: rgb(236, 235, 235);
     width: 25%;
-    height: 100vh;
+    height: 87vh;
     overflow: auto;
     float: left;
 }
 
 #analysis_content {
-    background-color: rgb(139, 48, 48);
+    background-color: rgb(158, 158, 158);
     width: 75%;
-    height: 100vh;
+    height: 87vh;
     overflow: auto;
     float: right;
 }
@@ -32,7 +32,7 @@ table.transactions_table {
 }
 
 th.transactions_table_header {
-    background-color: #ff8989;
+    background-color: #fad328;
     color: rgb(0, 0, 0);
     text-align: center;
     padding: 8px;
@@ -48,10 +48,11 @@ td.transactions_table_data {
     font-size: 12px;
 }
 
-tr.transactions_table_data_row:nth-child(odd) {
+tr.transactions_table_data_row:nth-child(even) {
     background-color: #f0f0f0
 }
 
-tr.transactions_table_data_row:nth-child(even) {
-    background-color: #d8d8d8
+tr.transactions_table_data_row:nth-child(odd) {
+    /* background-color: #d8d8d8 */
+    background-color: #dfdfdf
 }

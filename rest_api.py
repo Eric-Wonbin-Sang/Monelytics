@@ -6,8 +6,6 @@ from PastSystem.Classes.ParentClasses import Bank, Account
 
 from Classes import Profile
 
-from General import Functions
-
 app = Flask(__name__)
 CORS(app)
 api = Api(app)
@@ -106,21 +104,19 @@ class GraphFutureSystem(Resource):
 
 # Account Info ------------------------------------
 
-class GetAccountInfo(Resource):
+class GetProfileInfo(Resource):
 
-    def get(self):
+    def get(self, profile_name):
 
-        bank_logins_dict_list = Functions.parse_json(main_profile.bank_logins_json)
-        for bank_logins_dict in bank_logins_dict_list:
-            bank_logins_dict["username"] = bank_logins_dict["username"][:3] + (len(bank_logins_dict["username"]) - 3) * "*"
-            bank_logins_dict["password"] = len(bank_logins_dict["password"]) * "*"
-
+        for profile in profile_list:
+            if profile.name == profile_name:
+                return {
+                    "comment": "SUCCESS",
+                    "result": main_profile.to_dict()
+                }
         return {
-            "comment": "SUCCESS",
-            "result": {
-                "name": "Eric Sang",
-                "bank_logins_dict_list": bank_logins_dict_list
-            }
+            "comment": "FAILED",
+            "result": None
         }
 
 
@@ -131,7 +127,7 @@ api.add_resource(TransactionDictList,   '/past_system/get_transactions/<bank_to_
 api.add_resource(GetScenarioInfo,       '/future_system/get_scenarios')
 api.add_resource(GraphFutureSystem,     '/future_system/graph/<scenario_name>')
 
-api.add_resource(GetAccountInfo,     '/account/get_info')
+api.add_resource(GetProfileInfo,     '/profile/<profile_name>/get_info')
 
 
 if __name__ == '__main__':
