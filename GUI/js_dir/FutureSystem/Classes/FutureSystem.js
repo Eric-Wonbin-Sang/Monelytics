@@ -6,7 +6,6 @@ class FutureSystem {
         this.json_response = json_response;
         this.scenario_list = this.get_scenario_list();
         
-        // this.get_banks_and_accounts_sidebar_div()
         this.initialize_ui();
     
     }
@@ -20,44 +19,57 @@ class FutureSystem {
         return scenario_list;
     }
 
+    reset_scenario_buttons() {
+        for (let i in this.scenario_list) {
+            if (this.scenario_list[i].button.classList.contains("active")) {
+                this.scenario_list[i].button.classList.toggle("active");
+            }
+        }
+    }
+
+    get_curr_scenario() {
+        for (let i in this.scenario_list) {
+            if (this.scenario_list[i].button.classList.contains("active")) {
+                return this.scenario_list[i];
+            }
+        }
+    }
+
+    get_add_scenario_button() {
+        var button = create_elem("button", "add_scenario_button");
+        button.innerHTML = "+";
+        button.onclick = function() {
+
+        }
+        return button;
+    }
+
     initialize_ui() {
         for (let i in this.scenario_list) {
-            this.scenario_list[i].update_graph();
+            this.scenario_list[i].button.classList.toggle("active");
             if (i == 0) {
                 break;
             }
         }
-        // this.update_scenario_selection_div(this.scenario_list[0]);
-        this.update_projections_div(this.scenario_list[0]);
+        this.get_curr_scenario().update_graph();
+        this.update_scenarios_sidebar_div();
+        this.update_projections_div();
     }
 
-    update_scenario_selection_div(curr_scenario) {
-
-        var dropdown_div = document.getElementById("scenarios_dropdown");
-
-        var button = create_elem("button", "scenario_button");
-        button.innerHTML  = curr_scenario.name
-        button.onclick = function() {
-            document.getElementById("scenarios_a_div").classList.toggle("show");
-        }
-        dropdown_div.appendChild(button);
-
-        var scenarios_a_div = create_elem("div", null, "scenarios_a_div");
+    update_scenarios_sidebar_div() {
+        var div = document.getElementById("scenarios_sidebar");
         for (let i in this.scenario_list) {
-            var scenario = this.scenario_list[i];
-            var a_elem = create_elem("a");
-            a_elem.innerHTML = scenario.name;
-            a_elem.href = "#";
-            scenarios_a_div.appendChild(a_elem);
+            div.appendChild(this.scenario_list[i].button);
         }
-        dropdown_div.appendChild(scenarios_a_div);
-
-        dropdown_div.appendChild(curr_scenario.get_summary_div());
-
+        div.appendChild(this.get_add_scenario_button());
     }
 
-    update_projections_div(curr_scenario) {
+    update_projections_div() {
+
+        var curr_scenario = this.get_curr_scenario();
+
         var div = document.getElementById("projections_div");
+        div.innerHTML = "";
         var projection_div_list = curr_scenario.get_projection_div_list();
         for (let i in projection_div_list) {
             div.appendChild(projection_div_list[i]);

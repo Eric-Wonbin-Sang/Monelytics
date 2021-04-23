@@ -112,3 +112,7 @@ class Scenario:
             ret_str += str(projection)
         ret_str = "\t" + ret_str.replace("\n", "\n\t")
         return "Scenario: {}\n".format(self.name) + ret_str
+
+
+def make_scenario_json(source_dir, scenario_name):
+    Functions.dict_to_json({}, source_dir + "/" + scenario_name)

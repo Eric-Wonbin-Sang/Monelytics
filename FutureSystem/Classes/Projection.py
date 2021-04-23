@@ -15,7 +15,6 @@ class Projection:
         self.end_datetime = kwargs.get("end_datetime")
 
         self.amount = kwargs.get("amount")
-        self.type = "income" if self.amount >= 0 else "expense"
 
         self.dataframe = self.get_dataframe()
 
@@ -33,6 +32,8 @@ class Projection:
                 curr_datetime += datetime.timedelta(days=1)
             elif self.frequency == "weekly":
                 curr_datetime += datetime.timedelta(days=7)
+            elif self.frequency == "biweekly":
+                curr_datetime += datetime.timedelta(days=14)
             elif self.frequency == "monthly":
                 curr_datetime = Functions.add_months(curr_datetime, 1)
             elif self.frequency == "yearly":

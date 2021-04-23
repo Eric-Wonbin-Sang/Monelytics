@@ -1,0 +1,15 @@
+button.scenario_button {
+    background-color: rgb(66, 124, 64);
+    color: white;
+    cursor: pointer;
+    padding: 16px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 14px;
+}
+
+button.scenario_button.active, button.scenario_button:hover {
+    background-color: rgb(36, 165, 19);
+}

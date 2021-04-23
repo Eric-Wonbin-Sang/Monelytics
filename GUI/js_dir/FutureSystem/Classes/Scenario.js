@@ -10,6 +10,7 @@ class Scenario {
         this.name = this.scenario_dict["name"];
         this.projection_dict_list = this.scenario_dict["projection_dict_list"];
 
+        this.button = this.get_button();
         this.projection_list = this.get_projection_list();
 
     }
@@ -20,6 +21,19 @@ class Scenario {
             projection_list.push(new Projection(this, this.projection_dict_list[i]));
         }
         return projection_list;
+    }
+
+    get_button() {
+        var button = create_elem("button", "scenario_button");
+        button.innerHTML = this.name;
+        var self = this;
+        button.onclick = function() {
+            self.future_system.reset_scenario_buttons();
+            button.classList.toggle("active");
+            self.update_graph();
+            self.future_system.update_projections_div();
+        }
+        return button;
     }
 
     get_graph_rest_url() {
