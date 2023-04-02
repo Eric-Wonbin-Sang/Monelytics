@@ -28,16 +28,19 @@ class Projection:
             datetime_list.append(curr_datetime)
             amount_list.append(self.amount)
 
-            if self.frequency == "daily":
-                curr_datetime += datetime.timedelta(days=1)
-            elif self.frequency == "weekly":
-                curr_datetime += datetime.timedelta(days=7)
-            elif self.frequency == "biweekly":
-                curr_datetime += datetime.timedelta(days=14)
-            elif self.frequency == "monthly":
-                curr_datetime = Functions.add_months(curr_datetime, 1)
-            elif self.frequency == "yearly":
-                curr_datetime = Functions.add_months(curr_datetime, 12)
+            if type(self.frequency) == int:
+                curr_datetime += datetime.timedelta(days=self.frequency)
+            else:
+                if self.frequency == "daily":
+                    curr_datetime += datetime.timedelta(days=1)
+                elif self.frequency == "weekly":
+                    curr_datetime += datetime.timedelta(days=7)
+                elif self.frequency == "biweekly":
+                    curr_datetime += datetime.timedelta(days=14)
+                elif self.frequency == "monthly":
+                    curr_datetime = Functions.add_months(curr_datetime, 1)
+                elif self.frequency == "yearly":
+                    curr_datetime = Functions.add_months(curr_datetime, 12)
 
         data = {"result": amount_list}
         full_dataframe = pd.DataFrame(data, index=datetime_list, columns=list(data.keys()))
